@@ -1,0 +1,33 @@
+{
+  "name": "faire",
+  "version": "0.0.0",
+  "description": "Text list management, useful for todo lists.",
+  "main": "index.js",
+  "scripts": {
+    "test": "make test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/spectrumbranch/faire.git"
+  },
+  "keywords": [
+    "todo",
+    "tasklist",
+    "task",
+    "notes"
+  ],
+  "author": "Christopher Bebry, Casmira Boland",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/spectrumbranch/faire/issues"
+  },
+  "dependencies": {
+    "scurvy": "~0.2.1",
+    "sequelize": "~2.0.0-beta.0",
+    "hapi": "~1.14.0",
+    "mysql": "~2.0.0-alpha9"
+  },
+  "devDependencies": {
+    "mocha": "~1.13.0"
+  }
+}

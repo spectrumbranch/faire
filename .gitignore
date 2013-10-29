@@ -13,3 +13,6 @@ results
 
 npm-debug.log
 node_modules
+.sass-cache
+config/config.js
+config/database.js
