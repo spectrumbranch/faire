@@ -10,15 +10,15 @@ exports.config = {
   hostname: '0.0.0.0',
   port: 8000,
   tls: false,
-  cookie_name: 'cartography-cookie',
-  cookie_password: 'sdoi239fsER0a1'
+  cookie_name: 'faire-cookie',
+  cookie_password: 'xfgkj23owe90nef0'
 };
 
 exports.mailconfig = {
   method: 'sendmail',
   sendmail: {
     bin: '/usr/sbin/sendmail',
-	from: '"Cartography Server" <no-reply@something.com>'
+	from: '"Faire Server" <no-reply@something.com>'
   }
 };
 
@@ -26,6 +26,6 @@ exports.mailconfig = {
 //Keep this commented out if exports.config.tls == false
 //var fs = require('fs');
 //exports.tlsconfig = {
-//  key: fs.readFileSync('/somewhere/fixtures/keys/cartography-key.pem'),
-//  cert: fs.readFileSync('/somewhere/fixtures/keys/cartography-cert.pem')
+//  key: fs.readFileSync('/somewhere/fixtures/keys/faire-key.pem'),
+//  cert: fs.readFileSync('/somewhere/fixtures/keys/faire-cert.pem')
 //}

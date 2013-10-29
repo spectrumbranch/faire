@@ -16,3 +16,4 @@ node_modules
 .sass-cache
 config/config.js
 config/database.js
+config/database.test.js

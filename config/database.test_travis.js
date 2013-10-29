@@ -6,7 +6,7 @@ exports.config = {
   type: 'mysql',
   hostname: '127.0.0.1',
   port: 3306,
-  db: 't_cartography',
+  db: 't_faire',
   user: 'root',
   password: ''
 };
