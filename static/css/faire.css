@@ -1,0 +1,48 @@
+.entry-section {
+	margin-top:15px;
+}
+
+.top-bar-section ul {
+	width: 100%;
+}
+.top-bar-section ul li {
+	width: 100%;
+}
+hr {
+	margin: 0;
+}
+
+.uber-divider {
+	color: #2ba6cb;
+	border: solid 3px;
+	margin: 5px 0 5px;
+}
+.faire-task  div{
+	padding: 10px 0;
+	text-align: center;
+	word-wrap: break-word;
+}
+a {
+	color: #000;
+}
+.faire-inactive a {
+	text-decoration:line-through;
+	color: #2ba6cb;
+}
+@media only screen {
+	.faire-entry {
+		width: 90%;
+	}
+	.faire-menu-entry {
+		
+	}
+}
+
+@media only screen and (min-width: 768px) {
+	.faire-entry {
+		width: 94%;
+	}
+	.faire-menu-entry {
+		width: 6%;
+	}
+}
