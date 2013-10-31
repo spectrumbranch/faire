@@ -15,9 +15,9 @@ var server = new Hapi.Server(serverConfig.hostname, serverConfig.port, options);
 
 var Faire = require('./lib');
 //var util = Faire.Util;
-//var auth = Faire.Auth;
-//var mailer = Faire.Mailer; //TODO
-//mailer.init(mailConfig);
+var auth = Faire.Auth;
+var mailer = Faire.Mailer;
+mailer.init(mailConfig);
 var scurvy = Faire.Scurvy;
 
 
@@ -42,7 +42,7 @@ server.auth('session', {
 login_validate = function() {
     var S = Hapi.types.String;
     return {
-        userid: S().required().min(5).max(30),
+		email: S().email().required().max(50),
         passwrd: S().required().min(8),
         view: S()
     }
@@ -51,10 +51,9 @@ login_validate = function() {
 register_validate = function() {
     var S = Hapi.types.String;
     return {
-        userid: S().required().min(5).max(30),
+		email: S().email().required().max(50),
         passwrd: S().required().min(8),
-        passwrd0: S().required().min(8),
-        email: S().email().required().max(50)
+        passwrd0: S().required().min(8)
     }
 }
 
@@ -64,11 +63,12 @@ server.route([
   //{ method: 'GET',         path: '/', config: { handler: home.handler, auth: { mode: 'try' } } },
   //{ method: '*',         path: '/version', handler: function() { this.reply(util.version); } },
   //Authentication Routes
-  //{ method: '*',         path: '/confirm/{hashkey*}', config: { handler: auth.confirm, auth: false  } },
-  //{ method: 'POST', path: '/register', config: { handler: auth.register, validate: { payload: register_validate() }, auth: false  } },
-  //{ method: 'POST', path: '/login', config: { handler: auth.login, validate: { payload: login_validate() }, auth: { mode: 'try' }  } },
-  //{ method: 'GET', path: '/login', config: { handler: auth.login_view, auth: { mode: 'try' }  } },
-  //{ method: '*', path: '/logout', config: { handler: auth.logout, auth: true  } },
+  { method: '*',         path: '/confirm/{hashkey*}', config: { handler: auth.confirm, auth: false  } },
+  { method: 'GET', path: '/register', config: { handler: auth.register_view, auth: { mode: 'try' }  } },
+  { method: 'POST', path: '/register', config: { handler: auth.register, validate: { payload: register_validate() }, auth: { mode: 'try' }   } },
+  { method: 'POST', path: '/login', config: { handler: auth.login, validate: { payload: login_validate() }, auth: { mode: 'try' }  } },
+  { method: 'GET', path: '/login', config: { handler: auth.login_view, auth: { mode: 'try' }  } },
+  { method: '*', path: '/logout', config: { handler: auth.logout, auth: true  } },
   
   //All static content
   { method: '*',         path: '/{path*}', handler: { directory: { path: './static/', listing: false, redirectToSlash: true } } }
@@ -84,6 +84,6 @@ db.init(virt_modules, function() {
     
     //start server
     server.start();
-    //auth.setURI(server.info.uri);
+    auth.setURI(server.info.uri);
     console.log('Server up at ' + server.info.uri + ' !');
 });
