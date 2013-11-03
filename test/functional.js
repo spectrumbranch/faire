@@ -159,4 +159,38 @@ describe('Faire.Task API', function() {
 			})
 		})
 	})
+	
+	describe('#update()', function() {
+		it('should return the updated task object after updating it in the database.', function(done) {
+			var taskName = 'This is an example task10.';
+			var updatedTaskName = 'This is task10 updated with something new';
+			Faire.Task.add({ user: user_id_1, name: taskName }, function(err, task) {
+				Faire.Task.update({ id: task.id, user: user_id_1, name: updatedTaskName }, function(err1, updatedTask) {
+					assert(err1 == null);
+					assert(updatedTask !== undefined);
+					assert(updatedTask.id !== undefined && updatedTask.id = task.id);
+					assert(updatedTask.name !== undefined && updatedTask.name = updatedTaskName);
+					assert(updatedTask.status !== undefined);
+					done();
+				})
+			})
+		})
+		it('should error out when required parameters "user" and "id" are missing.', function(done) {
+			var taskName = 'This is an example task11.';
+			Faire.Task.add({ user: user_id_1, name: taskName  }, function(err, task) {
+				//missing both user and id
+				Faire.Task.update({}, function(err1, updatedTask1) {
+					assert(err1 instanceof Error);
+					assert(updatedTask1 === undefined);
+					//missing user
+					Faire.Task.update({ id: task.id }, function(err2, updatedTask2) {
+						assert(err2 instanceof Error);
+						assert(updatedTask2 === undefined);
+						done();
+					})
+					
+				})
+			})
+		})
+	})
 })
