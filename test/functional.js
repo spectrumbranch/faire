@@ -27,7 +27,7 @@ describe('Faire.Task API', function() {
 				assert(err == null);
 				assert(task !== undefined);
 				assert(task.id !== undefined);
-				assert(task.name !== undefined && task.name = taskName);
+				assert(task.name !== undefined && task.name === taskName);
 				assert(task.status !== undefined && task.status === 'active');
 				done();
 			})
@@ -39,7 +39,7 @@ describe('Faire.Task API', function() {
 				assert(err == null);
 				assert(task !== undefined);
 				assert(task.id !== undefined);
-				assert(task.name !== undefined && task.name = taskName);
+				assert(task.name !== undefined && task.name === taskName);
 				assert(task.status !== undefined && task.status === status_inactive);
 				done();
 			})
@@ -63,8 +63,8 @@ describe('Faire.Task API', function() {
 				Faire.Task.activate({ id: task.id, user: userid}, function(err1, activatedTask) {
 					assert(err1 == null);
 					assert(activatedTask !== undefined);
-					assert(activatedTask.id !== undefined && activatedTask.id = task.id);
-					assert(activatedTask.name !== undefined && activatedTask.name = taskName);
+					assert(activatedTask.id !== undefined && activatedTask.id === task.id);
+					assert(activatedTask.name !== undefined && activatedTask.name === taskName);
 					assert(activatedTask.status !== undefined && activatedTask.status === status_active);
 					done();
 				})
@@ -98,8 +98,8 @@ describe('Faire.Task API', function() {
 				Faire.Task.inactivate({ id: task.id, user: userid}, function(err1, inactivatedTask) {
 					assert(err1 == null);
 					assert(inactivatedTask !== undefined);
-					assert(inactivatedTask.id !== undefined && inactivatedTask.id = task.id);
-					assert(inactivatedTask.name !== undefined && inactivatedTask.name = taskName);
+					assert(inactivatedTask.id !== undefined && inactivatedTask.id === task.id);
+					assert(inactivatedTask.name !== undefined && inactivatedTask.name === taskName);
 					assert(inactivatedTask.status !== undefined && inactivatedTask.status === status_inactive);
 					done();
 				})
@@ -133,8 +133,8 @@ describe('Faire.Task API', function() {
 				Faire.Task.delete({ id: task.id, user: user_id_1}, function(err1, deletedTask) {
 					assert(err1 == null);
 					assert(deletedTask !== undefined);
-					assert(deletedTask.id !== undefined && deletedTask.id = task.id);
-					assert(deletedTask.name !== undefined && deletedTask.name = taskName);
+					assert(deletedTask.id !== undefined && deletedTask.id === task.id);
+					assert(deletedTask.name !== undefined && deletedTask.name === taskName);
 					assert(deletedTask.status !== undefined && deletedTask.status === status_deleted);
 					done();
 				})
@@ -168,8 +168,8 @@ describe('Faire.Task API', function() {
 				Faire.Task.update({ id: task.id, user: user_id_1, name: updatedTaskName }, function(err1, updatedTask) {
 					assert(err1 == null);
 					assert(updatedTask !== undefined);
-					assert(updatedTask.id !== undefined && updatedTask.id = task.id);
-					assert(updatedTask.name !== undefined && updatedTask.name = updatedTaskName);
+					assert(updatedTask.id !== undefined && updatedTask.id === task.id);
+					assert(updatedTask.name !== undefined && updatedTask.name === updatedTaskName);
 					assert(updatedTask.status !== undefined);
 					done();
 				})
@@ -201,8 +201,8 @@ describe('Faire.Task API', function() {
 				Faire.Task.get({ id: task.id, user: user_id_1 }, function(err1, getTask) {
 					assert(err1 == null);
 					assert(getTask !== undefined);
-					assert(getTask.id !== undefined && getTask.id = task.id);
-					assert(getTask.name !== undefined && getTask.name = taskName);
+					assert(getTask.id !== undefined && getTask.id === task.id);
+					assert(getTask.name !== undefined && getTask.name === taskName);
 					assert(getTask.status !== undefined);
 					assert(getTask.updatedBy !== undefined);
 					
