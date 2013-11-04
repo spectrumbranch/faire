@@ -193,4 +193,44 @@ describe('Faire.Task API', function() {
 			})
 		})
 	})
+	
+	describe('#get()', function() {
+		it('should return the task object keyed by the given id. if the task does not exist, return empty', function(done) {
+			var taskName = 'This is an example task12.';
+			Faire.Task.add({ user: user_id_1, name: taskName }, function(err, task) {
+				Faire.Task.get({ id: task.id, user: user_id_1 }, function(err1, getTask) {
+					assert(err1 == null);
+					assert(getTask !== undefined);
+					assert(getTask.id !== undefined && getTask.id = task.id);
+					assert(getTask.name !== undefined && getTask.name = taskName);
+					assert(getTask.status !== undefined);
+					assert(getTask.updatedBy !== undefined);
+					
+					Faire.Task.get({ id: 9999999, user: user_id_1 }, function(err2, getTask2) {
+						assert(err2 == null);
+						assert(getTask2 !== undefined);
+						assert(getTask.id === undefined);
+					})
+					done();
+				})
+			})
+		})
+		it('should error out when required parameters "user" and "id" are missing.', function(done) {
+			var taskName = 'This is an example task13.';
+			Faire.Task.add({ user: user_id_1, name: taskName  }, function(err, task) {
+				//missing both user and id
+				Faire.Task.get({}, function(err1, getTask1) {
+					assert(err1 instanceof Error);
+					assert(getTask1 === undefined);
+					//missing user
+					Faire.Task.get({ id: task.id }, function(err2, getTask2) {
+						assert(err2 instanceof Error);
+						assert(getTask2 === undefined);
+						done();
+					})
+					
+				})
+			})
+		})
+	})
 })
