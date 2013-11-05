@@ -3,20 +3,32 @@ var Faire = require('../lib');
 var async = require('async');
 
 describe('Faire.Task API', function() {
-	var user_id_1;
+	var user_id_1, user_id_2, user_id_3;
 	before(function(done) {
-		var email = 'tester@test.com';
-		var passwrd = 'shdi2389chs98w3jnh';
+		var email1 = 'tester@test.com';
+		var passwrd1 = 'shdi2389chs98w3jnh';
+		
+		var email2 = 'getalltester@test.com';
+		var passwrd2 = 'fsdoifushdf98w33h2';
+		
+		var email3 = 'hasnotasks@test.com';
+		var passwrd3 = 'dskn2398fuisesSQ19';
 		
 		var virt_modules = [];
 		virt_modules.push(Faire.Scurvy);
 
 		var db = require('../lib/models');
 		db.init(virt_modules, function() {
-			console.log('database setup complete');
-			Faire.Scurvy.createUser({email: email, passwrd: passwrd, status: 'active'}, function(err, userball) {
-				user_id_1 = userball.user.id
-				done();
+			console.log('-------- database setup complete --------');
+			Faire.Scurvy.createUser({email: email1, passwrd: email2, status: 'active'}, function(err, userball1) {
+				user_id_1 = userball1.user.id
+				Faire.Scurvy.createUser({email: email2, passwrd: passwrd2, status: 'active'}, function(err, userball2) {
+					user_id_2 = userball2.user.id;
+					Faire.Scurvy.createUser({email: email3, passwrd: passwrd3, status: 'active'}, function(err, userball3) {
+						user_id_3 = userball3.user.id;
+						done();
+					});
+				});
 			});
 		});
 	})
@@ -230,6 +242,38 @@ describe('Faire.Task API', function() {
 					})
 					
 				})
+			})
+		})
+	})
+	
+	describe('#getAll()', function() {
+		it('should return all tasks for a given user if no filters are applied. if there are no tasks for that user, return empty', function(done) {
+			var taskName = 'This is an example task14.';
+			Faire.Task.add({ user: user_id_2, name: taskName }, function(err, task) {
+				Faire.Task.getAll({ user: user_id_2 }, function(err1, getAllTasks1) {
+					assert(err1 == null);
+					assert(getAllTasks1 !== undefined && Array.isArray(getAllTasks1) && getAllTasks1.length == 1);
+					assert(getAllTasks1[0].id !== undefined && getAllTasks1[0].id === task.id);
+					assert(getAllTasks1[0].name !== undefined && getAllTasks1[0].name === taskName);
+					assert(getAllTasks1[0].status !== undefined);
+					assert(getAllTasks1[0].updatedBy !== undefined);
+					
+					//User 3 has no tasks
+					Faire.Task.getAll({ user: user_id_3 }, function(err2, getAllTasks2) {
+						assert(err2 == null);
+						assert(getAllTasks2 !== undefined && Array.isArray(getAllTasks2) && getAllTasks2.length == 0);
+						assert(getAllTasks2.id === undefined);
+						done();
+					})
+				})
+			})
+		})
+		it('should error out when required parameter "user" is missing.', function(done) {
+			var taskName = 'This is an example task15.';
+			Faire.Task.getAll({ }, function(err1, getAllTasks1) {
+				assert(err1 instanceof Error);
+				assert(getAllTasks1 === undefined);
+				done();
 			})
 		})
 	})
