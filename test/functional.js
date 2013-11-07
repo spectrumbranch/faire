@@ -2,7 +2,7 @@ var assert = require('assert');
 var Faire = require('../lib');
 var async = require('async');
 
-describe('Faire.Task API', function() {
+describe('Faire.Tasks API', function() {
 	var user_id_1, user_id_2, user_id_3;
 	before(function(done) {
 		var email1 = 'tester@test.com';
@@ -35,7 +35,7 @@ describe('Faire.Task API', function() {
 	describe('#add()', function() {
 		it('should return the task object after adding it to the database.', function(done) {
 			var taskName = 'This is an example task.';
-			Faire.Task.add({ user: user_id_1, name: taskName }, function(err, task) {
+			Faire.Tasks.add({ user: user_id_1, name: taskName }, function(err, task) {
 				assert(err == null);
 				assert(task !== undefined);
 				assert(task.id !== undefined);
@@ -47,7 +47,7 @@ describe('Faire.Task API', function() {
 		it('should return the task object with a nondefault status after adding it to the database.', function(done) {
 			var taskName = 'This is an example task2.';
 			var status_inactive = 'inactive';
-			Faire.Task.add({ user: user_id_1, name: taskName, status: status_inactive }, function(err, task) {
+			Faire.Tasks.add({ user: user_id_1, name: taskName, status: status_inactive }, function(err, task) {
 				assert(err == null);
 				assert(task !== undefined);
 				assert(task.id !== undefined);
@@ -58,7 +58,7 @@ describe('Faire.Task API', function() {
 		})
 		it('should error out when required parameters "user" and "name" are missing.', function(done) {
 			var taskName = 'This is an example task3.';
-			Faire.Task.add({}, function(err, task) {
+			Faire.Tasks.add({}, function(err, task) {
 				assert(err instanceof Error);
 				assert(task === undefined);
 				done();
@@ -71,8 +71,8 @@ describe('Faire.Task API', function() {
 			var taskName = 'This is an example task4.';
 			var status_inactive = 'inactive';
 			var status_active = 'active';
-			Faire.Task.add({ user: user_id_1, name: taskName, status: status_inactive  }, function(err, task) {
-				Faire.Task.activate({ id: task.id, user: user_id_1}, function(err1, activatedTask) {
+			Faire.Tasks.add({ user: user_id_1, name: taskName, status: status_inactive  }, function(err, task) {
+				Faire.Tasks.activate({ id: task.id, user: user_id_1}, function(err1, activatedTask) {
 					assert(err1 == null);
 					assert(activatedTask !== undefined);
 					assert(activatedTask.id !== undefined && activatedTask.id === task.id);
@@ -85,13 +85,13 @@ describe('Faire.Task API', function() {
 		it('should error out when required parameters "user" and "id" are missing.', function(done) {
 			var taskName = 'This is an example task5.';
 			var status_inactive = 'inactive';
-			Faire.Task.add({ user: user_id_1, name: taskName, status: status_inactive  }, function(err, task) {
+			Faire.Tasks.add({ user: user_id_1, name: taskName, status: status_inactive  }, function(err, task) {
 				//missing both user and id
-				Faire.Task.activate({}, function(err1, activatedTask1) {
+				Faire.Tasks.activate({}, function(err1, activatedTask1) {
 					assert(err1 instanceof Error);
 					assert(activatedTask1 === undefined);
 					//missing user
-					Faire.Task.activate({ id: task.id }, function(err2, activatedTask2) {
+					Faire.Tasks.activate({ id: task.id }, function(err2, activatedTask2) {
 						assert(err2 instanceof Error);
 						assert(activatedTask2 === undefined);
 						done();
@@ -106,8 +106,8 @@ describe('Faire.Task API', function() {
 		it('should return the inactivated task object after inactivating it in the database.', function(done) {
 			var taskName = 'This is an example task6.';
 			var status_inactive = 'inactive';
-			Faire.Task.add({ user: user_id_1, name: taskName }, function(err, task) {
-				Faire.Task.inactivate({ id: task.id, user: user_id_1}, function(err1, inactivatedTask) {
+			Faire.Tasks.add({ user: user_id_1, name: taskName }, function(err, task) {
+				Faire.Tasks.inactivate({ id: task.id, user: user_id_1}, function(err1, inactivatedTask) {
 					assert(err1 == null);
 					assert(inactivatedTask !== undefined);
 					assert(inactivatedTask.id !== undefined && inactivatedTask.id === task.id);
@@ -120,13 +120,13 @@ describe('Faire.Task API', function() {
 		it('should error out when required parameters "user" and "id" are missing.', function(done) {
 			var taskName = 'This is an example task7.';
 			var status_inactive = 'inactive';
-			Faire.Task.add({ user: user_id_1, name: taskName  }, function(err, task) {
+			Faire.Tasks.add({ user: user_id_1, name: taskName  }, function(err, task) {
 				//missing both user and id
-				Faire.Task.inactivate({}, function(err1, inactivatedTask1) {
+				Faire.Tasks.inactivate({}, function(err1, inactivatedTask1) {
 					assert(err1 instanceof Error);
 					assert(inactivatedTask1 === undefined);
 					//missing user
-					Faire.Task.inactivate({ id: task.id }, function(err2, inactivatedTask2) {
+					Faire.Tasks.inactivate({ id: task.id }, function(err2, inactivatedTask2) {
 						assert(err2 instanceof Error);
 						assert(inactivatedTask2 === undefined);
 						done();
@@ -141,8 +141,8 @@ describe('Faire.Task API', function() {
 		it('should return the deleted task object after deleting it in the database.', function(done) {
 			var taskName = 'This is an example task8.';
 			var status_deleted = 'deleted';
-			Faire.Task.add({ user: user_id_1, name: taskName }, function(err, task) {
-				Faire.Task.delete({ id: task.id, user: user_id_1}, function(err1, deletedTask) {
+			Faire.Tasks.add({ user: user_id_1, name: taskName }, function(err, task) {
+				Faire.Tasks.delete({ id: task.id, user: user_id_1}, function(err1, deletedTask) {
 					assert(err1 == null);
 					assert(deletedTask !== undefined);
 					assert(deletedTask.id !== undefined && deletedTask.id === task.id);
@@ -155,13 +155,13 @@ describe('Faire.Task API', function() {
 		it('should error out when required parameters "user" and "id" are missing.', function(done) {
 			var taskName = 'This is an example task9.';
 			var status_deleted = 'deleted';
-			Faire.Task.add({ user: user_id_1, name: taskName  }, function(err, task) {
+			Faire.Tasks.add({ user: user_id_1, name: taskName  }, function(err, task) {
 				//missing both user and id
-				Faire.Task.delete({}, function(err1, deletedTask1) {
+				Faire.Tasks.delete({}, function(err1, deletedTask1) {
 					assert(err1 instanceof Error);
 					assert(deletedTask1 === undefined);
 					//missing user
-					Faire.Task.delete({ id: task.id }, function(err2, deletedTask2) {
+					Faire.Tasks.delete({ id: task.id }, function(err2, deletedTask2) {
 						assert(err2 instanceof Error);
 						assert(deletedTask2 === undefined);
 						done();
@@ -176,8 +176,8 @@ describe('Faire.Task API', function() {
 		it('should return the updated task object after updating it in the database.', function(done) {
 			var taskName = 'This is an example task10.';
 			var updatedTaskName = 'This is task10 updated with something new';
-			Faire.Task.add({ user: user_id_1, name: taskName }, function(err, task) {
-				Faire.Task.update({ id: task.id, user: user_id_1, name: updatedTaskName }, function(err1, updatedTask) {
+			Faire.Tasks.add({ user: user_id_1, name: taskName }, function(err, task) {
+				Faire.Tasks.update({ id: task.id, user: user_id_1, name: updatedTaskName }, function(err1, updatedTask) {
 					assert(err1 == null);
 					assert(updatedTask !== undefined);
 					assert(updatedTask.id !== undefined && updatedTask.id === task.id);
@@ -189,13 +189,13 @@ describe('Faire.Task API', function() {
 		})
 		it('should error out when required parameters "user" and "id" are missing.', function(done) {
 			var taskName = 'This is an example task11.';
-			Faire.Task.add({ user: user_id_1, name: taskName  }, function(err, task) {
+			Faire.Tasks.add({ user: user_id_1, name: taskName  }, function(err, task) {
 				//missing both user and id
-				Faire.Task.update({}, function(err1, updatedTask1) {
+				Faire.Tasks.update({}, function(err1, updatedTask1) {
 					assert(err1 instanceof Error);
 					assert(updatedTask1 === undefined);
 					//missing user
-					Faire.Task.update({ id: task.id }, function(err2, updatedTask2) {
+					Faire.Tasks.update({ id: task.id }, function(err2, updatedTask2) {
 						assert(err2 instanceof Error);
 						assert(updatedTask2 === undefined);
 						done();
@@ -209,8 +209,8 @@ describe('Faire.Task API', function() {
 	describe('#get()', function() {
 		it('should return the task object keyed by the given id. if the task does not exist, return empty', function(done) {
 			var taskName = 'This is an example task12.';
-			Faire.Task.add({ user: user_id_1, name: taskName }, function(err, task) {
-				Faire.Task.get({ id: task.id, user: user_id_1 }, function(err1, getTask) {
+			Faire.Tasks.add({ user: user_id_1, name: taskName }, function(err, task) {
+				Faire.Tasks.get({ id: task.id, user: user_id_1 }, function(err1, getTask) {
 					assert(err1 == null);
 					assert(getTask !== undefined);
 					assert(getTask.id !== undefined && getTask.id === task.id);
@@ -219,7 +219,7 @@ describe('Faire.Task API', function() {
 					assert(getTask.updatedAt !== undefined);
 					assert(getTask.createdAt !== undefined);
 					
-					Faire.Task.get({ id: 9999999, user: user_id_1 }, function(err2, getTask2) {
+					Faire.Tasks.get({ id: 9999999, user: user_id_1 }, function(err2, getTask2) {
 						assert(err2 == null);
 						assert(getTask2 !== undefined);
 						assert(getTask2.id === undefined);
@@ -230,13 +230,13 @@ describe('Faire.Task API', function() {
 		})
 		it('should error out when required parameters "user" and "id" are missing.', function(done) {
 			var taskName = 'This is an example task13.';
-			Faire.Task.add({ user: user_id_1, name: taskName  }, function(err, task) {
+			Faire.Tasks.add({ user: user_id_1, name: taskName  }, function(err, task) {
 				//missing both user and id
-				Faire.Task.get({}, function(err1, getTask1) {
+				Faire.Tasks.get({}, function(err1, getTask1) {
 					assert(err1 instanceof Error);
 					assert(getTask1 === undefined);
 					//missing user
-					Faire.Task.get({ id: task.id }, function(err2, getTask2) {
+					Faire.Tasks.get({ id: task.id }, function(err2, getTask2) {
 						assert(err2 instanceof Error);
 						assert(getTask2 === undefined);
 						done();
@@ -250,8 +250,8 @@ describe('Faire.Task API', function() {
 	describe('#getAll()', function() {
 		it('should return all tasks for a given user if no filters are applied. if there are no tasks for that user, return empty', function(done) {
 			var taskName = 'This is an example task14.';
-			Faire.Task.add({ user: user_id_2, name: taskName }, function(err, task) {
-				Faire.Task.getAll({ user: user_id_2 }, function(err1, getAllTasks1) {
+			Faire.Tasks.add({ user: user_id_2, name: taskName }, function(err, task) {
+				Faire.Tasks.getAll({ user: user_id_2 }, function(err1, getAllTasks1) {
 					assert(err1 == null);
 					assert(getAllTasks1 !== undefined && Array.isArray(getAllTasks1) && getAllTasks1.length == 1);
 					assert(getAllTasks1[0].id !== undefined && getAllTasks1[0].id === task.id);
@@ -261,7 +261,7 @@ describe('Faire.Task API', function() {
 					assert(getAllTasks1[0].createdAt !== undefined);
 					
 					//User 3 has no tasks
-					Faire.Task.getAll({ user: user_id_3 }, function(err2, getAllTasks2) {
+					Faire.Tasks.getAll({ user: user_id_3 }, function(err2, getAllTasks2) {
 						assert(err2 == null);
 						assert(getAllTasks2 !== undefined && Array.isArray(getAllTasks2) && getAllTasks2.length == 0);
 						assert(getAllTasks2.id === undefined);
@@ -272,7 +272,7 @@ describe('Faire.Task API', function() {
 		})
 		it('should error out when required parameter "user" is missing.', function(done) {
 			var taskName = 'This is an example task15.';
-			Faire.Task.getAll({ }, function(err1, getAllTasks1) {
+			Faire.Tasks.getAll({ }, function(err1, getAllTasks1) {
 				assert(err1 instanceof Error);
 				assert(getAllTasks1 === undefined);
 				done();
