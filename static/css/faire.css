@@ -12,6 +12,22 @@ hr {
 	margin: 0;
 }
 
+.faire-menu-icon {
+	display: block;
+	width: 16px;
+	height: 0px;
+	-webkit-box-shadow: 0 10px 0 1px #2ba6cb, 0 16px 0 1px #2ba6cb, 0 22px 0 1px #2ba6cb;
+	box-shadow: 0 10px 0 1px #2ba6cb, 0 16px 0 1px #2ba6cb, 0 22px 0 1px #2ba6cb;
+}
+.faire-menu-icon-wrapper {
+	margin:0 auto;
+	display:block;
+	width:20px;
+	height:32px;
+	position:relative;
+	right:15px;
+}
+
 .uber-divider {
 	color: #2ba6cb;
 	border: solid 3px;
