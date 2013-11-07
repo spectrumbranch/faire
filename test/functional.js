@@ -216,12 +216,13 @@ describe('Faire.Task API', function() {
 					assert(getTask.id !== undefined && getTask.id === task.id);
 					assert(getTask.name !== undefined && getTask.name === taskName);
 					assert(getTask.status !== undefined);
-					assert(getTask.updatedBy !== undefined);
+					assert(getTask.updatedAt !== undefined);
+					assert(getTask.createdAt !== undefined);
 					
 					Faire.Task.get({ id: 9999999, user: user_id_1 }, function(err2, getTask2) {
 						assert(err2 == null);
 						assert(getTask2 !== undefined);
-						assert(getTask.id === undefined);
+						assert(getTask2.id === undefined);
 					})
 					done();
 				})
@@ -256,7 +257,8 @@ describe('Faire.Task API', function() {
 					assert(getAllTasks1[0].id !== undefined && getAllTasks1[0].id === task.id);
 					assert(getAllTasks1[0].name !== undefined && getAllTasks1[0].name === taskName);
 					assert(getAllTasks1[0].status !== undefined);
-					assert(getAllTasks1[0].updatedBy !== undefined);
+					assert(getAllTasks1[0].updatedAt !== undefined);
+					assert(getAllTasks1[0].createdAt !== undefined);
 					
 					//User 3 has no tasks
 					Faire.Task.getAll({ user: user_id_3 }, function(err2, getAllTasks2) {
