@@ -59,6 +59,8 @@ register_validate = function() {
 
 server.route([
   //Faire Routes
+  //{ method: 'GET', path: '/', config: { handler: /*auth.register_view*/, auth: { mode: true }  } },
+  
   //{ method: 'GET',         path: '/', config: { handler: home.handler, auth: { mode: 'try' } } },
   //{ method: '*',         path: '/version', handler: function() { this.reply(util.version); } },
   //Authentication Routes
