@@ -18,7 +18,6 @@ var Faire = require('./lib');
 var auth = Faire.Auth;
 var mailer = Faire.Mailer;
 mailer.init(mailConfig);
-var scurvy = Faire.Scurvy;
 
 
 server.auth('session', {
@@ -76,7 +75,7 @@ server.route([
 
 //setup/load modules/plugins here
 var virt_modules = [];
-virt_modules.push(scurvy);
+virt_modules.push(Faire.Scurvy);
 
 var db = require('./lib/models');
 db.init(virt_modules, function() {
