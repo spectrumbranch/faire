@@ -61,7 +61,7 @@ register_validate = function() {
 
 server.route([
 	//Faire Routes
-	{ 
+	{
 		method: 'GET', path: '/tasks', config: {
 			handler: function() {
 				var request = this;
@@ -78,7 +78,7 @@ server.route([
 			auth: { mode: "required" }
 		}
 	},
-	{ 
+	{
 		method: 'POST', path: '/tasks/add', config: {
 			handler: function() {
 				var request = this;
@@ -99,7 +99,7 @@ server.route([
 			auth: { mode: "required" }
 		}
 	},
-	{ 
+	{
 		method: 'GET', path: '/tasks/{id}', config: {
 			handler: function() {
 				var request = this;
@@ -118,9 +118,109 @@ server.route([
 			auth: { mode: "required" }
 		}
 	},
-  
-  //{ method: 'GET',         path: '/', config: { handler: home.handler, auth: { mode: 'try' } } },
-  //{ method: '*',         path: '/version', handler: function() { this.reply(util.version); } },
+	{
+		method: 'POST', path: '/tasks/{id}/update', config: {
+			handler: function() {
+				var request = this;
+				var taskid = request.params.id;
+				var taskname = request.payload.name;
+				var taskstatus = request.payload.status;
+				var session = request.auth.credentials;
+				if (session) {
+					var updateObj = {};
+					updateObj.id = taskid;
+					updateObj.user = session.id;
+					if (taskname !== undefined) {
+						updateObj.name = taskname;
+					}
+					if (taskstatus !== undefined) {
+						updateObj.status = taskstatus;
+					}
+					Faire.Tasks.update(updateObj, function(err, updatedTask) {
+						if (err) throw err;
+						request.reply(updatedTask);
+					})
+				} else {
+					request.reply({error: 'Must be logged in.'});
+				}
+			},
+			validate: {
+				path: { id: Hapi.types.Number().integer().required() },
+				payload: {
+					name: Hapi.types.String(),
+					status: Hapi.types.any().valid(['active','inactive','deleted']);
+				}
+			},
+			
+			auth: { mode: "required" }
+		}
+	},
+	{
+		method: 'POST', path: '/tasks/{id}/delete', config: {
+			handler: function() {
+				var request = this;
+				var taskid = request.params.id;
+				var session = request.auth.credentials;
+				if (session) {
+					Faire.Tasks.delete({ user: session.id, id: taskid }, function(err, deletedTask) {
+						if (err) throw err;
+						request.reply(deletedTask);
+					})
+				} else {
+					request.reply({error: 'Must be logged in.'});
+				}
+			},
+			validate: {
+				path: { id: Hapi.types.Number().integer().required() }
+			},
+			
+			auth: { mode: "required" }
+		}
+	},
+	{
+		method: 'POST', path: '/tasks/{id}/inactivate', config: {
+			handler: function() {
+				var request = this;
+				var taskid = request.params.id;
+				var session = request.auth.credentials;
+				if (session) {
+					Faire.Tasks.inactivate({ user: session.id, id: taskid }, function(err, inactivatedTask) {
+						if (err) throw err;
+						request.reply(inactivatedTask);
+					})
+				} else {
+					request.reply({error: 'Must be logged in.'});
+				}
+			},
+			validate: {
+				path: { id: Hapi.types.Number().integer().required() }
+			},
+			
+			auth: { mode: "required" }
+		}
+	},
+	{
+		method: 'POST', path: '/tasks/{id}/activate', config: {
+			handler: function() {
+				var request = this;
+				var taskid = request.params.id;
+				var session = request.auth.credentials;
+				if (session) {
+					Faire.Tasks.inactivate({ user: session.id, id: taskid }, function(err, activatedTask) {
+						if (err) throw err;
+						request.reply(activatedTask);
+					})
+				} else {
+					request.reply({error: 'Must be logged in.'});
+				}
+			},
+			validate: {
+				path: { id: Hapi.types.Number().integer().required() }
+			},
+			
+			auth: { mode: "required" }
+		}
+	},
   //Authentication Routes
   { method: '*',         path: '/confirm/{hashkey*}', config: { handler: auth.confirm, auth: false  } },
   { method: 'GET', path: '/register', config: { handler: auth.register_view, auth: { mode: 'try' }  } },
