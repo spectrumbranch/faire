@@ -79,6 +79,27 @@ server.route([
 		}
 	},
 	{ 
+		method: 'POST', path: '/tasks/add', config: {
+			handler: function() {
+				var request = this;
+				var taskname = request.payload.name;
+				var session = request.auth.credentials;
+				if (session) {
+					Faire.Tasks.add({ user: session.id, name: taskname }, function(err, addTask) {
+						if (err) throw err;
+						request.reply(addTask);
+					})
+				} else {
+					request.reply({error: 'Must be logged in.'});
+				}
+			},
+			validate: { payload: {
+				name: Hapi.types.String().required()
+			} },
+			auth: { mode: "required" }
+		}
+	},
+	{ 
 		method: 'GET', path: '/tasks/{id}', config: {
 			handler: function() {
 				var request = this;
@@ -94,24 +115,6 @@ server.route([
 				}
 			},
 			validate: { path: { id: Hapi.types.Number().integer().required() } },
-			auth: { mode: "required" }
-		}
-	},
-	{ 
-		method: 'GET', path: '/tasks/add', config: {
-			handler: function() {
-				var request = this;
-				var taskid = request.params.id;
-				var session = request.auth.credentials;
-				if (session) {
-					Faire.Tasks.get({ user: session.id, id: taskid }, function(err, getTask) {
-						if (err) throw err;
-						request.reply(getTask);
-					})
-				} else {
-					request.reply({error: 'Must be logged in.'});
-				}
-			},
 			auth: { mode: "required" }
 		}
 	},
