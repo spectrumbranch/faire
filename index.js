@@ -1,4 +1,6 @@
-var Hapi = require('hapi'),
+var Faire = require('./lib');
+
+var Hapi = Faire.Hapi,
     options = { cors: true };
 var masterConfig = require('./config/config');
 
@@ -13,7 +15,7 @@ if (serverConfig.tls) {
 
 var server = new Hapi.Server(serverConfig.hostname, serverConfig.port, options);
 
-var Faire = require('./lib');
+
 //var util = Faire.Util;
 var auth = Faire.Auth;
 var mailer = Faire.Mailer;
@@ -24,7 +26,7 @@ server.auth('session', {
     scheme: 'cookie',
     password: serverConfig.cookie_password,
     cookie: serverConfig.cookie_name,
-    redirectTo: '/',
+    redirectTo: '/login',
     isSecure: serverConfig.tls,
     ttl: 1800000,
     clearInvalid: true
@@ -58,8 +60,61 @@ register_validate = function() {
 
 
 server.route([
-  //Faire Routes
-  //{ method: 'GET', path: '/', config: { handler: /*auth.register_view*/, auth: { mode: true }  } },
+	//Faire Routes
+	{ 
+		method: 'GET', path: '/tasks', config: {
+			handler: function() {
+				var request = this;
+				var session = request.auth.credentials;
+				if (session) {
+					Faire.Tasks.getAll({ user: session.id }, function(err, getAllTasks) {
+						if (err) throw err;
+						request.reply(getAllTasks);
+					})
+				} else {
+					request.reply({error: 'Must be logged in.'});
+				}
+			},
+			auth: { mode: "required" }
+		}
+	},
+	{ 
+		method: 'GET', path: '/tasks/{id}', config: {
+			handler: function() {
+				var request = this;
+				var taskid = request.params.id;
+				var session = request.auth.credentials;
+				if (session) {
+					Faire.Tasks.get({ user: session.id, id: taskid }, function(err, getTask) {
+						if (err) throw err;
+						request.reply(getTask);
+					})
+				} else {
+					request.reply({error: 'Must be logged in.'});
+				}
+			},
+			validate: { path: { id: Hapi.types.Number().integer().required() } },
+			auth: { mode: "required" }
+		}
+	},
+	{ 
+		method: 'GET', path: '/tasks/add', config: {
+			handler: function() {
+				var request = this;
+				var taskid = request.params.id;
+				var session = request.auth.credentials;
+				if (session) {
+					Faire.Tasks.get({ user: session.id, id: taskid }, function(err, getTask) {
+						if (err) throw err;
+						request.reply(getTask);
+					})
+				} else {
+					request.reply({error: 'Must be logged in.'});
+				}
+			},
+			auth: { mode: "required" }
+		}
+	},
   
   //{ method: 'GET',         path: '/', config: { handler: home.handler, auth: { mode: 'try' } } },
   //{ method: '*',         path: '/version', handler: function() { this.reply(util.version); } },
@@ -72,7 +127,7 @@ server.route([
   { method: '*', path: '/logout', config: { handler: auth.logout, auth: true  } },
   
   //All static content
-  { method: '*',         path: '/{path*}', handler: { directory: { path: './static/', listing: false, redirectToSlash: true } } }
+  { method: '*', path: '/{path*}', config: { handler: { directory: { path: './static/', listing: false, redirectToSlash: true } }, auth: true } }
 ]);
 
 //setup/load modules/plugins here
