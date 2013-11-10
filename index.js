@@ -227,10 +227,11 @@ server.route([
   { method: 'POST', path: '/login', config: { handler: auth.login, validate: { payload: login_validate() }, auth: { mode: 'try' }  } },
   { method: '*', path: '/logout', config: { handler: auth.logout, auth: true  } }, 
   //Views
+  { method: 'GET', path: '/', config: { handler: Faire.Home.home_view, auth: true  } },
   { method: 'GET', path: '/login', config: { handler: auth.login_view, auth: { mode: 'try' }  } },
   { method: 'GET', path: '/register', config: { handler: auth.register_view, auth: { mode: 'try' }  } },
   //All static content
-  { method: '*', path: '/{path*}', config: { handler: { directory: { path: './static/', listing: false, redirectToSlash: true } }, auth: true } }
+  { method: '*', path: '/{path*}', config: { handler: { directory: { path: './static/', listing: false, redirectToSlash: true } }, auth: { mode: 'try' } } }
 ]);
 
 //setup/load modules/plugins here
