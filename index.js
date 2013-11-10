@@ -32,13 +32,13 @@ server.auth('session', {
     clearInvalid: true
 });
 
-//server.views({
-//    engines: {
-//        html: 'handlebars'            
-//    },
-//    path: './lib/views',
-//    partialsPath: './lib/views/partials'
-//});
+server.views({
+    engines: {
+        html: 'handlebars'            
+    },
+    path: './lib/views',
+    partialsPath: './lib/views/partials'
+});
 
 login_validate = function() {
     var S = Hapi.types.String;
@@ -147,8 +147,8 @@ server.route([
 			validate: {
 				path: { id: Hapi.types.Number().integer().required() },
 				payload: {
-					name: Hapi.types.String(),
-					status: Hapi.types.any().valid(['active','inactive','deleted']);
+					name: Faire.Joi.string().max(50),
+					status: Faire.Joi.any().valid(['active','inactive','deleted'])
 				}
 			},
 			
@@ -222,13 +222,13 @@ server.route([
 		}
 	},
   //Authentication Routes
-  { method: '*',         path: '/confirm/{hashkey*}', config: { handler: auth.confirm, auth: false  } },
-  { method: 'GET', path: '/register', config: { handler: auth.register_view, auth: { mode: 'try' }  } },
+  { method: '*', path: '/confirm/{hashkey*}', config: { handler: auth.confirm, auth: false  } },
   { method: 'POST', path: '/register', config: { handler: auth.register, validate: { payload: register_validate() }, auth: { mode: 'try' }   } },
   { method: 'POST', path: '/login', config: { handler: auth.login, validate: { payload: login_validate() }, auth: { mode: 'try' }  } },
+  { method: '*', path: '/logout', config: { handler: auth.logout, auth: true  } }, 
+  //Views
   { method: 'GET', path: '/login', config: { handler: auth.login_view, auth: { mode: 'try' }  } },
-  { method: '*', path: '/logout', config: { handler: auth.logout, auth: true  } },
-  
+  { method: 'GET', path: '/register', config: { handler: auth.register_view, auth: { mode: 'try' }  } },
   //All static content
   { method: '*', path: '/{path*}', config: { handler: { directory: { path: './static/', listing: false, redirectToSlash: true } }, auth: true } }
 ]);
