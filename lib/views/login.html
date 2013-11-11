@@ -15,11 +15,20 @@
 </head>
 <body>
 	<div class="row">
-		<div class="large-12 small-12 columns">
+		<div class="large-6 large-centered small-12 columns">
 			<form method="post" action="/login">
-				Email: <input type="text" name="email"><br/>
-				Password: <input type="password" name="passwrd"><br/>
-				<input type="submit" value="Login">
+				<div class="row">
+					<div class="large-12 small-12 columns">
+						<fieldset>
+							<legend>Faire Login</legend>
+							<label>Email:</label>
+							<input type="text" name="email"><br/>
+							<label>Password:</label>
+							<input type="password" name="passwrd"><br/>
+							<input type="submit" value="Login" class="button success radius expand" />
+						</fieldset>
+					</div>
+				</div>
 			</form>
 		</div>
 	</div>

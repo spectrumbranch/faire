@@ -1,6 +1,12 @@
 .entry-section {
 	margin-top:15px;
 }
+.faire-drop-menu {
+	display:none;
+}
+.faire-drop-menu.active {
+	display:block;
+}
 
 .top-bar-section ul {
 	width: 100%;
