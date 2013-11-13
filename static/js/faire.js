@@ -1,20 +1,33 @@
 function TaskCtrl($scope, $http) {
 	$scope.tasks = [];
 	
+	;(function() {
+		console.log('initialize');
+		$http({
+			url: '/tasks',
+			method: 'GET',
+			data: {}
+		}).success(function(data, status, headers, config) {
+			angular.forEach(data, function(task) {
+				$scope.tasks.push(task);
+			})
+		}).error(function(data, status, headers, config) {
+			console.log('there is an error: ' + status);
+			console.log(data);
+		})
+	})();
+	
 	$scope.addTask = function() {
-		console.log('in here');
 		$http({
 			url: '/tasks/add',
 			method: 'POST',
 			data: { name: $scope.taskName }
 		}).success(function(data, status, headers, config) {
-		
 			$scope.tasks.push(data);
 			$scope.taskName = '';
-			
-			console.log($scope.tasks);
 		}).error(function(data, status, headers, config) {
 			console.log('there is an error: ' + status);
+			console.log(data);
 		})
 	};
 }
