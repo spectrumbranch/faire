@@ -51,7 +51,7 @@ hr {
 a {
 	color: #000;
 }
-.faire-inactive a {
+.faire-task.inactive a {
 	text-decoration:line-through;
 	color: #2ba6cb;
 }
