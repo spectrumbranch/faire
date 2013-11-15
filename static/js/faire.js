@@ -1,15 +1,15 @@
 function TaskCtrl($scope, $http) {
-	$scope.tasks = [];
+	$scope.tasks = {};
 	
 	;(function() {
-		console.log('initialize');
+		//console.log('initialize');
 		$http({
 			url: '/tasks',
 			method: 'GET',
 			data: {}
 		}).success(function(data, status, headers, config) {
 			angular.forEach(data, function(task) {
-				$scope.tasks.push(task);
+				$scope.tasks[task.id] = task;
 			})
 		}).error(function(data, status, headers, config) {
 			console.log('there is an error: ' + status);
@@ -23,13 +23,38 @@ function TaskCtrl($scope, $http) {
 			method: 'POST',
 			data: { name: $scope.taskName }
 		}).success(function(data, status, headers, config) {
-			$scope.tasks.push(data);
+			$scope.tasks[data.id] = data;
 			$scope.taskName = '';
 		}).error(function(data, status, headers, config) {
 			console.log('there is an error: ' + status);
 			console.log(data);
 		})
 	};
+	
+	$scope.toggleTask = function(id) {
+		console.log('toggleTask');
+		console.log(id);
+		var task = $scope.tasks[id];
+		var statusAction = '';
+		if (task.status == 'active') {
+			statusAction = 'inactivate';
+		} else if (task.status == 'inactive') {
+			statusAction = 'activate';
+		}
+		
+		$http({
+			url: '/tasks/'+id+'/'+statusAction,
+			method: 'POST',
+			data: {}
+		}).success(function(data, status, headers, config) {
+			$scope.tasks[id] = data;
+			//$scope.tasks.push(data);
+			//$scope.taskName = '';
+		}).error(function(data, status, headers, config) {
+			console.log('there is an error: ' + status);
+			console.log(data);
+		})
+	}
 }
 
 var setup_faire_menu = function() {

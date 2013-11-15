@@ -70,10 +70,10 @@
 		</div>
 
 		<div ng-cloak id="task-container">
-			<div ng-repeat="task in tasks">
+			<div ng-repeat="(id, task) in tasks">
 				<div class="row faire-task  \{{task.status}}">
 					<div class="large-12 small-12 columns">
-						<a href="#">\{{task.name}}</a>
+						<a ng-click="toggleTask(id)">\{{task.name}}</a>
 					</div>
 				</div>
 				<div class="row">

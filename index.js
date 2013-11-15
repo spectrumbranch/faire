@@ -28,7 +28,7 @@ server.auth('session', {
     cookie: serverConfig.cookie_name,
     redirectTo: '/login',
     isSecure: serverConfig.tls,
-    ttl: 1800000,
+//    ttl: 1800000,
     clearInvalid: true
 });
 
@@ -206,7 +206,7 @@ server.route([
 				var taskid = request.params.id;
 				var session = request.auth.credentials;
 				if (session) {
-					Faire.Tasks.inactivate({ user: session.id, id: taskid }, function(err, activatedTask) {
+					Faire.Tasks.activate({ user: session.id, id: taskid }, function(err, activatedTask) {
 						if (err) throw err;
 						request.reply(activatedTask);
 					})
