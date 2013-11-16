@@ -16,7 +16,16 @@ function TaskCtrl($scope, $http) {
 			console.log(data);
 		})
 	})();
-	
+	$scope.hasNoTasks = function() {
+		for (var key in $scope.tasks) {
+			if ($scope.tasks.hasOwnProperty(key)) {
+			//	console.log('found a task!');
+				return false;
+			}
+		}
+	//	console.log('no tasks!');
+		return true;
+	};
 	$scope.addTask = function() {
 		$http({
 			url: '/tasks/add',
