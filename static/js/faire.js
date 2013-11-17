@@ -1,70 +1,76 @@
-function TaskCtrl($scope, $http) {
-	$scope.tasks = {};
-	
-	;(function() {
-		//console.log('initialize');
-		$http({
-			url: '/tasks',
-			method: 'GET',
-			data: {}
-		}).success(function(data, status, headers, config) {
-			angular.forEach(data, function(task) {
-				$scope.tasks[task.id] = task;
+angular.module('faireApp', ['ngTouch'])
+	.controller('TaskCtrl', function ($scope, $http) {
+		$scope.tasks = {};
+		
+		;(function() {
+			//console.log('initialize');
+			$http({
+				url: '/tasks',
+				method: 'GET',
+				data: {}
+			}).success(function(data, status, headers, config) {
+				angular.forEach(data, function(task) {
+					$scope.tasks[task.id] = task;
+				})
+			}).error(function(data, status, headers, config) {
+				console.log('there is an error: ' + status);
+				console.log(data);
 			})
-		}).error(function(data, status, headers, config) {
-			console.log('there is an error: ' + status);
-			console.log(data);
-		})
-	})();
-	$scope.hasNoTasks = function() {
-		for (var key in $scope.tasks) {
-			if ($scope.tasks.hasOwnProperty(key)) {
-			//	console.log('found a task!');
-				return false;
+		})();
+		$scope.hasNoTasks = function() {
+			for (var key in $scope.tasks) {
+				if ($scope.tasks.hasOwnProperty(key)) {
+				//	console.log('found a task!');
+					return false;
+				}
 			}
-		}
-	//	console.log('no tasks!');
-		return true;
-	};
-	$scope.addTask = function() {
-		$http({
-			url: '/tasks/add',
-			method: 'POST',
-			data: { name: $scope.taskName }
-		}).success(function(data, status, headers, config) {
-			$scope.tasks[data.id] = data;
-			$scope.taskName = '';
-		}).error(function(data, status, headers, config) {
-			console.log('there is an error: ' + status);
-			console.log(data);
-		})
-	};
-	
-	$scope.toggleTask = function(id) {
-		console.log('toggleTask');
-		console.log(id);
-		var task = $scope.tasks[id];
-		var statusAction = '';
-		if (task.status == 'active') {
-			statusAction = 'inactivate';
-		} else if (task.status == 'inactive') {
-			statusAction = 'activate';
+		//	console.log('no tasks!');
+			return true;
+		};
+		$scope.addTask = function() {
+			$http({
+				url: '/tasks/add',
+				method: 'POST',
+				data: { name: $scope.taskName }
+			}).success(function(data, status, headers, config) {
+				$scope.tasks[data.id] = data;
+				$scope.taskName = '';
+			}).error(function(data, status, headers, config) {
+				console.log('there is an error: ' + status);
+				console.log(data);
+			})
+		};
+		
+		$scope.editTask = function(id) {
+			console.log('swipe left for id ' + id);
+			alert(id);
 		}
 		
-		$http({
-			url: '/tasks/'+id+'/'+statusAction,
-			method: 'POST',
-			data: {}
-		}).success(function(data, status, headers, config) {
-			$scope.tasks[id] = data;
-			//$scope.tasks.push(data);
-			//$scope.taskName = '';
-		}).error(function(data, status, headers, config) {
-			console.log('there is an error: ' + status);
-			console.log(data);
-		})
-	}
-}
+		$scope.toggleTask = function(id) {
+			console.log('toggleTask');
+			console.log(id);
+			var task = $scope.tasks[id];
+			var statusAction = '';
+			if (task.status == 'active') {
+				statusAction = 'inactivate';
+			} else if (task.status == 'inactive') {
+				statusAction = 'activate';
+			}
+			
+			$http({
+				url: '/tasks/'+id+'/'+statusAction,
+				method: 'POST',
+				data: {}
+			}).success(function(data, status, headers, config) {
+				$scope.tasks[id] = data;
+				//$scope.tasks.push(data);
+				//$scope.taskName = '';
+			}).error(function(data, status, headers, config) {
+				console.log('there is an error: ' + status);
+				console.log(data);
+			})
+		}
+	});
 
 var setup_faire_menu = function() {
 	var faire_menu_btn_status_default = false;
