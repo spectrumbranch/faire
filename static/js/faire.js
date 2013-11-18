@@ -1,6 +1,25 @@
 angular.module('faireApp', ['ngTouch'])
 	.controller('TaskCtrl', function ($scope, $http) {
-		$scope.tasks = {};
+		//$scope.tasks = {};
+		$scope.indexer = {};
+		$scope.tasks = [];
+		
+		$scope.addToIndex = function(task) {
+			$scope.tasks.push($scope.indexer[task.id] = task);
+		};
+		
+		$scope.updateIndex = function(input) {
+			for (var i = 0; i < $scope.tasks.length; i++) {
+				if (input.id == $scope.tasks[i].id) {
+					$scope.tasks[i] = $scope.indexer[input.id] = input;
+					break;
+				}
+			}
+		};
+		
+		$scope.getFromIndex = function(id) {
+			return $scope.indexer[id];
+		};
 		
 		;(function() {
 			//console.log('initialize');
@@ -10,7 +29,7 @@ angular.module('faireApp', ['ngTouch'])
 				data: {}
 			}).success(function(data, status, headers, config) {
 				angular.forEach(data, function(task) {
-					$scope.tasks[task.id] = task;
+					$scope.addToIndex(task);
 				})
 			}).error(function(data, status, headers, config) {
 				console.log('there is an error: ' + status);
@@ -18,14 +37,15 @@ angular.module('faireApp', ['ngTouch'])
 			})
 		})();
 		$scope.hasNoTasks = function() {
-			for (var key in $scope.tasks) {
-				if ($scope.tasks.hasOwnProperty(key)) {
+			return $scope.tasks.length == 0;
+			//for (var key in $scope.tasks) {
+			//	if ($scope.tasks.hasOwnProperty(key)) {
 				//	console.log('found a task!');
-					return false;
-				}
-			}
+			//		return false;
+			//	}
+			//}
 		//	console.log('no tasks!');
-			return true;
+			//return true;
 		};
 		$scope.addTask = function() {
 			$http({
@@ -33,7 +53,8 @@ angular.module('faireApp', ['ngTouch'])
 				method: 'POST',
 				data: { name: $scope.taskName }
 			}).success(function(data, status, headers, config) {
-				$scope.tasks[data.id] = data;
+				$scope.addToIndex(data);
+				//$scope.tasks[data.id] = data;
 				$scope.taskName = '';
 			}).error(function(data, status, headers, config) {
 				console.log('there is an error: ' + status);
@@ -44,12 +65,16 @@ angular.module('faireApp', ['ngTouch'])
 		$scope.editTask = function(id) {
 			console.log('swipe left for id ' + id);
 			alert(id);
+			//TODO: not yet implemented
 		}
 		
 		$scope.toggleTask = function(id) {
 			console.log('toggleTask');
 			console.log(id);
-			var task = $scope.tasks[id];
+			//$scope.index[task.id] = task; //etc
+			//$scope.updateIndex(task);
+			
+			var task = $scope.getFromIndex(id);
 			var statusAction = '';
 			if (task.status == 'active') {
 				statusAction = 'inactivate';
@@ -62,7 +87,7 @@ angular.module('faireApp', ['ngTouch'])
 				method: 'POST',
 				data: {}
 			}).success(function(data, status, headers, config) {
-				$scope.tasks[id] = data;
+				$scope.updateIndex(data);
 				//$scope.tasks.push(data);
 				//$scope.taskName = '';
 			}).error(function(data, status, headers, config) {
@@ -85,28 +110,9 @@ var setup_faire_menu = function() {
 	});
 }
 
-var setup_faire_add = function() {
-	var input_selector = '#addItemInput';
-	$(input_selector).on('keydown', function(e) {
-		if (e.keyCode == 13) {
-			e.preventDefault();
-			
-			console.log('enter');
-			
-			var input_task_name = $(input_selector).val();
-			//empty
-			$(input_selector).val('');
-			
-			$.post('/tasks/add', { name: input_task_name }, function(response) {
-				console.log(response);
-			})
-		}
-	});
-}
 
 
 $(document).ready(function() {
 	setup_faire_menu();
-	//setup_faire_add();
 	
 })
