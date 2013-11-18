@@ -54,7 +54,7 @@ angular.module('faireApp', ['ngTouch'])
 				data: { name: $scope.taskName }
 			}).success(function(data, status, headers, config) {
 				$scope.addToIndex(data);
-				//$scope.tasks[data.id] = data;
+				//reset input box to blank
 				$scope.taskName = '';
 			}).error(function(data, status, headers, config) {
 				console.log('there is an error: ' + status);
