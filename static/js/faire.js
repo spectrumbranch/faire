@@ -38,14 +38,6 @@ angular.module('faireApp', ['ngTouch'])
 		})();
 		$scope.hasNoTasks = function() {
 			return $scope.tasks.length == 0;
-			//for (var key in $scope.tasks) {
-			//	if ($scope.tasks.hasOwnProperty(key)) {
-				//	console.log('found a task!');
-			//		return false;
-			//	}
-			//}
-		//	console.log('no tasks!');
-			//return true;
 		};
 		$scope.addTask = function() {
 			$http({
@@ -97,6 +89,17 @@ angular.module('faireApp', ['ngTouch'])
 		}
 	});
 
+	
+var show_faire_model = function(show, html) {
+	html = html ? html : '';
+	var text = html + '<a class="close-reveal-modal">&#215;</a>';
+	var faireModal = $('#faireModal').empty();
+	if (show) {
+		faireModal.append(text).foundation('reveal', 'open');
+	} else {
+		faireModal.foundation('reveal', 'close');
+	}
+}
 var setup_faire_menu = function() {
 	var faire_menu_btn_status_default = false;
 	var faire_menu_btn_status = faire_menu_btn_status_default;
