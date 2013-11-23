@@ -1,5 +1,5 @@
 angular.module('faireApp', ['ngTouch'])
-	.controller('TaskCtrl', function ($scope, $http) {
+	.controller('TaskCtrl', function ($rootScope, $scope, $http) {
 		//$scope.tasks = {};
 		$scope.indexer = {};
 		$scope.tasks = [];
@@ -56,8 +56,34 @@ angular.module('faireApp', ['ngTouch'])
 		
 		$scope.editTask = function(id) {
 			console.log('swipe left for id ' + id);
-			alert(id);
+			
+			var task = $scope.getFromIndex(id);
+			//TODO: why arent the next two lines working?
+			$scope.editTaskName = task.name;
+			$scope.editTaskId = task.id;
+			show_faire_modal(true);
+		
 			//TODO: not yet implemented
+		}
+		
+		$scope.performEditTask = function(id) {
+			console.log("performEditTask  " + id );
+			
+			$http({
+				url: '/tasks/'+id+'/update',
+				method: 'POST',
+				data: { name: $scope.editTaskName }
+			}).success(function(data, status, headers, config) {
+				$scope.updateIndex(data);
+				//reset input box to blank
+				show_faire_modal(false);
+				$scope.editTaskName = '';
+				$scope.editTaskId = '';
+			}).error(function(data, status, headers, config) {
+				console.log('there is an error: ' + status);
+				console.log(data);
+				show_faire_modal(false);
+			})
 		}
 		
 		$scope.toggleTask = function(id) {
@@ -89,17 +115,21 @@ angular.module('faireApp', ['ngTouch'])
 		}
 	});
 
+
 	
-var show_faire_model = function(show, html) {
-	html = html ? html : '';
-	var text = html + '<a class="close-reveal-modal">&#215;</a>';
-	var faireModal = $('#faireModal').empty();
+var show_faire_modal = function(show) {
+	var faireModal = $('#faireModal');//.empty();
 	if (show) {
-		faireModal.append(text).foundation('reveal', 'open');
+		faireModal.foundation('reveal', 'open');
 	} else {
 		faireModal.foundation('reveal', 'close');
 	}
 }
+
+
+
+
+
 var setup_faire_menu = function() {
 	var faire_menu_btn_status_default = false;
 	var faire_menu_btn_status = faire_menu_btn_status_default;

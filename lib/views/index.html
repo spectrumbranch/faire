@@ -95,21 +95,39 @@
 				</div>
 			</div>
 		</div>
+		
+	
+		<script>
+		document.write('<script src=' +
+		('__proto__' in {} ? 'js/vendor/zepto' : 'js/vendor/jquery') +
+		'.js><\/script>')
+		</script>
+
+		<script src="js/foundation.min.js"></script>
+		<script src="js/vendor/angular.min.js"></script>
+		<script src="js/vendor/angular-touch.min.js"></script>
+		<script src="js/faire.js"></script>
+
+		<script>
+			$(document).foundation();
+		</script>
+		<div id="faireModal" class="reveal-modal">
+			<div class="row entry-section">
+				<div class="large-11 small-11 faire-entry columns">
+					<form ng-submit="performEditTask(editTaskId)">
+						<input type="text" id="editItemInput" ng-model="editTaskName" placeholder="Edit an item on your list..." size="50" />
+					</form>
+				</div>
+				<div class="large-1 small-1 faire-menu-entry columns">
+					<a id="faire-edit-btn">
+						<span class="faire-menu-icon-wrapper">
+							<span class="faire-menu-icon" style=""></span>
+						</span>
+					</a>
+				</div>
+			</div>
+			<a class="close-reveal-modal">&#215;</a>
+		</div>
 	</div>
-	<script>
-	document.write('<script src=' +
-	('__proto__' in {} ? 'js/vendor/zepto' : 'js/vendor/jquery') +
-	'.js><\/script>')
-	</script>
-
-	<script src="js/foundation.min.js"></script>
-	<script src="js/vendor/angular.min.js"></script>
-	<script src="js/vendor/angular-touch.min.js"></script>
-	<script src="js/faire.js"></script>
-
-	<script>
-		$(document).foundation();
-	</script>
-	<div id="faireModal" class="reveal-modal"></div>
 </body>
 </html>
