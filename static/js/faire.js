@@ -58,12 +58,9 @@ angular.module('faireApp', ['ngTouch'])
 			console.log('swipe left for id ' + id);
 			
 			var task = $scope.getFromIndex(id);
-			//TODO: why arent the next two lines working?
 			$scope.editTaskName = task.name;
 			$scope.editTaskId = task.id;
 			show_faire_modal(true);
-		
-			//TODO: not yet implemented
 		}
 		
 		$scope.performEditTask = function(id) {
