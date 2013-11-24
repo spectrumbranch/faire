@@ -71,14 +71,16 @@
 
 		<div ng-cloak id="task-container">
 			<div ng-repeat="task in tasks | orderBy:'-createdAt'">
-				<div class="row faire-task  \{{task.status}}" ng-swipe-left="editTask(task.id)">
-					<div class="large-12 small-12 columns">
-						<a ng-click="toggleTask(task.id)">\{{task.name}}</a>
+				<div class="faire-task  \{{task.status}}">
+					<div class="row actionable" ng-swipe-left="editTask(task.id)" ng-swipe-right="deleteTask(task.id)">
+						<div class="large-12 small-12 columns">
+							<a ng-click="toggleTask(task.id)">\{{task.name}}</a>
+						</div>
 					</div>
-				</div>
-				<div class="row">
-					<div class="large-12 small-12 columns">
-						<hr />
+					<div class="row">
+						<div class="large-12 small-12 columns">
+							<hr />
+						</div>
 					</div>
 				</div>
 			</div>
@@ -113,17 +115,33 @@
 		</script>
 		<div id="faireModal" class="reveal-modal">
 			<div class="row entry-section">
-				<div class="large-11 small-11 faire-entry columns">
+				<div class="large-12 small-12 columns">
 					<form ng-submit="performEditTask(editTaskId)">
 						<input type="text" id="editItemInput" ng-model="editTaskName" placeholder="Edit an item on your list..." size="50" />
 					</form>
 				</div>
-				<div class="large-1 small-1 faire-menu-entry columns">
-					<a id="faire-edit-btn">
-						<span class="faire-menu-icon-wrapper">
-							<span class="faire-menu-icon" style=""></span>
-						</span>
-					</a>
+			</div>
+			<a class="close-reveal-modal">&#215;</a>
+		</div>
+		<div id="faireDeleteModal" class="reveal-modal">
+			<div class="row entry-section">
+				<div class="large-12 small-12 columns">
+					<form ng-submit="performDeleteTask(deleteTaskId)">
+						<fieldset>
+							<legend>Are you sure you want to delete this task?</legend>
+							<blockquote>
+								\{{deleteTaskName}}
+							</blockquote>
+							<div class="row">
+								<div class="large-6 small-6 columns">
+									<input type="submit" value="Delete" class="button success radius expand" />
+								</div>
+								<div class="large-6 small-6 columns">
+									<input type="button" value="Cancel" class="button alert radius expand" onclick="show_faire_delete_modal(false)" />
+								</div>
+							</div>
+						</fieldset>
+					</form>
 				</div>
 			</div>
 			<a class="close-reveal-modal">&#215;</a>

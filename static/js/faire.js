@@ -63,6 +63,15 @@ angular.module('faireApp', ['ngTouch'])
 			show_faire_modal(true);
 		}
 		
+		$scope.deleteTask = function(id) {
+			console.log('swipe right for id ' + id);
+			
+			var task = $scope.getFromIndex(id);
+			$scope.deleteTaskName = task.name;
+			$scope.deleteTaskId = task.id;
+			show_faire_delete_modal(true);
+		}
+		
 		$scope.performEditTask = function(id) {
 			console.log("performEditTask  " + id );
 			
@@ -83,11 +92,28 @@ angular.module('faireApp', ['ngTouch'])
 			})
 		}
 		
+		$scope.performDeleteTask = function(id) {
+			console.log("performDeleteTask  " + id );
+			
+			$http({
+				url: '/tasks/'+id+'/delete',
+				method: 'POST',
+				data: { }
+			}).success(function(data, status, headers, config) {
+				$scope.updateIndex(data);
+				//reset input box to blank
+				show_faire_delete_modal(false);
+				$scope.deleteTaskName = '';
+				$scope.deleteTaskId = '';
+			}).error(function(data, status, headers, config) {
+				console.log('there is an error: ' + status);
+				console.log(data);
+				show_faire_modal(false);
+			})
+		}
+		
 		$scope.toggleTask = function(id) {
-			console.log('toggleTask');
-			console.log(id);
-			//$scope.index[task.id] = task; //etc
-			//$scope.updateIndex(task);
+			console.log('toggleTask ' + id);
 			
 			var task = $scope.getFromIndex(id);
 			var statusAction = '';
@@ -103,8 +129,6 @@ angular.module('faireApp', ['ngTouch'])
 				data: {}
 			}).success(function(data, status, headers, config) {
 				$scope.updateIndex(data);
-				//$scope.tasks.push(data);
-				//$scope.taskName = '';
 			}).error(function(data, status, headers, config) {
 				console.log('there is an error: ' + status);
 				console.log(data);
@@ -116,6 +140,15 @@ angular.module('faireApp', ['ngTouch'])
 	
 var show_faire_modal = function(show) {
 	var faireModal = $('#faireModal');//.empty();
+	if (show) {
+		faireModal.foundation('reveal', 'open');
+	} else {
+		faireModal.foundation('reveal', 'close');
+	}
+}
+
+var show_faire_delete_modal = function(show) {
+	var faireModal = $('#faireDeleteModal');//.empty();
 	if (show) {
 		faireModal.foundation('reveal', 'open');
 	} else {

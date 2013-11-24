@@ -1,6 +1,6 @@
 {
   "name": "faire",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Text list management, useful for todo lists.",
   "main": "index.js",
   "scripts": {

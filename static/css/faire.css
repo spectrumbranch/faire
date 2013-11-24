@@ -43,8 +43,10 @@ hr {
 	border: solid 3px;
 	margin: 5px 0 5px;
 }
-.faire-task  div{
+.faire-task .actionable {
 	padding: 10px 0;
+}
+.faire-task  div{
 	text-align: center;
 	word-wrap: break-word;
 }
@@ -54,6 +56,9 @@ a {
 .faire-task.inactive a {
 	text-decoration:line-through;
 	color: #2ba6cb;
+}
+.faire-task.deleted  {
+	display:none;
 }
 @media only screen {
 	.faire-entry {
