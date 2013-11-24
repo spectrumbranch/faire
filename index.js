@@ -54,7 +54,8 @@ register_validate = function() {
     return {
 		email: S().email().required().max(50),
         passwrd: S().required().min(8),
-        passwrd0: S().required().min(8)
+        passwrd0: S().required().min(8),
+		view: S()
     }
 }
 

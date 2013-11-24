@@ -1,6 +1,5 @@
 angular.module('faireApp', ['ngTouch'])
 	.controller('TaskCtrl', function ($rootScope, $scope, $http) {
-		//$scope.tasks = {};
 		$scope.indexer = {};
 		$scope.tasks = [];
 		
@@ -22,7 +21,6 @@ angular.module('faireApp', ['ngTouch'])
 		};
 		
 		;(function() {
-			//console.log('initialize');
 			$http({
 				url: '/tasks',
 				method: 'GET',
@@ -139,7 +137,7 @@ angular.module('faireApp', ['ngTouch'])
 
 	
 var show_faire_modal = function(show) {
-	var faireModal = $('#faireModal');//.empty();
+	var faireModal = $('#faireModal');
 	if (show) {
 		faireModal.foundation('reveal', 'open');
 	} else {
@@ -148,7 +146,7 @@ var show_faire_modal = function(show) {
 }
 
 var show_faire_delete_modal = function(show) {
-	var faireModal = $('#faireDeleteModal');//.empty();
+	var faireModal = $('#faireDeleteModal');
 	if (show) {
 		faireModal.foundation('reveal', 'open');
 	} else {
