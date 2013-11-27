@@ -1,6 +1,6 @@
 <!DOCTYPE html>
-<!--[if IE 8]> 				 <html class="no-js lt-ie9" lang="en" > <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en"><![endif]-->
+<!--[if gt IE 8]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width">
@@ -16,16 +16,16 @@
 <body>
 	<div class="row">
 		<div class="large-6 large-centered small-12 columns">
-			<form method="post" action="/login">
+			<form method="post" action="/login" id="loginForm">
 				<div class="row">
 					<div class="large-12 small-12 columns">
 						<fieldset>
 							<legend>Faire Login</legend>
 							<label>Email:</label>
-							<input type="text" name="email"><br/>
+							<input type="text" name="email" id="loginEmail"><br/>
 							<label>Password:</label>
-							<input type="password" name="passwrd"><br/>
-							<input type="submit" value="Login" class="button success radius expand" />
+							<input type="password" name="passwrd" id="loginPw"><br/>
+							<input type="button" value="Login" id="loginBtn" class="button success radius expand" />
 							<h6 class="subheader"><a href="/register">Don't have an account yet? Register here!</a></h6>
 						</fieldset>
 					</div>
