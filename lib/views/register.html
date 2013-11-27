@@ -16,19 +16,19 @@
 <body>
 	<div class="row">
 		<div class="large-6 large-centered small-12 columns">
-			<form method="post" action="/register">
+			<form method="post" action="/register" id="registerForm">
 				<input type="hidden" name="view" value="true" />
 				<div class="row">
 					<div class="large-12 small-12 columns">
 						<fieldset>
 							<legend>Faire Registration</legend>
 							<label>Email:</label>
-							<input type="text" name="email"><br/>
+							<input type="text" name="email" id="registerEmail"><br/>
 							<label>Password:</label>
-							<input type="password" name="passwrd"><br/>
+							<input type="password" name="passwrd" id="registerPw"><br/>
 							<label>Password Again:</label>
-							<input type="password" name="passwrd0"><br/>
-							<input type="submit" value="Register" class="button success radius expand" />
+							<input type="password" name="passwrd0" id="registerPw0"><br/>
+							<input type="button" value="Register" id="registerBtn" class="button success radius expand" />
 							<h6 class="subheader"><a href="/login">Already have an account? Login here!</a></h6>
 						</fieldset>
 					</div>
@@ -44,6 +44,7 @@
   </script>
 
   <script src="js/foundation.min.js"></script>
+  <script src="js/faire.register.js"></script>
 
   <script>
     $(document).foundation();
