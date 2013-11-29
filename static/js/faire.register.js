@@ -1,8 +1,8 @@
 $(document).ready(function () {
-	setupRegisterButton();
+	setupRegisterForm();
 })
 
-var setupRegisterButton = function() {
+var setupRegisterForm = function() {
 	var registerBtn = $('#registerBtn');
 	
 	var isValidEmailAddress = function(emailAddress) {
@@ -32,21 +32,22 @@ var setupRegisterButton = function() {
 			errElem.remove();
 		}
 	};
-		
-	registerBtn.on('click', function(e) {
+
+	var handleRegisterUserSubmit = function() {
 		clearErrors();
-		
+	
 		//Step 0: Get the fields
 		//Step 1: Validate that the fields are setup appropriately.
 		var errors = [];
-		
+
+
 		var email = $('#registerEmail').val();
 		if (email.length > 50 || !isValidEmailAddress(email)) {
 			var email_error = 'Email cannot be more than 50 characters and must be valid.';
 			errors.push(email_error);
 			showError('registerEmail',email_error);
 		}
-		
+
 		var passwrd = $('#registerPw').val();
 		if (passwrd.length < 8) {
 			var passwrd_length_error = 'Password must be between 8 or more characters.';
@@ -67,5 +68,9 @@ var setupRegisterButton = function() {
 			//No errors!
 			$('#registerForm').submit();
 		}
+	};
+		
+	registerBtn.on('click', function(e) {
+		handleRegisterUserSubmit();	
 	});
 }

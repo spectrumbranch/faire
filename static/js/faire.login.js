@@ -33,8 +33,7 @@ var setupLoginButton = function() {
 			errElem.remove();
 		}
 	};
-		
-	loginBtn.on('click', function(e) {
+	var handleLoginUserSubmit = function() {
 		clearErrors();
 		
 		//Step 0: Get the fields
@@ -61,6 +60,11 @@ var setupLoginButton = function() {
 			//No errors!
 			$('#loginForm').submit();
 		}
+
+
+	}
+	loginBtn.on('click', function(e) {
+		handleLoginUserSubmit();
 	});
 }
 
