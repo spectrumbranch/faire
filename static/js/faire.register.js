@@ -73,4 +73,9 @@ var setupRegisterForm = function() {
 	registerBtn.on('click', function(e) {
 		handleRegisterUserSubmit();	
 	});
+	$('input').on('keyup', function(e) {
+		if (e.which == 13) {
+			handleRegisterUserSubmit();
+		}
+	});
 }

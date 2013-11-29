@@ -1,9 +1,9 @@
 $(document).ready(function () {
-	setupLoginButton();
+	setupLoginForm();
 	registerSuccessful();
 });
 
-var setupLoginButton = function() {
+var setupLoginForm = function() {
 	var loginBtn = $('#loginBtn');
 	
 	var isValidEmailAddress = function(emailAddress) {
@@ -66,6 +66,11 @@ var setupLoginButton = function() {
 	loginBtn.on('click', function(e) {
 		handleLoginUserSubmit();
 	});
+	$('input').on('keyup', function(e) {
+		if (e.which == 13) {
+			handleLoginUserSubmit();
+		}
+	})
 }
 
 var registerSuccessful = function() {
