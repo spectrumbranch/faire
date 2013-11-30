@@ -11,7 +11,9 @@
 .faire-drop-menu.active {
 	display:block;
 }
-
+.faire-drop-menu .faire-task {
+	padding: 8px 0;
+}
 .top-bar-section ul {
 	width: 100%;
 }
