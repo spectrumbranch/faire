@@ -51,6 +51,13 @@ angular.module('faireApp', ['ngTouch'])
 				console.log(data);
 			})
 		};
+		$scope.clearCompletedItems = function() {
+			for (var i = 0; i < $scope.tasks.length; i++) {
+				if ($scope.tasks[i].status === 'inactive') {
+					$scope.performDeleteTask($scope.tasks[i].id);
+				}
+			}
+		}
 		
 		$scope.editTask = function(id) {
 			console.log('swipe left for id ' + id);
@@ -70,13 +77,22 @@ angular.module('faireApp', ['ngTouch'])
 			show_faire_delete_modal(true);
 		}
 		
-		$scope.performEditTask = function(id) {
+		$scope.performEditTask = function(id, taskdata) {
 			console.log("performEditTask  " + id );
+			
+			if (taskdata === undefined || taskdata === null) {
+				taskdata = {};
+			} else {
+				console.log(taskdata);
+			}
+			if ($scope.editTaskName !== '') {
+				taskdata.name = $scope.editTaskName;
+			}
 			
 			$http({
 				url: '/tasks/'+id+'/update',
 				method: 'POST',
-				data: { name: $scope.editTaskName }
+				data: taskdata
 			}).success(function(data, status, headers, config) {
 				$scope.updateIndex(data);
 				//reset input box to blank
