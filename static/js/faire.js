@@ -59,6 +59,14 @@ angular.module('faireApp', ['ngTouch'])
 			}
 		}
 		
+		$scope.deleteTasklist = function() {
+			for (var i = 0; i < $scope.tasks.length; i++) {
+				if ($scope.tasks[i].status !== 'deleted') {
+					$scope.performDeleteTask($scope.tasks[i].id);
+				}
+			}
+		}
+		
 		$scope.editTask = function(id) {
 			console.log('swipe left for id ' + id);
 			
