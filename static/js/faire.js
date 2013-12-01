@@ -35,7 +35,17 @@ angular.module('faireApp', ['ngTouch'])
 			})
 		})();
 		$scope.hasNoTasks = function() {
-			return $scope.tasks.length == 0;
+			var result = true;
+			if ($scope.tasks.length != 0) {
+				for (var i = 0; i < $scope.tasks.length; i++) {
+					if ($scope.tasks[i].status !== 'deleted') {
+						//if we have any tasks that are not deleted, it means we have at least one task.
+						result = false;
+						break;
+					}
+				}
+			}
+			return result;
 		};
 		$scope.addTask = function() {
 			$http({
