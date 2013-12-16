@@ -22,7 +22,7 @@
     "url": "https://github.com/spectrumbranch/faire/issues"
   },
   "dependencies": {
-    "scurvy": "~0.2.1",
+    "scurvy": "~0.3.0",
     "sequelize": "~2.0.0-beta.0",
     "hapi": "~1.16.0",
     "mysql": "~2.0.0-alpha9",
