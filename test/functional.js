@@ -223,8 +223,8 @@ describe('Faire.Tasks API', function() {
 						assert(err2 == null);
 						assert(getTask2 !== undefined);
 						assert(getTask2.id === undefined);
+						done();
 					})
-					done();
 				})
 			})
 		})
