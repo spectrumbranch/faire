@@ -1,6 +1,7 @@
 var assert = require('assert');
 var Faire = require('../lib');
 var async = require('async');
+//Should consider a more efficient testing method.
 
 describe('Faire.Tasks API', function() {
 	var user_id_1, user_id_2, user_id_3;
@@ -278,5 +279,13 @@ describe('Faire.Tasks API', function() {
 				done();
 			})
 		})
+	})
+})
+
+describe('Faire.Preferences API', function() {
+	describe('#setTheme()', function() {
+		it('should create the preferences object if it does not exist already', function(done) {
+			assert(false);
+		});
 	})
 })
