@@ -36,25 +36,6 @@ server.views({
     partialsPath: './lib/views/partials'
 });
 
-login_validate = function() {
-    var S = Hapi.types.String;
-    return {
-		email: S().email().required().max(50),
-        passwrd: S().required().min(8),
-        view: S()
-    }
-}
-
-register_validate = function() {
-    var S = Hapi.types.String;
-    return {
-		email: S().email().required().max(50),
-        passwrd: S().required().min(8),
-        passwrd0: S().required().min(8),
-		view: S()
-    }
-}
-
 //Routes setup
 server.route(Faire.Routes.get(Faire));
 
