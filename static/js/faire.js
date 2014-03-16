@@ -51,10 +51,10 @@ angular.module('faireApp', ['ngTouch'])
 			$http({
 				url: '/tasks/add',
 				method: 'POST',
-				data: { name: $scope.taskName }
+				data: { name: afr$scope.taskName }
 			}).success(function(data, status, headers, config) {
 				$scope.addToIndex(data);
-				//reset input box to blank
+		afr		//reset input box to blank
 				$scope.taskName = '';
 			}).error(function(data, status, headers, config) {
 				console.log('there is an error: ' + status);
@@ -68,6 +68,10 @@ angular.module('faireApp', ['ngTouch'])
 				}
 			}
 		}
+		
+		$scope.editTheme = function() {
+			show_faire_edit_theme_modal(true);
+		}		
 		
 		$scope.deleteTasklist = function() {
 			for (var i = 0; i < $scope.tasks.length; i++) {
@@ -172,6 +176,15 @@ angular.module('faireApp', ['ngTouch'])
 	
 var show_faire_modal = function(show) {
 	var faireModal = $('#faireModal');
+	if (show) {
+		faireModal.foundation('reveal', 'open');
+	} else {
+		faireModal.foundation('reveal', 'close');
+	}
+}
+
+var show_faire_edit_theme_modal = function(show) {
+	var faireModal = $('#faireEditThemeModal');
 	if (show) {
 		faireModal.foundation('reveal', 'open');
 	} else {

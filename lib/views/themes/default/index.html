@@ -38,6 +38,16 @@
 				</div>
 				<div class="row faire-task">
 					<div class="large-12 small-12 columns">
+						<a ng-click="editTheme()">Select Theme</a>
+					</div>
+				</div>
+				<div class="row">
+					<div class="large-12 small-12 columns">
+						<hr />
+					</div>
+				</div>
+				<div class="row faire-task">
+					<div class="large-12 small-12 columns">
 						<a ng-click="clearCompletedItems()">Clear Completed Items</a>
 					</div>
 				</div>
@@ -141,6 +151,33 @@
 			</div>
 			<a class="close-reveal-modal">&#215;</a>
 		</div>
+		<div id="faireEditThemeModal" class="reveal-modal">
+			<div class="row entry-section">
+				<div class="large-12 small-12 columns">
+					<form ng-submit="performDeleteTask(deleteTaskId)">
+						<fieldset>
+							<legend>Select from the options below to edit your theme</legend>
+								<form>
+									<select>
+									  <option value="default_theme">Default Theme</option>
+									  <option value="theme_1">Theme 1</option>
+									  <option value="theme_2">Theme 2</option>
+									</select>							
+								</form>
+							<div class="row">
+								<div class="large-6 small-6 columns">
+									<input type="submit" value="Accept" class="button success radius expand" />
+								</div>
+								<div class="large-6 small-6 columns">
+									<input type="button" value="Cancel" class="button alert radius expand" onclick="show_faire_delete_modal(false)" />
+								</div>
+							</div>
+						</fieldset>
+					</form>
+				</div>
+			</div>
+			<a class="close-reveal-modal">&#215;</a>
+		</div>		
 	</div>
 </body>
 </html>
