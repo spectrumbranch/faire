@@ -51,10 +51,10 @@ angular.module('faireApp', ['ngTouch'])
 			$http({
 				url: '/tasks/add',
 				method: 'POST',
-				data: { name: afr$scope.taskName }
+				data: { name: $scope.taskName }
 			}).success(function(data, status, headers, config) {
 				$scope.addToIndex(data);
-		afr		//reset input box to blank
+				//reset input box to blank
 				$scope.taskName = '';
 			}).error(function(data, status, headers, config) {
 				console.log('there is an error: ' + status);
@@ -70,7 +70,22 @@ angular.module('faireApp', ['ngTouch'])
 		}
 		
 		$scope.editTheme = function() {
-			show_faire_edit_theme_modal(true);
+			$.get('/themes', function(response){
+				var themeOptions = $('#faireThemeOptions');
+				themeOptions.empty();
+				$.get('/preferences/theme', function(themeSelected){
+					themeSelected = themeSelected.theme;
+					for (var i = 0; i < response.themes.length; i++) {
+						if (themeSelected == response.themes[i]) {
+							themeOptions.append('<option selected="selected" value="'+response.themes[i]+'">'+response.themes[i]+'</option>') 
+						} else {
+							themeOptions.append('<option value="'+response.themes[i]+'">'+response.themes[i]+'</option>'); 
+						}
+					}
+					show_faire_edit_theme_modal(true);
+				})
+			})
+			
 		}		
 		
 		$scope.deleteTasklist = function() {
@@ -201,7 +216,12 @@ var show_faire_delete_modal = function(show) {
 	}
 }
 
-
+var changeTheme = function() {
+	var selectedTheme = $('#faireThemeOptions').val();
+	$.post( "/preferences/theme", {theme:selectedTheme}, function( data ) {
+		window.location.reload()
+	});
+}
 
 
 
