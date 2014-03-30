@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>Faire DEFAULT FOUNDATION5</title>
+  <title>Faire FOUNDATION 5 VIEW</title>
 
   
   <link rel="stylesheet" href="css/foundation.css">
@@ -158,15 +158,13 @@
 						<fieldset>
 							<legend>Select from the options below to edit your theme</legend>
 								<form>
-									<select>
-									  <option value="default_theme">Default Theme</option>
-									  <option value="theme_1">Theme 1</option>
-									  <option value="theme_2">Theme 2</option>
+									<select id="faireThemeOptions">
+									  <option value="">Theme not available</option>
 									</select>							
 								</form>
 							<div class="row">
 								<div class="large-6 small-6 columns">
-									<input type="submit" value="Accept" class="button success radius expand" />
+									<input type="submit" value="Accept" class="button success radius expand" onclick="changeTheme()" />
 								</div>
 								<div class="large-6 small-6 columns">
 									<input type="button" value="Cancel" class="button alert radius expand" onclick="show_faire_delete_modal(false)" />
