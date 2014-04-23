@@ -306,7 +306,6 @@ describe('Faire.Preferences API', function() {
 			Faire.Preferences.get({ user: user_id_1 }, function(err, preference) {
 				//expect default
 				assert(err == null);
-				
 				assert(preference != null);
 				assert(preference.theme == 'default');
 				
@@ -314,6 +313,13 @@ describe('Faire.Preferences API', function() {
 					assert(err2 == null);
 					assert(changedPrefs != null);
 					assert(changedPrefs.theme == 'notdefault');
+					
+					Faire.Preferences.get({ user: user_id_1 }, function(err3, getUpdatedPrefs) {
+						assert(err3 == null);
+						assert(getUpdatedPrefs != null);
+						assert(getUpdatedPrefs.theme == 'notdefault');
+						done();
+					})
 				})
 			});
 		});
