@@ -84,7 +84,7 @@
 				<div class="faire-task  \{{task.status}}">
 					<div class="row actionable" ng-swipe-left="editTask(task.id)" ng-swipe-right="deleteTask(task.id)">
 						<div class="large-12 small-12 columns">
-							<a ng-click="toggleTask(task.id)">\{{task.name}}</a>
+							<a ng-click="toggleTask(task.id)">\{{task.name}}</a><strong class="show-for-large-up"><a ng-click="editTask(task.id)">Edit</a> | <a ng-click="deleteTask(task.id)">Delete</a></strong>
 						</div>
 					</div>
 					<div class="row">
