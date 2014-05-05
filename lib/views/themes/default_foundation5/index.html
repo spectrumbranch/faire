@@ -154,28 +154,26 @@
 		<div id="faireEditThemeModal" class="reveal-modal">
 			<div class="row entry-section">
 				<div class="large-12 small-12 columns">
-					<form ng-submit="performDeleteTask(deleteTaskId)">
-						<fieldset>
-							<legend>Select from the options below to edit your theme</legend>
-								<form>
-									<select id="faireThemeOptions">
-									  <option value="">Theme not available</option>
-									</select>							
-								</form>
-							<div class="row">
-								<div class="large-6 small-6 columns">
-									<input type="submit" value="Accept" class="button success radius expand" onclick="changeTheme()" />
-								</div>
-								<div class="large-6 small-6 columns">
-									<input type="button" value="Cancel" class="button alert radius expand" onclick="show_faire_delete_modal(false)" />
-								</div>
+					<fieldset>
+						<legend>Select from the options below to edit your theme</legend>
+							<form>
+								<select id="faireThemeOptions">
+								  <option value="">Theme not available</option>
+								</select>							
+							</form>
+						<div class="row">
+							<div class="large-6 small-6 columns">
+								<input type="submit" value="Accept" class="button success radius expand" onclick="changeTheme()" />
 							</div>
-						</fieldset>
-					</form>
+							<div class="large-6 small-6 columns">
+								<input type="button" value="Cancel" class="button alert radius expand" onclick="show_faire_edit_theme_modal(false)" />
+							</div>
+						</div>
+					</fieldset>
 				</div>
 			</div>
 			<a class="close-reveal-modal">&#215;</a>
-		</div>		
+		</div>
 	</div>
 </body>
 </html>
