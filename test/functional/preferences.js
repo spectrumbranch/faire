@@ -1,10 +1,12 @@
 var assert = require('assert');
 var Faire;
 var db;
+var Fixtures;
 
-module.exports = function(faire, DB) {
+module.exports = function(faire, DB, fixtures) {
 	Faire = faire;
 	db = DB;
+	Fixtures = fixtures;
 }
 
 describe('Faire.Preferences API', function() {

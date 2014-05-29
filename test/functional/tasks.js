@@ -1,24 +1,25 @@
 var assert = require('assert');
 var Faire;
 var db;
+var Fixtures;
 
-module.exports = function(faire, DB) {
+module.exports = function(faire, DB, fixtures) {
 	Faire = faire;
 	db = DB;
+	Fixtures = fixtures;
 }
 
-//Should consider a more efficient testing method.
 describe('Faire.Tasks API', function() {
 	var user_id_1, user_id_2, user_id_3;
 	before(function(done) {
-		var email1 = 'tester@test.com';
-		var passwrd1 = 'shdi2389chs98w3jnh';
+		var email1 = Fixtures.Tasks.Users[0].email;//'tester@test.com';
+		var passwrd1 = Fixtures.Tasks.Users[0].password;//'shdi2389chs98w3jnh';
 		
-		var email2 = 'getalltester@test.com';
-		var passwrd2 = 'fsdoifushdf98w33h2';
+		var email2 = Fixtures.Tasks.Users[1].email;//'getalltester@test.com';
+		var passwrd2 = Fixtures.Tasks.Users[1].password;//'fsdoifushdf98w33h2';
 		
-		var email3 = 'hasnotasks@test.com';
-		var passwrd3 = 'dskn2398fuisesSQ19';
+		var email3 = Fixtures.Tasks.Users[2].email;//'hasnotasks@test.com';
+		var passwrd3 = Fixtures.Tasks.Users[2].password;//'dskn2398fuisesSQ19';
 		
 		var virt_modules = [];
 		virt_modules.push(Faire.Scurvy);
