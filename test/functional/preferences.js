@@ -13,8 +13,8 @@ describe('Faire.Preferences API', function() {
 	var user_id_1;
 	var theme_1 = 'default';
 	before(function(done) {
-		var email1 = 'preftests@test.com';
-		var passwrd1 = 'dfdiuw437thudsriweaw3';
+		var email1 = Fixtures.Preferences.Users[0].email;//'preftests@test.com';
+		var passwrd1 = Fixtures.Preferences.Users[0].password;//'dfdiuw437thudsriweaw3';
 
 		var virt_modules = [];
 		virt_modules.push(Faire.Scurvy);

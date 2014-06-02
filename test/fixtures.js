@@ -6,4 +6,9 @@ Fixtures.Tasks.Users = [
 	{ email: 'hasnotasks@test.com', password: 'dskn2398fuisesSQ19' }
 ];
 
+Fixtures.Preferences = {};
+Fixtures.Preferences.Users = [
+	{ email: 'preftests@test.com', password: 'dfdiuw437thudsriweaw3' }
+];
+
 module.exports = Fixtures;
