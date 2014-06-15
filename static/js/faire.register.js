@@ -1,5 +1,6 @@
 $(document).ready(function () {
 	setupRegisterForm();
+	responseHandler();
 })
 
 var setupRegisterForm = function() {
@@ -79,3 +80,13 @@ var setupRegisterForm = function() {
 		}
 	});
 }
+
+var responseHandler = function() {
+	var response = window.location.search.replace("?","");
+	if (response == "userAlreadyExists") {
+		$('#faireRegisterModalMessage').empty()
+			.append('I\'m sorry! It looks like a user has already registered with that email address. If you own that account, try logging in instead!')
+			.append('<br /><br /><input type="button" value="Okay!" class="button success radius" onclick="$(\'#faireRegisterModal\').foundation(\'reveal\', \'close\')"/>');
+		$('#faireRegisterModal').foundation('reveal', 'open');
+	}
+};
