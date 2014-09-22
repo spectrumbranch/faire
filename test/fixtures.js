@@ -11,4 +11,12 @@ Fixtures.Preferences.Users = [
 	{ email: 'preftests@test.com', password: 'dfdiuw437thudsriweaw3' }
 ];
 
+Fixtures.Lists = {};
+Fixtures.Lists.Users = [
+	{ email: 'liststests@test.com', password: 'zxdo9w3bksfd98xbhwer0u8s' },
+	{ email: 'listssharedwith@test.com', password: 'sdfsf8973gyur3whu89fwerf' },
+	{ email: 'listsnotshared@test.com', password: 'dfg65ert65srdg687ser4df' },
+	{ email: 'hasnolists@test.com', password: 'sdfuhfiuf89wfehgfwifwe9u8uiwe' }
+];
+
 module.exports = Fixtures;
