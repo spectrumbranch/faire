@@ -1,5 +1,4 @@
 var assert = require('assert');
-var async = require('async');
 var Faire;
 var db;
 var Fixtures;
@@ -31,7 +30,7 @@ describe('Faire.Tasks API', function() {
 		
 		db.init(virt_modules, function() {
 			console.log('-------- database setup complete --------');
-			async.parallel([
+			Faire.Async.parallel([
 				function(cb) {
 					Faire.Scurvy.createUser({email: email1, passwrd: passwrd1, status: 'active'}, function(err, userball1) {
 						user_id_1 = userball1.user.id
