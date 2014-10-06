@@ -1,0 +1,95 @@
+/*---GLOBAL---*/
+
+.no-padding{
+	padding: 0;
+}
+
+/*---HEADER---*/
+
+#header{
+	height: 45px;
+	background: #2ba6cb;
+	font-family: Arial,Helvetica,sans-serif;
+}
+
+#header.contain-to-grid .top-bar{
+	background: #2ba6cb;
+	height: 45px;
+}
+
+#header .top-bar{
+	
+}
+
+#header-nav-container{
+	width: 970px;
+	margin: 0 auto;
+}
+
+#header-left{
+	float: left;
+}
+
+#header-right{
+	float: right;
+}
+
+#header-nav{
+	list-style: none;
+	display: block;
+	margin: 0;
+}
+
+#header-nav li{
+	float: left;
+}
+
+#header-nav li a{
+	color: #fff;
+	padding: 15px;
+	
+}
+
+#nav-logo{
+	padding-top: 4px;
+}
+
+.top-bar-section li:not(.has-form) a:not(.button){
+	background: #2ba6cb;
+	font-size: 14px;
+}
+
+.top-bar-section li:not(.has-form) a:not(.button):hover{
+	background: #474747;
+}
+
+/*---Search Bar---*/
+
+#header-search{
+	background: #dddddd;
+	height: 45px;
+	padding: 4px 10px;
+}
+
+#search-bar{
+	background-image: url('../img/search-icon.png');
+	background-size: 22px 21px;
+	background-repeat: no-repeat;
+	background-position: right; 
+}
+
+#search-icon{
+	background: #fff;
+	border-left: 0;
+}
+
+/*---Home Page Styles---*/
+
+#main-container h1{
+	font-size: 16px;
+	width: 100%;
+	background: #2ba6cb;
+	color: #fff;
+	font-weight: 600;
+	padding: 5px;
+}

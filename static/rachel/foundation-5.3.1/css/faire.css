@@ -1,0 +1,81 @@
+
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+	display: none !important;
+}
+.entry-section {
+	margin-top:15px;
+}
+.faire-drop-menu {
+	display:none;
+}
+.faire-drop-menu.active {
+	display:block;
+}
+.faire-drop-menu .faire-task {
+	padding: 8px 0;
+}
+.top-bar-section ul {
+	width: 100%;
+}
+.top-bar-section ul li {
+	width: 100%;
+}
+hr {
+	margin: 0;
+}
+
+.faire-menu-icon {
+	display: block;
+	width: 16px;
+	height: 0px;
+	-webkit-box-shadow: 0 10px 0 1px #2ba6cb, 0 16px 0 1px #2ba6cb, 0 22px 0 1px #2ba6cb;
+	box-shadow: 0 10px 0 1px #2ba6cb, 0 16px 0 1px #2ba6cb, 0 22px 0 1px #2ba6cb;
+}
+.faire-menu-icon-wrapper {
+	margin:0 auto;
+	display:block;
+	width:20px;
+	height:32px;
+	position:relative;
+	right:15px;
+}
+
+.uber-divider {
+	color: #2ba6cb;
+	border: solid 3px;
+	margin: 5px 0 5px;
+}
+.faire-task .actionable {
+	padding: 10px 0;
+}
+.faire-task  div{
+	text-align: center;
+	word-wrap: break-word;
+}
+a {
+	color: #000;
+}
+.faire-task.inactive a {
+	text-decoration:line-through;
+	color: #2ba6cb;
+}
+.faire-task.deleted  {
+	display:none;
+}
+@media only screen {
+	.faire-entry {
+		width: 90%;
+	}
+	.faire-menu-entry {
+		
+	}
+}
+
+@media only screen and (min-width: 768px) {
+	.faire-entry {
+		width: 94%;
+	}
+	.faire-menu-entry {
+		width: 6%;
+	}
+}

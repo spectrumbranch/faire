@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--><html class="no-js" lang="en"> <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Faire</title>
+
+  
+  <link rel="stylesheet" href="rachel/foundation-5.3.1/css/foundation.css">
+  <link rel="stylesheet" href="rachel/foundation-5.3.1/css/faire_theme.css">
+
+  <script src="rachel/foundation-5.3.1/js/vendor/modernizr.js"></script>
+
+</head>
+<body ng-app="faireApp">
+	<div id="header" class="contain-to-grid sticky fixed">
+		<nav class="top-bar" data-topbar data-options="sticky_on">
+			<div id="nav-container">
+			<!--Logo-->
+				<ul class="title-area">
+					<li class="name">
+						<a href="index.html"><img id="nav-logo" src="rachel/foundation-5.3.1/img/logo.png" alt="" /></a>
+					</li>
+					<li class="toggle-topbar menu-icon"><a href="#"><span></span></a></li>
+				</ul>
+
+				<section class="top-bar-section">
+					<!-- Right Nav Section -->
+					<ul class="right nav-links">
+						<li><a href="#">Home</a></li>
+						<li><a href="#">Lists</a></li>
+						<li><a href="#">Profile</a></li>
+						<li><a href="#">Logout</a></li>
+					</ul>
+				</section>
+			</div>
+		</nav>	
+	</div>
+	<div id="header-search">
+		<form>
+			<div class="row">
+				<div class="small-12 columns no-padding">
+					<input type="text" id="search-bar" placeholder="Search Lists ...">
+				</div>
+				<!--<div class="small-1 columns no-padding">
+					<a href="#" class="postfix" id="search-icon">
+						<img src="rachel/foundation-5.3.1/img/search-icon.png" width="25" height="23" alt="" />
+					</a>
+				</div>-->
+			</div>	
+		</form>
+	</div>
+	<div id="main-container">
+		<div class="row">
+			<div class="small-12 medium-4 large-4 columns">
+				<h1>List Title #1</h1>
+				<ul>
+					<li>This is a list item</li>
+					<li>This is a list item</li>
+					<li>This is a list item</li>
+				</ul>	
+			</div>
+			<div class="small-12 medium-4 large-4 columns">
+				<h1>List Title #2</h1>
+				<ul>
+					<li>This is a list item</li>
+					<li>This is a list item</li>
+					<li>This is a list item</li>
+				</ul>	
+			</div>
+			<div class="small-12 medium-4 large-4 columns">
+				<h1>List Title #3</h1>
+				<ul>
+					<li>This is a list item</li>
+					<li>This is a list item</li>
+					<li>This is a list item</li>
+				</ul>	
+			</div>			
+		</div>
+		<div class="row">
+			<div class="small-12 medium-4 large-4 columns">
+				<h1>List Title #4</h1>
+				<ul>
+					<li>This is a list item</li>
+					<li>This is a list item</li>
+					<li>This is a list item</li>
+				</ul>	
+			</div>
+			<div class="small-12 medium-4 large-4 columns">
+				<h1>List Title #5</h1>
+				<ul>
+					<li>This is a list item</li>
+					<li>This is a list item</li>
+					<li>This is a list item</li>
+				</ul>	
+			</div>
+			<div class="small-12 medium-4 large-4 columns">
+				<h1>List Title #6</h1>
+				<ul>
+					<li>This is a list item</li>
+					<li>This is a list item</li>
+					<li>This is a list item</li>
+				</ul>	
+			</div>			
+		</div>
+	</div>
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	<!--<div ng-controller="TaskCtrl">
+		<div data-magellan-expedition="fixed">
+			<div class="row entry-section">
+				<div class="large-11 small-11 faire-entry columns">
+					<form ng-submit="addTask()">
+						<input type="text" id="addItemInput" ng-model="taskName" placeholder="Add an item to your list..." size="50" />
+					</form>
+				</div>
+				<div class="large-1 small-1 faire-menu-entry columns">
+					<a id="faire-menu-btn">
+						<span class="faire-menu-icon-wrapper">
+							<span class="faire-menu-icon" style=""></span>
+						</span>
+					</a>				
+				</div>
+			</div>
+			<div class="faire-drop-menu">
+				<div class="row">
+					<div class="large-12 small-12 columns">
+						<hr class="uber-divider" />
+					</div>
+				</div>
+				<div class="row faire-task">
+					<div class="large-12 small-12 columns">
+						<a ng-click="editTheme()">Select Theme</a>
+					</div>
+				</div>
+				<div class="row">
+					<div class="large-12 small-12 columns">
+						<hr />
+					</div>
+				</div>
+				<div class="row faire-task">
+					<div class="large-12 small-12 columns">
+						<a ng-click="clearCompletedItems()">Clear Completed Items</a>
+					</div>
+				</div>
+				<div class="row">
+					<div class="large-12 small-12 columns">
+						<hr />
+					</div>
+				</div>
+				<div class="row faire-task">
+					<div class="large-12 small-12 columns">
+						<a ng-click="deleteTasklist()">Delete List</a>
+					</div>
+				</div>
+				<div class="row">
+					<div class="large-12 small-12 columns">
+						<hr />
+					</div>
+				</div>
+				<div class="row faire-task">
+					<div class="large-12 small-12 columns">
+						<a href="/logout">Logout</a>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="large-12 small-12 columns">
+					<hr class="uber-divider" />
+				</div>
+			</div>
+		</div>
+
+		<div ng-cloak id="task-container">
+			<div ng-repeat="task in tasks | orderBy:'-createdAt'">
+				<div class="faire-task  \{{task.status}}">
+					<div class="row actionable" ng-swipe-left="editTask(task.id)" ng-swipe-right="deleteTask(task.id)">
+						<div class="large-12 small-12 columns">
+							<a ng-click="toggleTask(task.id)">\{{task.name}}</a><strong class="show-for-large-up"><a ng-click="editTask(task.id)">Edit</a> | <a ng-click="deleteTask(task.id)">Delete</a></strong>
+						</div>
+					</div>
+					<div class="row">
+						<div class="large-12 small-12 columns">
+							<hr />
+						</div>
+					</div>
+				</div>
+			</div>
+			<div ng-show="hasNoTasks()">
+				<div class="row faire-task">
+					<div class="large-12 small-12 columns">
+						No tasks!
+					</div>
+				</div>
+			</div>
+		</div>-->
+		
+	
+		<script src="rachel/foundation-5.3.1/js/vendor/jquery.js"></script>
+
+		<script src="rachel/foundation-5.3.1/js/foundation.min.js"></script>
+		<script src="rachel/foundation-5.3.1/js/vendor/angular.min.js"></script>
+		<script src="rachel/foundation-5.3.1/js/vendor/angular-touch.min.js"></script>
+		<script src="rachel/foundation-5.3.1/js/faire.js"></script>
+
+		<script>
+			$(document).foundation();
+		</script>
+		<!--<div id="faireModal" class="reveal-modal">
+			<div class="row entry-section">
+				<div class="large-12 small-12 columns">
+					<form ng-submit="performEditTask(editTaskId)">
+						<input type="text" id="editItemInput" ng-model="editTaskName" placeholder="Edit an item on your list..." size="50" />
+					</form>
+				</div>
+			</div>
+			<a class="close-reveal-modal">&#215;</a>
+		</div>
+		<div id="faireDeleteModal" class="reveal-modal">
+			<div class="row entry-section">
+				<div class="large-12 small-12 columns">
+					<form ng-submit="performDeleteTask(deleteTaskId)">
+						<fieldset>
+							<legend>Are you sure you want to delete this task?</legend>
+							<blockquote>
+								\{{deleteTaskName}}
+							</blockquote>
+							<div class="row">
+								<div class="large-6 small-6 columns">
+									<input type="submit" value="Delete" class="button success radius expand" />
+								</div>
+								<div class="large-6 small-6 columns">
+									<input type="button" value="Cancel" class="button alert radius expand" onclick="show_faire_delete_modal(false)" />
+								</div>
+							</div>
+						</fieldset>
+					</form>
+				</div>
+			</div>
+			<a class="close-reveal-modal">&#215;</a>
+		</div>
+		<div id="faireEditThemeModal" class="reveal-modal">
+			<div class="row entry-section">
+				<div class="large-12 small-12 columns">
+					<fieldset>
+						<legend>Select from the options below to edit your theme</legend>
+							<form>
+								<select id="faireThemeOptions">
+								  <option value="">Theme not available</option>
+								</select>							
+							</form>
+						<div class="row">
+							<div class="large-6 small-6 columns">
+								<input type="submit" value="Accept" class="button success radius expand" onclick="changeTheme()" />
+							</div>
+							<div class="large-6 small-6 columns">
+								<input type="button" value="Cancel" class="button alert radius expand" onclick="show_faire_edit_theme_modal(false)" />
+							</div>
+						</div>
+					</fieldset>
+				</div>
+			</div>
+			<a class="close-reveal-modal">&#215;</a>
+		</div>
+	</div>-->
+</body>
+</html>
