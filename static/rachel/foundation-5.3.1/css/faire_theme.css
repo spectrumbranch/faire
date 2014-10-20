@@ -85,11 +85,32 @@
 
 /*---Home Page Styles---*/
 
+#main-container {
+	margin-top: 15px;
+}
+
+#main-container  .columns{
+	float: left;
+}
+
 #main-container h1{
 	font-size: 16px;
 	width: 100%;
 	background: #2ba6cb;
 	color: #fff;
 	font-weight: 600;
-	padding: 5px;
+	padding: 7px 5px;
+	margin-bottom: 0;
+}
+
+ul.individual-lists{
+	margin-left: 0;
+	font-size: 14px;
+}
+
+ul.individual-lists li{
+	list-style: none;
+	text-align: center;
+	line-height: 35px;
+	border-bottom: 1px solid #dddddd;
 }
