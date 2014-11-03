@@ -1,6 +1,9 @@
 angular.module('faireApp', ['ngTouch'])
 	.controller('faireCtrl', function ($rootScope, $scope, $http) {
 		$scope.lists = [];
+		
+		$scope.addNewListFormData = {};
+		
 		// var listOne = {};
 		// listOne.name = 'Groceries';
 		// listOne.tasks = [];
@@ -23,6 +26,7 @@ angular.module('faireApp', ['ngTouch'])
 		// listTwo.tasks.push(movieTwo);
 		// $scope.lists.push(listTwo);
 		
+		//init
 		;(function() {
 			$http({
 				url: '/lists',
@@ -37,6 +41,25 @@ angular.module('faireApp', ['ngTouch'])
 			})
 		})();
 
+		
+		$scope.addList = function() {
+			$http({
+				url: '/lists/add',
+				method: 'POST',
+				data: $scope.addNewListFormData
+			}).success(function(data, status, headers, config) {
+				$scope.lists.push(data);
+				console.log(data);
+				$scope.clearAddNewListFormData();
+			}).error(function(data, status, headers, config) {
+				console.log('there is an error adding the new list: ' + status);
+				console.log(data);
+			})
+		}
+		
+		$scope.clearAddNewListFormData = function() {
+			$scope.addNewListFormData = {};
+		}
 	});
 
 

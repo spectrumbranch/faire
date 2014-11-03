@@ -73,6 +73,14 @@
 			</div>			
 		</div>
 		
+		
+		<div id="add-new-list">
+			<form ng-submit="addList()">
+				<input type="text" name="name" ng-model="addNewListFormData.name" placeholder="make this required" />
+				<input type="submit" value="Add list" />
+			</form>
+		</div>
+		
 		<script src="rachel/foundation-5.3.1/js/vendor/jquery.js"></script>
 
 		<script src="rachel/foundation-5.3.1/js/foundation.min.js"></script>
