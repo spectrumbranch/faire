@@ -17,17 +17,6 @@ var server = new Hapi.Server(serverConfig.hostname, serverConfig.port, options);
 
 Faire.Mailer.init(mailConfig);
 
-
-// server.auth('session', {
-    // scheme: 'cookie',
-    // password: serverConfig.cookie_password,
-    // cookie: serverConfig.cookie_name,
-    // redirectTo: '/login',
-    // isSecure: serverConfig.tls,
-// //    ttl: 1800000,
-    // clearInvalid: true
-// });
-
 server.views({
     engines: {
         html: require('handlebars')
@@ -37,28 +26,28 @@ server.views({
 });
 
 server.pack.register(require('hapi-auth-cookie'), function (err) {
-	server.auth.strategy('session', 'cookie', {
-		password: serverConfig.cookie_password,
-		cookie: serverConfig.cookie_name,
-		redirectTo: '/login',
-		isSecure: serverConfig.tls,
-		clearInvalid: true
-	});
-	//Routes setup
-	server.route(Faire.Routes.get(Faire));
+    server.auth.strategy('session', 'cookie', {
+        password: serverConfig.cookie_password,
+        cookie: serverConfig.cookie_name,
+        redirectTo: '/login',
+        isSecure: serverConfig.tls,
+        clearInvalid: true
+    });
+    //Routes setup
+    server.route(Faire.Routes.get(Faire));
 
-	//setup/load modules/plugins here
-	var virt_modules = [];
-	virt_modules.push(Faire.Scurvy);
+    //setup/load modules/plugins here
+    var virt_modules = [];
+    virt_modules.push(Faire.Scurvy);
 
-	var db = require('./lib/models');
-	db.init(virt_modules, function() {
-		console.log('database setup complete');
-		
-		//start server
-		server.start();
-		Faire.Auth.setURI(server.info.uri);
-		console.log('Server up at ' + server.info.uri + ' !');
+    var db = require('./lib/models');
+    db.init(virt_modules, function() {
+        console.log('database setup complete');
+        
+        //start server
+        server.start();
+        Faire.Auth.setURI(server.info.uri);
+        console.log('Server up at ' + server.info.uri + ' !');
 
-	});
+    });
 });
