@@ -1,31 +1,25 @@
-angular.module('faireApp', ['ngTouch'])
-	.controller('faireCtrl', function ($rootScope, $scope, $http) {
+angular.module('faireApp', ['ngTouch','ngRoute', 'faire.service']).config(['$routeProvider', function($routeProvider) {
+    $routeProvider
+        .when('/', {
+            templateUrl: 'rachel/views/home.html',
+            controller: 'FaireHomeController'
+        })
+        .when('/list/new', {
+            templateUrl: 'rachel/views/create-list.html',
+            controller: 'FaireCreateListController'
+        })
+        .when('/list/:listId', {
+            templateUrl: 'rachel/views/list.html',
+            controller: 'FaireViewListController'
+        })
+        .otherwise({
+            redirectTo: '/'
+        });
+}])
+	.controller('FaireHomeController', function ($scope, $http, FaireService, $location) {
+		
 		$scope.lists = [];
-		
-		$scope.addNewListFormData = {};
-		
-		// var listOne = {};
-		// listOne.name = 'Groceries';
-		// listOne.tasks = [];
-		// var taskOne = {};
-		// taskOne.name = 'Avocado';
-		// var taskTwo = {};
-		// taskTwo.name = 'Coffee';
-		// listOne.tasks.push(taskOne);
-		// listOne.tasks.push(taskTwo);
-		// $scope.lists.push(listOne);
-		
-		// var listTwo = {};
-		// listTwo.name = 'Movies';
-		// listTwo.tasks = [];
-		// var movieOne = {};
-		// movieOne.name = 'Aladdin';
-		// var movieTwo = {};
-		// movieTwo.name = 'Beauty & The Beast';
-		// listTwo.tasks.push(movieOne);
-		// listTwo.tasks.push(movieTwo);
-		// $scope.lists.push(listTwo);
-		
+			
 		//init
 		;(function() {
 			$http({
@@ -40,28 +34,36 @@ angular.module('faireApp', ['ngTouch'])
 				console.log(data);
 			})
 		})();
-
-		
-		$scope.addList = function() {
-			$http({
-				url: '/lists/add',
-				method: 'POST',
-				data: $scope.addNewListFormData
-			}).success(function(data, status, headers, config) {
-				$scope.lists.push(data);
-				console.log(data);
-				$scope.clearAddNewListFormData();
-			}).error(function(data, status, headers, config) {
-				console.log('there is an error adding the new list: ' + status);
-				console.log(data);
-			})
-		}
+	
+	})
+	
+	.controller('FaireCreateListController', function ($scope, $http, FaireService, $location) {
+	
+		$scope.addNewListFormData = {};
 		
 		$scope.clearAddNewListFormData = function() {
 			$scope.addNewListFormData = {};
 		}
-	});
-
+		
+		$scope.addList = function(){
+			FaireService.addList($scope.addNewListFormData, function(error, data){
+				if (error){
+					// TODO
+				} else {
+					$scope.clearAddNewListFormData();
+					$location.path('/list/' + data.id);
+				}
+			})
+		}
+	})
+	
+	.controller('FaireViewListController', function ($scope, $http, $routeParams, FaireService, $location) {
+		$scope.params = $routeParams;
+		$scope.tasks = [];
+		FaireService.getTasks($scope.params.listId, function(error, tasks){ 
+			$scope.tasks = tasks;
+		})
+	})
 
 // var changeTheme = function() {
 	// var selectedTheme = $('#faireThemeOptions').val();

@@ -12,55 +12,57 @@
 	font-family: Arial,Helvetica,sans-serif;
 }
 
+#header .top-bar{
+	background: #2ba6cb;
+}
+
+@media (min-width: 1025px){
+	#header .top-bar{
+		width: 1000px;
+		margin: 0 auto;
+	}
+}
+
+#header .top-bar .name{
+	background: #2ba6cb;
+}
+
 #header.contain-to-grid .top-bar{
 	background: #2ba6cb;
-	height: 45px;
 }
 
-#header .top-bar{
-	
+@media (min-width: 641px){
+	#header.contain-to-grid .top-bar{
+		background: #2ba6cb;
+		height: 45px;
+	}
 }
 
-#header-nav-container{
-	width: 970px;
-	margin: 0 auto;
-}
-
-#header-left{
-	float: left;
-}
-
-#header-right{
-	float: right;
-}
-
-#header-nav{
-	list-style: none;
-	display: block;
-	margin: 0;
-}
-
-#header-nav li{
-	float: left;
-}
-
-#header-nav li a{
-	color: #fff;
-	padding: 15px;
-	
+#header.contain-to-grid .top-bar.expanded{
+	z-index: 100;
 }
 
 #nav-logo{
 	padding-top: 4px;
 }
 
-.top-bar-section li:not(.has-form) a:not(.button){
-	background: #2ba6cb;
-	font-size: 14px;
+@media(max-width: 1024px){
+	#nav-logo{
+		padding-left: 5px;
+	}
 }
 
-.top-bar-section li:not(.has-form) a:not(.button):hover{
-	background: #474747;
+@media (min-width: 641px){
+	.top-bar-section li:not(.has-form) a:not(.button){
+		background: #2ba6cb;
+		font-size: 14px;
+	}
+}
+
+@media (min-width: 641px){
+	.top-bar-section li:not(.has-form) a:not(.button):hover{
+		background: #474747;
+	}
 }
 
 /*---Search Bar---*/
@@ -71,11 +73,17 @@
 	padding: 4px 10px;
 }
 
+@media (max-width: 640px){
+	#header-search{
+		height: 100px;
+	}
+}
+
 #search-bar{
-	background-image: url('../img/search-icon.png');
+	/*background-image: url('../img/search-icon.png');
 	background-size: 22px 21px;
 	background-repeat: no-repeat;
-	background-position: right; 
+	background-position: 301px 7px; */
 }
 
 #search-icon{
@@ -85,15 +93,36 @@
 
 /*---Home Page Styles---*/
 
-#main-container {
-	margin-top: 15px;
+#main-container{
+	margin-top: 20px;
+}
+
+@media (max-width: 1024px){
+	#main-container .row{
+		padding: 0px 10px;
+	}
 }
 
 #main-container  .columns{
 	float: left;
+	padding: 0px 0px 0px 10px;
 }
 
-#main-container h1{
+@media (max-width: 640px){
+	#main-container  .columns{
+		padding: 0px;
+	}
+}
+
+#main-container  .columns:first-child{
+	padding: 0px;
+}
+
+#main-container  .columns:nth-child(3n+4){
+	padding: 0px;
+}
+
+#main-container h1.list-title{
 	font-size: 16px;
 	width: 100%;
 	background: #2ba6cb;
@@ -120,7 +149,7 @@ ul.individual-lists li{
 .button-create-list{
 	color: #2ba6cb;
 	background-color: #fff;
-	padding: 1px 5px 0px 5px;
+	padding: 1px 6px 0px 6px;
 	float: right;
 	border: 1px solid #fff;
 	border-radius: 68%;
@@ -132,3 +161,127 @@ ul.individual-lists li{
 	color: #fff;
 	border: 1px solid #474747;
 }
+
+#edit-screen-border{
+	border-right: 1px solid #ddd;
+	height: 100%;
+}
+
+@media (max-width: 640px){
+	#edit-screen-border{
+		border-right: 0;
+	}
+}
+
+#edit-screen-content{
+	width: 90%;
+}
+
+@media (max-width: 640px){
+	#edit-screen-content{
+		width: 100%;
+	}
+}
+
+#edit-screen-content h1{
+	font-size: 24px;
+	font-weight: bold;
+	border-bottom: 6px solid #ddd;
+	line-height: 50px;
+	color: #2AA6CA;
+	margin-bottom: 25px;
+}
+
+.individual-list-items{
+	font-size: 14px;
+	list-style: none;
+	margin: 0px;
+}
+
+.individual-list-items li{
+	width: 100%;
+}
+
+.individual-list-items li:hover i.fi-pencil{
+	display: block;
+}
+
+.individual-list-items .list-item-container{
+	padding-bottom: 12px;
+	height: auto;
+	min-height: 16px;
+}
+
+.individual-list-items .list-item-text{
+	width: 90%;
+	float: left;
+}
+
+.individual-list-items li a{
+	width: 10%;
+	float: right;
+	text-align: right;
+	font-size: 18px;
+}
+
+.individual-list-items li i.fi-pencil{
+	display: none;
+}
+
+.main-buttons{
+	background-color: #2AA6CA;
+	color: #fff;
+	border: 0;
+	padding: 10px 20px;
+	cursor: pointer;
+	font-size: 14px;
+}
+
+.main-buttons:hover{
+	background-color: #474747;
+}
+
+#edit-screen-sidenav{
+	padding-left: 15%;
+}
+
+@media (max-width: 640px){
+	#edit-screen-sidenav{
+		padding-left: 0;
+	}
+}
+
+#edit-screen-sidenav ul{
+	list-style: none;
+	font-size: 18px;
+	color: #2AA6CA;
+	margin-left: 0px;
+}
+
+#edit-screen-sidenav ul li{
+	line-height: 40px;
+}
+
+#view-all{
+
+}
+
+/*---Individual List Styles---*/
+
+#list-header-icons{
+	float: right;
+	display: inline;
+	font-size: 21px;
+	padding-top: 3px;
+}
+
+#list-header-icons a{
+	color: #999;
+	padding: 0px 3px;
+}
+
+#list-header-icons a:hover{
+	color: #444;
+}
+
+

@@ -12,85 +12,71 @@
   <link rel="stylesheet" href="rachel/foundation-5.3.1/css/foundation-icons.css" />
 
   <script src="rachel/foundation-5.3.1/js/vendor/modernizr.js"></script>
+  <script src="components/angular/angular.min.js"></script>
+  <script src="components/angular-route/angular-route.min.js"></script>
 
 </head>
 <body ng-app="faireApp">
-	<div ng-controller="faireCtrl">
-		<div id="header" class="contain-to-grid sticky fixed">
-			<nav class="top-bar" data-topbar data-options="sticky_on">
-				<div id="nav-container">
-				<!--Logo-->
-					<ul class="title-area">
-						<li class="name">
-							<a href="index.html"><img id="nav-logo" src="rachel/foundation-5.3.1/img/logo.png" alt="" /></a>
-						</li>
-						<li class="toggle-topbar menu-icon"><a href="#"><span></span></a></li>
-					</ul>
 
-					<section class="top-bar-section">
-						<!-- Right Nav Section -->
-						<ul class="right nav-links">
-							<li><a href="#">Home</a></li>
-							<li><a href="#">Lists</a></li>
-							<li><a href="#">Profile</a></li>
-							<li><a href="#">Logout</a></li>
+	<div id="wrapper">
+		
+			<div id="header" class="contain-to-grid fixed">
+				<nav class="top-bar" data-topbar role="navigation">
+					<div id="nav-container">
+					<!--Logo-->
+						<ul class="title-area">
+							<li class="name">
+								<a href="#/"><img id="nav-logo" src="rachel/foundation-5.3.1/img/logo.png" alt="" /></a>
+							</li>
+							<li class="toggle-topbar menu-icon"><a href="#"><span></span></a></li>
 						</ul>
-					</section>
-				</div>
-			</nav>	
-		</div>
-		<div id="header-search">
-			<form>
-				<div class="row">
-					<div class="medium-4 small-12 columns no-padding">
-						<input type="text" id="search-bar" placeholder="Search Lists ...">
-					</div>
-					<div class="medium-4 small-12 columns no-padding">
-						<select name="sort-lists">
-							<option value="sort-lists" selected>Sort Lists</option>
-							<option value="a-z">A to Z</option>
-							<option value="z-a">Z to A</option>
-							<option value="date-newest">Date: Newest</option>
-							<option value="date-oldest">Date: Oldest</option>
-						</select>
-					</div>
-				</div>	
-			</form>
-		</div>
-		<div id="main-container">
-			<div class="row">
-				<div class="small-12 medium-4 large-4 columns" ng-repeat="list in lists">
-					<h1>\{{list.name}}</h1>
-					<ul class="individual-lists">
-						<li ng-repeat="task in list.tasks">\{{task.name}}</li>
-					</ul>	
-				</div>			
+
+						<section class="top-bar-section">
+							<!-- Right Nav Section -->
+							<ul class="right nav-links">
+								<li><a href="#">Home</a></li>
+								<li><a href="#">Lists</a></li>
+								<li><a href="#">Profile</a></li>
+								<li><a href="#">Logout</a></li>
+							</ul> 
+						</section>
+					</div>				
+				</nav>	
 			</div>
-			<div class="row">
-				<div class="small-12 medium-4 large-4 columns">
-					<h1>Create New List <a href="#" class="button-create-list"><i class="step fi-plus size-36"></i></a></h1>	
-				</div>			
+			<div id="header-search">
+				<form>
+					<div class="row">
+						<div class="medium-4 small-12 columns no-padding">
+							<input type="text" id="search-bar" placeholder="Search Lists ...">
+						</div>
+						
+						<div class="medium-4 medium-offest-4 small-12 columns no-padding">
+							<select name="sort-lists">
+								<option value="sort-lists" selected>Sort Lists</option>
+								<option value="a-z">A to Z</option>
+								<option value="z-a">Z to A</option>
+								<option value="date-newest">Date: Newest</option>
+								<option value="date-oldest">Date: Oldest</option>
+							</select>
+						</div>
+					</div>	
+				</form>
 			</div>			
-		</div>
-		
-		
-		<div id="add-new-list">
-			<form ng-submit="addList()">
-				<input type="text" name="name" ng-model="addNewListFormData.name" placeholder="make this required" />
-				<input type="submit" value="Add list" />
-			</form>
-		</div>
-		
-		<script src="rachel/foundation-5.3.1/js/vendor/jquery.js"></script>
-
-		<script src="rachel/foundation-5.3.1/js/foundation.min.js"></script>
-		<script src="rachel/foundation-5.3.1/js/vendor/angular.min.js"></script>
-		<script src="rachel/foundation-5.3.1/js/vendor/angular-touch.min.js"></script>
-		<script src="rachel/js/faireCtrl.js"></script>
-
-		<script>
-			$(document).foundation();
-		</script>
+			<div id="main-container" ng-view>					
+									
+			</div>
 	</div>
+	
+	<script src="rachel/foundation-5.3.1/js/vendor/jquery.js"></script>
+	<script src="rachel/foundation-5.3.1/js/foundation.min.js"></script>
+	<script src="rachel/foundation-5.3.1/js/vendor/angular-touch.min.js"></script>
+	<script src="rachel/js/faireService.js"></script>
+	<script src="rachel/js/faireCtrl.js"></script>	
+
+	<script>
+		$(document).foundation();
+	</script>
+			
+
 </body>
 </html>

@@ -1,0 +1,22 @@
+<div class="row" data-equalizer>
+	<div id="edit-screen-border" class="medium-8 columns" data-equalizer-watch>
+		<div id="edit-screen-content">
+			<h1>Create a New List</h1>
+			<form ng-submit="addList()">
+				<input type="text" name="name" ng-model="addNewListFormData.name" placeholder="make this required" />
+				<input type="submit" value="Create List" id="add-list" class="main-buttons right" />
+			</form>
+		</div>	
+	</div>
+	<div class="medium-4 columns" data-equalizer-watch>
+		<div id="edit-screen-sidenav">
+			<ul>
+				<li><a href="#">Recent List 1</a></li>
+				<li><a href="#">Recent List 2</a></li>
+				<li><a href="#">Recent List 3</a></li>
+				<li><a href="#">Recent List 4</a></li>
+			</ul> 
+			<button id="view-all" class="main-buttons">View All</button>
+		</div>
+	</div>
+</div>
