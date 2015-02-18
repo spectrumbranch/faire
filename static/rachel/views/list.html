@@ -17,8 +17,8 @@
 				</li>
 				<li>
 					<div class="list-item-container">
-						<div class="list-item-text"><input name="list-item" placeholder="Enter List Item Here" type="text"></div>
-						<a title="Save List"><i class="step fi-check size-20"></i></a>
+						<div class="list-item-text"><input ng-model="name" name="list-item" placeholder="Enter List Item Here" type="text"></div>
+						<a title="Save List" ng-click="addTask()"><i class="step fi-check size-20"></i></a>
 					</div>
 				</li>
 			</ul>

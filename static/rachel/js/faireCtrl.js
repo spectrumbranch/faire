@@ -60,9 +60,29 @@ angular.module('faireApp', ['ngTouch','ngRoute', 'faire.service']).config(['$rou
 	.controller('FaireViewListController', function ($scope, $http, $routeParams, FaireService, $location) {
 		$scope.params = $routeParams;
 		$scope.tasks = [];
-		FaireService.getTasks($scope.params.listId, function(error, tasks){ 
-			$scope.tasks = tasks;
-		})
+        $scope.name = '';
+        
+        $scope.addTask = function() {
+            if ($scope.name.length > 0) {
+                FaireService.addTask({ list: $scope.params.listId, name: $scope.name }, function(error, addedTask) {
+                    if (error) {
+                        console.log('FaireViewListController::addTask error: ',error);
+                    } else {
+                        $scope.name = '';
+                        $scope.tasks.push(addedTask);
+                    }
+                });
+            } else {
+                //TODO inform user to fill in the field
+            }
+        }
+        
+        ;(function() {
+            FaireService.getTasks($scope.params.listId, function(error, tasks){ 
+                $scope.tasks = tasks;
+            })
+        })();
+        
 	})
 
 // var changeTheme = function() {

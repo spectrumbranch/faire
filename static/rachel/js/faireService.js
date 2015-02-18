@@ -30,5 +30,21 @@ angular.module('faire.service', []).service('FaireService', ['$http', function F
 			cb(data);
 		})	
 	}
+    
+    this.addTask = function(task, cb) {
+        //task is like { list: #, name: 'task name' }
+        $http({
+            url: '/tasks/add',
+            method: 'POST',
+            data: task
+        }).success(function(data, status, headers, config) {
+            console.log(data);
+            cb(null, data);
+        }).error(function(data, status, headers, config) {
+            console.log('there is an error adding the new task: ' + status);
+            console.log(data);
+            cb(data);
+        })
+    }
 	
 }]);
