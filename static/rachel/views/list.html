@@ -5,15 +5,23 @@
 			<div class="individual-list-items" ng-repeat="task in tasks">
 				<div>
 					<div class="list-item-container" data-equalizer>
-						<div class="list-item-text" data-equalizer-watch><div ng-hide="task.edit">{{task.name}}</div><input ng-show="task.edit" ng-model="task.name" /></div>
-						<a title="Edit List" data-equalizer-watch ng-click="handleEdit(task)"><i class="step fi-pencil size-20"></i></a>				
+						<div class="list-item-text" data-equalizer-watch>
+							<div ng-hide="task.edit">{{task.name}}</div>
+							<input ng-show="task.edit" ng-model="task.name" type="text" />
+						</div>
+						<a title="Edit List" data-equalizer-watch ng-click="handleEdit(task)">
+							<i ng-hide="task.edit" class="step fi-pencil size-20"></i>
+							<i ng-show="task.edit" class="step fi-check size-20"></i>
+						</a>				
 					</div>
 				</div>
 			</div>
 			<div class="individual-list-items">
 				<div>
 					<div class="list-item-container" data-equalizer>
-						<div class="list-item-text" data-equalizer-watch><input ng-model="name" name="list-item" placeholder="Enter List Item Here" type="text"></div>
+						<div class="list-item-text" data-equalizer-watch>
+							<input ng-model="name" name="list-item" placeholder="Enter List Item Here" type="text">
+						</div>
 						<a title="Save List" ng-click="addTask()" data-equalizer-watch><i class="step fi-check size-20"></i></a>
 					</div>
 				</div>

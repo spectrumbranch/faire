@@ -170,13 +170,13 @@ ul.individual-lists li{
 	border: 1px solid #474747;
 }
 
-#edit-screen-border{
+#main-container #edit-screen-border{
 	border-right: 1px solid #ddd;
 	height: 100%;
 }
 
 @media (max-width: 640px){
-	#edit-screen-border{
+	#main-container #edit-screen-border{
 		border-right: 0;
 	}
 }
