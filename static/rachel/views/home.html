@@ -1,5 +1,5 @@
-<div class="row">
-	<div class="small-12 medium-4 large-4 columns" ng-repeat="list in lists">
+<div class="row" data-equalizer>
+	<div class="small-12 medium-4 large-4 columns" ng-repeat="list in lists" data-equalizer-watch>
 		<h1 class="list-title"><a href="#/list/{{list.id}}">{{list.name}}</a></h1>
 		<ul class="individual-lists">
 			<li ng-repeat="task in list.tasks">{{task.name}}</li>

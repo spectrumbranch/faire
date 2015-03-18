@@ -47,4 +47,22 @@ angular.module('faire.service', []).service('FaireService', ['$http', function F
         })
     }
 	
+    this.updateTask = function(task, cb) {
+        //task is like { list: #, name: 'task name' }
+		var id = task.id;
+		delete task.id;
+        $http({
+            url: '/tasks/' + id + '/update',
+            method: 'POST',
+            data: task
+        }).success(function(data, status, headers, config) {
+            console.log(data);
+            cb(null, data);
+        }).error(function(data, status, headers, config) {
+            console.log('there is an error updating the task: ' + status);
+            console.log(data);
+            cb(data);
+        })
+    }	
+	
 }]);

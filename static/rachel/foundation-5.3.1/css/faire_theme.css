@@ -106,6 +106,7 @@
 #main-container  .columns{
 	float: left;
 	padding: 0px 0px 0px 10px;
+	height: 240px;
 }
 
 @media (max-width: 640px){
@@ -126,10 +127,17 @@
 	font-size: 16px;
 	width: 100%;
 	background: #2ba6cb;
-	color: #fff;
 	font-weight: 600;
 	padding: 7px 5px;
 	margin-bottom: 0;
+}
+
+#main-container h1.list-title a{
+	color: #fff;
+}
+
+#main-container h1.list-title a:hover{
+	color: #474747;
 }
 
 ul.individual-lists{
@@ -146,7 +154,7 @@ ul.individual-lists li{
 
 /*---List Styles---*/
 
-.button-create-list{
+#main-container h1.list-title a.button-create-list{
 	color: #2ba6cb;
 	background-color: #fff;
 	padding: 1px 6px 0px 6px;
@@ -156,7 +164,7 @@ ul.individual-lists li{
 	margin-top: -2px;
 }
 
-.button-create-list:hover{
+#main-container h1.list-title a.button-create-list:hover{
 	background-color: #474747;
 	color: #fff;
 	border: 1px solid #474747;
@@ -198,34 +206,42 @@ ul.individual-lists li{
 	margin: 0px;
 }
 
-.individual-list-items li{
+.individual-list-items div{
 	width: 100%;
 }
 
-.individual-list-items li:hover i.fi-pencil{
+@media (min-width: 641px){
+	.individual-list-items div:hover i.fi-pencil{
+		display: block;
+	}
+}
+
+.individual-list-items div i.fi-pencil{
 	display: block;
 }
 
+@media (min-width: 641px){
+	.individual-list-items div i.fi-pencil{
+		display: none;
+	}
+}
+
 .individual-list-items .list-item-container{
-	padding-bottom: 12px;
-	height: auto;
-	min-height: 16px;
+	float: left;
+	padding-bottom: 25px;
 }
 
 .individual-list-items .list-item-text{
 	width: 90%;
 	float: left;
+	min-height: 20px;
 }
 
-.individual-list-items li a{
+.individual-list-items div a{
 	width: 10%;
 	float: right;
 	text-align: right;
 	font-size: 18px;
-}
-
-.individual-list-items li i.fi-pencil{
-	display: none;
 }
 
 .main-buttons{
