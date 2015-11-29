@@ -96,8 +96,9 @@ describe('Faire.Lists API', function() {
             Faire.Lists.add({ user: user_id_1, name: listName, status: status_inactive  }, function(err, list) {
                 Faire.Lists.activate({ id: list.id, user: user_id_1}, function(err1, activatedList) {
                     assert(err1 == null);
-                    assert(activatedList !== undefined);
-                    assert(activatedList.id !== undefined && activatedList.id === list.id);
+                    assert.notStrictEqual(activatedList, undefined);
+                    assert.notStrictEqual(activatedList.id, undefined);
+                    assert.strictEqual(activatedList.id, list.id);
                     assert(activatedList.name !== undefined && activatedList.name === listName);
                     assert(activatedList.status !== undefined && activatedList.status === status_active);
                     done();
@@ -283,18 +284,20 @@ describe('Faire.Lists API', function() {
             var listName = 'This is an example list to test getAll.';
             Faire.Lists.add({ user: user_id_1, name: listName }, function(err, list) {
                 Faire.Lists.getAll({ user: user_id_1 }, function(err1, getAllLists1) {
-                
-                    assert(err1 == null);
-                    assert(getAllLists1 !== undefined && Array.isArray(getAllLists1) && getAllLists1.length > 0);
-                    assert(getAllLists1[0].id !== undefined);
-                    assert(getAllLists1[0].name !== undefined);
-                    assert(getAllLists1[0].email !== undefined);
-                    assert(getAllLists1[0].status !== undefined);
-                    assert(getAllLists1[0].updatedAt !== undefined);
-                    assert(getAllLists1[0].createdAt !== undefined);
-                    assert(getAllLists1[0].tasks !== undefined && Array.isArray(getAllLists1[0].tasks));
-                    assert(getAllLists1[0].sharedUsers !== undefined && Array.isArray(getAllLists1[0].sharedUsers));
-                    
+                    try {
+                        assert(err1 == null);
+                        assert(getAllLists1 !== undefined && Array.isArray(getAllLists1) && getAllLists1.length > 0);
+                        assert(getAllLists1[0].id !== undefined);
+                        assert(getAllLists1[0].name !== undefined);
+                        assert(getAllLists1[0].email !== undefined);
+                        assert(getAllLists1[0].status !== undefined);
+                        assert(getAllLists1[0].updatedAt !== undefined);
+                        assert(getAllLists1[0].createdAt !== undefined);
+                        assert(getAllLists1[0].tasks !== undefined && Array.isArray(getAllLists1[0].tasks));
+                        assert(getAllLists1[0].sharedUsers !== undefined && Array.isArray(getAllLists1[0].sharedUsers));
+                    } catch(e) {
+                        return done(e);
+                    }
                     //User 4 has no lists
                     Faire.Lists.getAll({ user: user_id_4 }, function(err2, getAllLists2) {
                         assert(err2 == null);

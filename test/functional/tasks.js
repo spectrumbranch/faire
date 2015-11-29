@@ -67,7 +67,7 @@ describe('Faire.Tasks API', function() {
                 assert(task.id !== undefined);
                 assert(task.name !== undefined && task.name === taskName);
                 assert(task.status !== undefined && task.status === 'active');
-                assert(task.ListId !== undefined && task.ListId === list_id_1);
+                assert(task.listId !== undefined && task.listId === list_id_1);
                 done();
             })
         })
@@ -80,7 +80,7 @@ describe('Faire.Tasks API', function() {
                 assert(task.id !== undefined);
                 assert(task.name !== undefined && task.name === taskName);
                 assert(task.status !== undefined && task.status === status_inactive);
-                assert(task.ListId !== undefined && task.ListId === list_id_1);
+                assert(task.listId !== undefined && task.listId === list_id_1);
                 done();
             })
         })

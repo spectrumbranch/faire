@@ -35,7 +35,6 @@ describe('Faire.Preferences API', function() {
                 assert(err == null);
                 assert(preference != null);
                 assert(preference.theme == 'default');
-                
                 Faire.Preferences.setTheme( { user: user_id_1, theme: 'notdefault' }, function(err2, changedPrefs) {
                     assert(err2 == null);
                     assert(changedPrefs != null);
