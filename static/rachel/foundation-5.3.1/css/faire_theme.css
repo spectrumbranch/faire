@@ -106,7 +106,6 @@
 #main-container  .columns{
 	float: left;
 	padding: 0px 0px 0px 10px;
-	height: 240px;
 }
 
 @media (max-width: 640px){
@@ -130,14 +129,32 @@
 	font-weight: 600;
 	padding: 7px 5px;
 	margin-bottom: 0;
+	display: inline-block;
+    line-height: 20px;
 }
 
-#main-container h1.list-title a{
+#main-container a h1.list-title {
 	color: #fff;
 }
 
-#main-container h1.list-title a:hover{
+#main-container a:hover h1.list-title{
 	color: #474747;
+}
+
+#main-container .list-name {
+	width: 90%;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	display: inline-block;
+    float: left;
+}
+
+#main-container .list-name-edit{
+	text-align: right;
+	width: 10%;
+	display: inline-block;
+	font-size: 18px;
 }
 
 ul.individual-lists{
@@ -150,6 +167,9 @@ ul.individual-lists li{
 	text-align: center;
 	line-height: 35px;
 	border-bottom: 1px solid #dddddd;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;	
 }
 
 /*---List Styles---*/

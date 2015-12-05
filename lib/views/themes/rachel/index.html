@@ -10,6 +10,7 @@
   <link rel="stylesheet" href="rachel/foundation-5.3.1/css/foundation.css">
   <link rel="stylesheet" href="rachel/foundation-5.3.1/css/faire_theme.css">
   <link rel="stylesheet" href="rachel/foundation-5.3.1/css/foundation-icons.css" />
+  <link rel="stylesheet" href="components/font-awesome/css/font-awesome.min.css" />
 
   <script src="rachel/foundation-5.3.1/js/vendor/modernizr.js"></script>
   <script src="components/angular/angular.min.js"></script>
@@ -28,22 +29,30 @@
 							<li class="name">
 								<a href="#/"><img id="nav-logo" src="rachel/foundation-5.3.1/img/logo.png" alt="" /></a>
 							</li>
-							<li class="toggle-topbar menu-icon"><a href="#"><span></span></a></li>
+							<li class="toggle-topbar menu-icon"><a href><span></span></a></li>
 						</ul>
 
 						<section class="top-bar-section">
 							<!-- Right Nav Section -->
 							<ul class="right nav-links">
-								<li><a href="#">Home</a></li>
-								<li><a href="#">Lists</a></li>
-								<li><a href="#">Profile</a></li>
-								<li><a href="#">Logout</a></li>
+								<li>
+									<a href="#/"><i class="fa fa-home"></i> Home</a>
+								</li>
+								<li>
+									<a href="#/list/new"><i class="fa fa-plus-circle"></i> Create New List</a>
+								</li>								
+								<li>
+									<a href="#"><i class="fa fa-user"></i> Profile</a>
+								</li>
+								<li>
+									<a href="#"><i class="fa fa-sign-out"></i> Logout</a>
+								</li>
 							</ul> 
 						</section>
 					</div>				
 				</nav>	
 			</div>
-			<div id="header-search">
+			<!--<div id="header-search">
 				<form>
 					<div class="row">
 						<div class="medium-4 small-12 columns no-padding">
@@ -61,7 +70,7 @@
 						</div>
 					</div>	
 				</form>
-			</div>			
+			</div>-->			
 			<div id="main-container" ng-view>					
 									
 			</div>

@@ -1,17 +1,25 @@
 <div class="row" data-equalizer>
 	<div class="small-12 medium-4 large-4 columns" ng-repeat="list in lists" data-equalizer-watch>
-		<h1 class="list-title"><a href="#/list/{{list.id}}">{{list.name}}</a></h1>
+		<a href="#/list/{{list.id}}">
+			<h1 class="list-title">
+				<span class="list-name">{{list.name}}</span>
+				<span class="list-name-edit"><i class="fa fa-pencil"></i></span>
+			</h1>
+		</a>
 		<ul class="individual-lists">
-			<li ng-repeat="task in list.tasks">{{task.name}}</li>
+			<li ng-repeat="task in list.tasks | limitTo: 5">{{task.name}}</li>
+			<li><a href="#/list/{{list.id}}"><strong>View All Items</strong></a></li>
 		</ul>	
 	</div>			
 </div>
 
-<div class="row">
+<div class="row" ng-if="lists.length == 0">
 	<div class="small-12 medium-4 large-4 columns">
-		<h1 class="list-title">Create New List 
-			<a href="#/list/new" class="button-create-list panel"><i class="step fi-plus size-36"></i>
-			</a>
-		</h1>	
+		<a href="#/list/new">
+			<h1 class="list-title">
+				<span class="list-name">Create New List</span>
+				<span class="list-name-edit"><i class="fa fa-plus-circle"></i></span>
+			</h1>
+		</a>		
 	</div>			
 </div>
