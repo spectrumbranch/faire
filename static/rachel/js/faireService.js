@@ -118,5 +118,58 @@ angular.module('faire.service', []).service('FaireService', ['$http', function F
             cb(data);
         })
     }	
+
+    this.deleteTask = function(task, cb) {
+        //task is like { list: #, name: 'task name' }
+		var id = task.id;
+        var _task = task;
+		delete _task.id;
+        $http({
+            url: '/tasks/' + id + '/delete',
+            method: 'POST'
+        }).success(function(data, status, headers, config) {
+            console.log(data);
+            cb(null, data);
+        }).error(function(data, status, headers, config) {
+            console.log('there is an error deleting the task: ' + status);
+            console.log(data);
+            cb(data);
+        })
+    }	
 	
+    this.inactivateTask = function(task, cb) {
+        //task is like { list: #, name: 'task name' }
+		var id = task.id;
+        var _task = task;
+		delete _task.id;
+        $http({
+            url: '/tasks/' + id + '/inactivate',
+            method: 'POST',
+        }).success(function(data, status, headers, config) {
+            console.log(data);
+            cb(null, data);
+        }).error(function(data, status, headers, config) {
+            console.log('there is an error deleting the task: ' + status);
+            console.log(data);
+            cb(data);
+        })
+    }
+
+    this.activateTask = function(task, cb) {
+        //task is like { list: #, name: 'task name' }
+		var id = task.id;
+        var _task = task;
+		delete _task.id;
+        $http({
+            url: '/tasks/' + id + '/activate',
+            method: 'POST',
+        }).success(function(data, status, headers, config) {
+            console.log(data);
+            cb(null, data);
+        }).error(function(data, status, headers, config) {
+            console.log('there is an error deleting the task: ' + status);
+            console.log(data);
+            cb(data);
+        })
+    }	
 }]);

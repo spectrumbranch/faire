@@ -1,42 +1,47 @@
-<div class="row" data-equalizer>
-	<div id="edit-screen-border" class="medium-12 columns">
+<div class="wrapper row" data-equalizer>
+	<div id="edit-screen-border" class="medium-8 columns" data-equalizer-watch>
 		<div id="edit-screen-content">
-			<h1>{{list.name}}</h1>
-			<div class="individual-list-items" ng-repeat="task in tasks">
-				<div>
-					<div class="list-item-container" data-equalizer>
-						<div class="list-item-text" data-equalizer-watch>
-							<div ng-hide="task.edit">{{task.name}}</div>
-							<input ng-show="task.edit" ng-model="task.name" type="text" />
+			<h1 class="row">
+				<span class="small-10 columns">{{list.name}}</span>
+				<span style="display: none;" class="small-10 columns">
+					<input ng-show="list.edit" ng-model="list.name" type="text" />
+				</span>
+				<span class="small-2 columns text-right">
+					<i ng-hide="list.edit" class="fa fa-pencil"></i>
+					<i ng-show="list.edit" class="fa fa-check"></i>				
+				</span>
+			</h1>
+			<div class="individual-list-items row" ng-repeat="task in tasks" ng-class="{'no-border': task.status == 'deleted'}">
+				<div ng-hide="task.status == 'deleted'">
+					<div class="list-item-text small-10 columns">
+						<div ng-hide="task.edit" ng-click="toggleTaskActivity(task)" ng-class="{'cross-out-task': task.status == 'inactive'}">
+							{{task.name}}
 						</div>
-						<a title="Edit List" data-equalizer-watch ng-click="handleEdit(task)">
-							<i ng-hide="task.edit" class="step fi-pencil size-20"></i>
-							<i ng-show="task.edit" class="step fi-check size-20"></i>
-						</a>				
+						<input ng-show="task.edit" ng-model="task.name" type="text" />
+					</div>
+					<div class="small-2 columns text-right list-icons">
+						<a title="Edit List Item" data-equalizer-watch ng-click="handleEdit(task)">
+							<i ng-hide="task.edit" class="fa fa-pencil"></i>
+							<i ng-show="task.edit" class="fa fa-check"></i>
+						</a>	
+						<span ng-click="deleteTask(task)"><i class="fa fa-trash"></i></span>
 					</div>
 				</div>
 			</div>
-			<div class="individual-list-items">
-				<div>
-					<div class="list-item-container" data-equalizer>
-						<div class="list-item-text" data-equalizer-watch>
-							<input ng-model="name" name="list-item" placeholder="Enter List Item Here" type="text">
-						</div>
-						<a title="Save List" ng-click="addTask()" data-equalizer-watch><i class="step fi-check size-20"></i></a>
-					</div>
+			<div class="individual-list-items row">					
+				<div class="list-item-text small-10 columns" data-equalizer-watch>
+					<input ng-model="name" name="list-item" placeholder="Enter List Item Here" type="text">
+				</div>
+				<div class="small-2 columns text-right list-icons">
+					<a title="Save List" ng-click="addTask()" data-equalizer-watch><i class="fa fa-check"></i></a>
 				</div>
 			</div>
 		</div>	
 	</div>
-	<!--<div class="medium-4 columns" data-equalizer-watch>
+	<div class="medium-4 columns" data-equalizer-watch>
 		<div id="edit-screen-sidenav">
-			<ul>
-				<li><a href="#">Recent List 1</a></li>
-				<li><a href="#">Recent List 2</a></li>
-				<li><a href="#">Recent List 3</a></li>
-				<li><a href="#">Recent List 4</a></li>
-			</ul> 
-			<button id="view-all" class="main-buttons">View All</button>
+			<a href="#/" class="main-buttons"><i class="fa fa-trash"></i> Delete List</a>
+			<a href="#/" class="main-buttons"><i class="fa fa-share-alt"></i> Share List</a>
 		</div>
-	</div>-->
+	</div>
 </div>

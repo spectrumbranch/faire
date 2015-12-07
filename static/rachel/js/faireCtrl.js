@@ -76,6 +76,52 @@ angular.module('faireApp', ['ngTouch','ngRoute', 'faire.service']).config(['$rou
         });
     }
 
+    $scope.deleteTask = function(task) {
+        FaireService.deleteTask({ id: task.id }, function(error, deletedTask) {
+            if (error) {
+                console.log('FaireViewListController::deleteTask error: ',error);
+            } else {
+				updateTaskStatus(deletedTask);
+            }
+        });
+    }
+	
+    $scope.inactivateTask = function(task) {
+        FaireService.inactivateTask({ id: task.id }, function(error, inactivatedTask) {
+            if (error) {
+                console.log('FaireViewListController::deleteTask error: ',error);
+            } else {
+				updateTaskStatus(inactivatedTask);
+            }
+        });
+    }	
+	
+    $scope.activateTask = function(task) {
+        FaireService.activateTask({ id: task.id }, function(error, activatedTask) {
+            if (error) {
+                console.log('FaireViewListController::deleteTask error: ',error);
+            } else {
+				updateTaskStatus(activatedTask);
+            }
+        });
+    }	
+
+	function updateTaskStatus(task){
+		for (var i=0; i < $scope.tasks.length; i++){
+			if($scope.tasks[i].id == task.id){
+				$scope.tasks[i].status = task.status;
+			}
+		}	
+	}
+	
+	$scope.toggleTaskActivity = function(task){
+		if (task.status == 'active'){
+			$scope.inactivateTask(task);
+		} else{
+			$scope.activateTask(task);
+		}
+	}
+	
     $scope.handleEdit = function(task){
         if(task.edit) {
             $scope.updateTask(task, function () {
