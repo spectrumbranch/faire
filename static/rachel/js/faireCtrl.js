@@ -18,6 +18,20 @@ angular.module('faireApp', ['ngTouch','ngRoute', 'faire.service']).config(['$rou
 }])
 .controller('FaireHomeController', function ($scope, $http, FaireService, $location) {
     $scope.lists = [];
+	
+	$scope.homeTasksOrderBy = function(task) {
+		switch (task.status) {
+			case 'active':
+				return 1;
+				break;
+			case 'inactive':
+				return 3;
+				break;
+			case 'deleted':
+			default:
+				return 5;
+		}
+	}
     
     //init
     ;(function() {

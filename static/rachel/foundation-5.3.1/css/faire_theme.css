@@ -4,6 +4,10 @@
 	padding: 0;
 }
 
+.display-none{
+	display: none;
+}
+
 .row .row{
 	width: 100%;
 	margin: 0;
@@ -177,6 +181,12 @@ ul.individual-lists li{
     text-overflow: ellipsis;	
 }
 
+@media (min-width: 40.063em){
+	.home-lists{
+		height: 274px;
+	}
+}
+
 /*---List Styles---*/
 
 #main-container h1.list-title a.button-create-list{
@@ -255,7 +265,7 @@ ul.individual-lists li{
 	cursor: pointer;
 }
 
-.individual-list-items .cross-out-task{
+.cross-out-task{
 	text-decoration: line-through;
 }
 
