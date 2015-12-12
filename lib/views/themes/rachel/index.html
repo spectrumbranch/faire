@@ -18,62 +18,58 @@
 
 </head>
 <body ng-app="faireApp">
+	<div id="wrapper">		
+		<div id="header" class="contain-to-grid">
+			<nav class="top-bar" data-topbar role="navigation">
+				<div id="nav-container">
+				<!--Logo-->
+					<ul class="title-area">
+						<li class="name">
+							<a href="#/"><img id="nav-logo" src="rachel/foundation-5.3.1/img/logo.png" alt="" /></a>
+						</li>
+						<li class="toggle-topbar menu-icon"><a href><span></span></a></li>
+					</ul>
 
-	<div id="wrapper">
-		
-			<div id="header" class="contain-to-grid fixed">
-				<nav class="top-bar" data-topbar role="navigation">
-					<div id="nav-container">
-					<!--Logo-->
-						<ul class="title-area">
-							<li class="name">
-								<a href="#/"><img id="nav-logo" src="rachel/foundation-5.3.1/img/logo.png" alt="" /></a>
+					<section class="top-bar-section">
+						<!-- Right Nav Section -->
+						<ul class="right nav-links">
+							<li>
+								<a href="#/"><i class="fa fa-home"></i> Home</a>
 							</li>
-							<li class="toggle-topbar menu-icon"><a href><span></span></a></li>
-						</ul>
-
-						<section class="top-bar-section">
-							<!-- Right Nav Section -->
-							<ul class="right nav-links">
-								<li>
-									<a href="#/"><i class="fa fa-home"></i> Home</a>
-								</li>
-								<li>
-									<a href="#/list/new"><i class="fa fa-plus-circle"></i> Create New List</a>
-								</li>								
-								<li>
-									<a href="#"><i class="fa fa-user"></i> Profile</a>
-								</li>
-								<li>
-									<a href="#"><i class="fa fa-sign-out"></i> Logout</a>
-								</li>
-							</ul> 
-						</section>
-					</div>				
-				</nav>	
-			</div>
-			<!--<div id="header-search">
-				<form>
-					<div class="row">
-						<div class="medium-4 small-12 columns no-padding">
-							<input type="text" id="search-bar" placeholder="Search Lists ...">
-						</div>
-						
-						<div class="medium-4 medium-offest-4 small-12 columns no-padding">
-							<select name="sort-lists">
-								<option value="sort-lists" selected>Sort Lists</option>
-								<option value="a-z">A to Z</option>
-								<option value="z-a">Z to A</option>
-								<option value="date-newest">Date: Newest</option>
-								<option value="date-oldest">Date: Oldest</option>
-							</select>
-						</div>
-					</div>	
-				</form>
-			</div>-->			
-			<div id="main-container" ng-view>					
-									
-			</div>
+							<li>
+								<a href="#/list/new"><i class="fa fa-plus-circle"></i> Create New List</a>
+							</li>								
+							<li>
+								<a href="#"><i class="fa fa-user"></i> Profile</a>
+							</li>
+							<li>
+								<a href="#"><i class="fa fa-sign-out"></i> Logout</a>
+							</li>
+						</ul> 
+					</section>
+				</div>				
+			</nav>	
+		</div>
+		<!--<div id="header-search">
+			<form>
+				<div class="row">
+					<div class="medium-4 small-12 columns no-padding">
+						<input type="text" id="search-bar" placeholder="Search Lists ...">
+					</div>
+					
+					<div class="medium-4 medium-offest-4 small-12 columns no-padding">
+						<select name="sort-lists">
+							<option value="sort-lists" selected>Sort Lists</option>
+							<option value="a-z">A to Z</option>
+							<option value="z-a">Z to A</option>
+							<option value="date-newest">Date: Newest</option>
+							<option value="date-oldest">Date: Oldest</option>
+						</select>
+					</div>
+				</div>	
+			</form>
+		</div>-->			
+		<div id="main-container" ng-view></div>
 	</div>
 	
 	<script src="rachel/foundation-5.3.1/js/vendor/jquery.js"></script>
@@ -85,7 +81,5 @@
 	<script>
 		$(document).foundation();
 	</script>
-			
-
 </body>
 </html>

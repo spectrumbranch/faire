@@ -11,30 +11,34 @@
 					<i ng-show="list.edit" class="fa fa-check"></i>				
 				</span>
 			</h1>
-			<div class="individual-list-items row" ng-repeat="task in tasks" ng-class="{'no-border': task.status == 'deleted'}">
-				<div ng-hide="task.status == 'deleted'">
-					<div class="list-item-text small-10 columns">
-						<div ng-hide="task.edit" ng-click="toggleTaskActivity(task)" ng-class="{'cross-out-task': task.status == 'inactive'}">
-							{{task.name}}
+			<div class="individual-list-items row" ng-repeat="task in tasks" ng-class="{'display-none': task.status == 'deleted'}">
+				<form ng-submit="handleEdit(task)">
+					<div ng-hide="task.status == 'deleted'">
+						<div class="list-item-text small-10 columns">
+							<div ng-hide="task.edit" ng-click="toggleTaskActivity(task)" ng-class="{'cross-out-task': task.status == 'inactive'}">
+								{{task.name}}
+							</div>
+							<input ng-show="task.edit" ng-model="task.name" type="text" />
 						</div>
-						<input ng-show="task.edit" ng-model="task.name" type="text" />
+						<div class="small-2 columns text-right list-icons">
+							<a title="Edit List Item" data-equalizer-watch ng-click="handleEdit(task)">
+								<i ng-hide="task.edit" class="fa fa-pencil"></i>
+								<i ng-show="task.edit" class="fa fa-check"></i>
+							</a>	
+							<span ng-click="deleteTask(task)"><i class="fa fa-trash"></i></span>
+						</div>
+					</div>
+				</form>
+			</div>
+			<div class="individual-list-items row">		
+				<form ng-submit="addTask()">
+					<div class="list-item-text small-10 columns" data-equalizer-watch>
+						<input ng-model="name" name="list-item" placeholder="Enter List Item Here" type="text">
 					</div>
 					<div class="small-2 columns text-right list-icons">
-						<a title="Edit List Item" data-equalizer-watch ng-click="handleEdit(task)">
-							<i ng-hide="task.edit" class="fa fa-pencil"></i>
-							<i ng-show="task.edit" class="fa fa-check"></i>
-						</a>	
-						<span ng-click="deleteTask(task)"><i class="fa fa-trash"></i></span>
+						<a title="Save List" ng-click="addTask()" data-equalizer-watch><i class="fa fa-check"></i></a>
 					</div>
-				</div>
-			</div>
-			<div class="individual-list-items row">					
-				<div class="list-item-text small-10 columns" data-equalizer-watch>
-					<input ng-model="name" name="list-item" placeholder="Enter List Item Here" type="text">
-				</div>
-				<div class="small-2 columns text-right list-icons">
-					<a title="Save List" ng-click="addTask()" data-equalizer-watch><i class="fa fa-check"></i></a>
-				</div>
+				</form>
 			</div>
 		</div>	
 	</div>
