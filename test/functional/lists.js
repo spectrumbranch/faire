@@ -12,7 +12,7 @@ module.exports = function(faire, DB, fixtures) {
 //Should consider a more efficient testing method.
 describe('Faire.Lists API', function() {
     var user_id_1, user_id_2, user_id_3, user_id_4;
-    before(function(done) {
+    beforeEach(function(done) {
         var email1 = Fixtures.Lists.Users[0].email;
         var passwrd1 = Fixtures.Lists.Users[0].password;
         
@@ -280,30 +280,87 @@ describe('Faire.Lists API', function() {
     })
     
     describe('#getAll()', function() {
-        it('should return all tasks for a given user if no filters are applied. if there are no lists for that user, return empty', function(done) {
+        it('should return all non-deleted lists for a given user if no filters are applied. if there are no non-deleted lists for that user, return empty', function(done) {
             var listName = 'This is an example list to test getAll.';
             Faire.Lists.add({ user: user_id_1, name: listName }, function(err, list) {
-                Faire.Lists.getAll({ user: user_id_1 }, function(err1, getAllLists1) {
-                    try {
-                        assert(err1 == null);
-                        assert(getAllLists1 !== undefined && Array.isArray(getAllLists1) && getAllLists1.length > 0);
-                        assert(getAllLists1[0].id !== undefined);
-                        assert(getAllLists1[0].name !== undefined);
-                        assert(getAllLists1[0].email !== undefined);
-                        assert(getAllLists1[0].status !== undefined);
-                        assert(getAllLists1[0].updatedAt !== undefined);
-                        assert(getAllLists1[0].createdAt !== undefined);
-                        assert(getAllLists1[0].tasks !== undefined && Array.isArray(getAllLists1[0].tasks));
-                        assert(getAllLists1[0].sharedUsers !== undefined && Array.isArray(getAllLists1[0].sharedUsers));
-                    } catch(e) {
-                        return done(e);
-                    }
-                    //User 4 has no lists
-                    Faire.Lists.getAll({ user: user_id_4 }, function(err2, getAllLists2) {
-                        assert(err2 == null);
-                        assert(getAllLists2 !== undefined && Array.isArray(getAllLists2) && getAllLists2.length == 0);
-                        assert(getAllLists2.id === undefined);
-                        done();
+                Faire.Lists.add({ user: user_id_1, name: listName, status: 'deleted' }, function(err, deletedList) {
+                    Faire.Lists.getAll({ user: user_id_1 }, function(err1, getAllLists1) {
+                        try {
+                            assert(err1 == null);
+                            assert(getAllLists1 !== undefined && Array.isArray(getAllLists1) && getAllLists1.length == 1);
+                            assert(getAllLists1[0].id !== undefined);
+                            assert(getAllLists1[0].name !== undefined);
+                            assert(getAllLists1[0].email !== undefined);
+                            assert(getAllLists1[0].status === 'active');
+                            assert(getAllLists1[0].updatedAt !== undefined);
+                            assert(getAllLists1[0].createdAt !== undefined);
+                            assert(getAllLists1[0].tasks !== undefined && Array.isArray(getAllLists1[0].tasks));
+                            assert(getAllLists1[0].sharedUsers !== undefined && Array.isArray(getAllLists1[0].sharedUsers));
+                        } catch(e) {
+                            return done(e);
+                        }
+                        //User 4 has no lists
+                        Faire.Lists.getAll({ user: user_id_4 }, function(err2, getAllLists2) {
+                            assert(err2 == null);
+                            assert(getAllLists2 !== undefined && Array.isArray(getAllLists2) && getAllLists2.length == 0);
+                            assert(getAllLists2.id === undefined);
+                            done();
+                        })
+                    })
+                })
+            })
+        })
+        it('should return deleted lists when the "includeDeleted" flag is true', function(done) {
+            var activeListName = 'This is an active list to test getAll.';
+            var deletedListName = 'This is a deleted list to test getAll.';
+            Faire.Lists.add({ user: user_id_1, name: activeListName }, function(err, list) {
+                Faire.Lists.add({ user: user_id_1, name: deletedListName, status: 'deleted' }, function(err, deletedList) {
+                    Faire.Lists.getAll({ user: user_id_1, includeDeleted: true }, function(err1, getAllLists1) {
+                        try {
+                            assert(err1 == null);
+                            assert(getAllLists1 !== undefined && Array.isArray(getAllLists1) && getAllLists1.length == 2);
+                            
+                            var foundDeletedList = null
+                              , foundActiveList = null
+                              ;
+                              
+                            for (var i = 0; i < getAllLists1.length; i++) {
+                                if (getAllLists1[i].status == 'active') {
+                                    foundActiveList = getAllLists1[i];
+                                } else if (getAllLists1[i].status == 'deleted') {
+                                    foundDeletedList = getAllLists1[i];
+                                }
+                            }
+                            assert(foundDeletedList !== null);
+                            assert(foundActiveList !== null);
+                            
+                            assert(foundDeletedList.id !== undefined);
+                            assert(foundDeletedList.name === deletedListName);
+                            assert(foundDeletedList.email !== undefined);
+                            assert(foundDeletedList.status === 'deleted');
+                            assert(foundDeletedList.updatedAt !== undefined);
+                            assert(foundDeletedList.createdAt !== undefined);
+                            assert(foundDeletedList.tasks !== undefined && Array.isArray(foundDeletedList.tasks));
+                            assert(foundDeletedList.sharedUsers !== undefined && Array.isArray(foundDeletedList.sharedUsers));
+                            
+                            assert(foundActiveList.id !== undefined);
+                            assert(foundActiveList.name === activeListName);
+                            assert(foundActiveList.email !== undefined);
+                            assert(foundActiveList.status === 'active');
+                            assert(foundActiveList.updatedAt !== undefined);
+                            assert(foundActiveList.createdAt !== undefined);
+                            assert(foundActiveList.tasks !== undefined && Array.isArray(foundActiveList.tasks));
+                            assert(foundActiveList.sharedUsers !== undefined && Array.isArray(foundActiveList.sharedUsers));
+                        } catch(e) {
+                            return done(e);
+                        }
+                        //User 4 has no lists
+                        Faire.Lists.getAll({ user: user_id_4 }, function(err2, getAllLists2) {
+                            assert(err2 == null);
+                            assert(getAllLists2 !== undefined && Array.isArray(getAllLists2) && getAllLists2.length == 0);
+                            assert(getAllLists2.id === undefined);
+                            done();
+                        })
                     })
                 })
             })

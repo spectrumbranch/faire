@@ -13,7 +13,7 @@ module.exports = function(faire, DB, fixtures) {
 describe('Faire.Tasks API', function() {
     var user_id_1, user_id_2, user_id_3;
     var list_id_1;
-    before(function(done) {
+    beforeEach(function(done) {
         var email1 = Fixtures.Tasks.Users[0].email;//'tester@test.com';
         var passwrd1 = Fixtures.Tasks.Users[0].password;//'shdi2389chs98w3jnh';
         
@@ -291,24 +291,80 @@ describe('Faire.Tasks API', function() {
     })
     
     describe('#getAll()', function() {
-        it('should return all tasks for a given user if no filters are applied. if there are no tasks for that user, return empty', function(done) {
+        it('should return all non-deleted tasks for a given user if no filters are applied. if there are no non-deleted tasks for that user, return empty', function(done) {
             var taskName = 'This is an example task14.';
             Faire.Tasks.add({ user: user_id_1, name: taskName, list: list_id_1 }, function(err, task) {
-                Faire.Tasks.getAll({ user: user_id_1, list: list_id_1 }, function(err1, getAllTasks1) {
-                    assert(err1 == null);
-                    assert(getAllTasks1 !== undefined && Array.isArray(getAllTasks1) && getAllTasks1.length > 0);
-                    assert(getAllTasks1[0].id !== undefined);
-                    assert(getAllTasks1[0].name !== undefined);
-                    assert(getAllTasks1[0].status !== undefined);
-                    assert(getAllTasks1[0].updatedAt !== undefined);
-                    assert(getAllTasks1[0].createdAt !== undefined);
-                    
-                    //User 3 has no tasks in that list
-                    Faire.Tasks.getAll({ user: user_id_3, list: list_id_1 }, function(err2, getAllTasks2) {
-                        assert(err2 == null);
-                        assert(getAllTasks2 !== undefined && Array.isArray(getAllTasks2) && getAllTasks2.length == 0);
-                        assert(getAllTasks2.id === undefined);
-                        done();
+                Faire.Tasks.add({ user: user_id_1, name: taskName, list: list_id_1, status: 'deleted' }, function(err, deletedTask) {
+                    Faire.Tasks.getAll({ user: user_id_1, list: list_id_1 }, function(err1, getAllTasks1) {
+                        try {
+                            assert(err1 == null);
+                            assert(getAllTasks1 !== undefined && Array.isArray(getAllTasks1) && getAllTasks1.length == 1);
+                            assert(getAllTasks1[0].id !== undefined);
+                            assert(getAllTasks1[0].name !== undefined);
+                            assert(getAllTasks1[0].status !== undefined);
+                            assert(getAllTasks1[0].updatedAt !== undefined);
+                            assert(getAllTasks1[0].createdAt !== undefined);
+                        } catch(e) {
+                            return done(e);
+                        }
+                        
+                        //User 3 has no tasks in that list
+                        Faire.Tasks.getAll({ user: user_id_3, list: list_id_1 }, function(err2, getAllTasks2) {
+                            assert(err2 == null);
+                            assert(getAllTasks2 !== undefined && Array.isArray(getAllTasks2) && getAllTasks2.length == 0);
+                            assert(getAllTasks2.id === undefined);
+                            done();
+                        })
+                    })
+                })
+            })
+        })
+        it('should return deleted tasks when the "includeDeleted" flag is true', function(done) {
+            var activeTaskName = 'This is an active task14.';
+            var deletedTaskName = 'This is a deleted task14.';
+            Faire.Tasks.add({ user: user_id_1, name: activeTaskName, list: list_id_1 }, function(err, task) {
+                Faire.Tasks.add({ user: user_id_1, name: deletedTaskName, list: list_id_1, status: 'deleted' }, function(err, deletedTask) {
+                    Faire.Tasks.getAll({ user: user_id_1, list: list_id_1, includeDeleted: true }, function(err1, getAllTasks1) {
+                        try {
+                            assert(err1 == null);
+                            assert(getAllTasks1 !== undefined && Array.isArray(getAllTasks1) && getAllTasks1.length == 2);
+                            
+                            var foundDeletedTask = null
+                              , foundActiveTask = null
+                              ;
+                              
+                            for (var i = 0; i < getAllTasks1.length; i++) {
+                                if (getAllTasks1[i].status == 'active') {
+                                    foundActiveTask = getAllTasks1[i];
+                                } else if (getAllTasks1[i].status == 'deleted') {
+                                    foundDeletedTask = getAllTasks1[i];
+                                }
+                            }
+                            assert(foundDeletedTask !== null);
+                            assert(foundActiveTask !== null);
+                            
+                            assert(foundDeletedTask.id !== undefined);
+                            assert(foundDeletedTask.name === deletedTaskName);
+                            assert(foundDeletedTask.status === 'deleted');
+                            assert(foundDeletedTask.updatedAt !== undefined);
+                            assert(foundDeletedTask.createdAt !== undefined);
+                                
+                            assert(foundActiveTask.id !== undefined);
+                            assert(foundActiveTask.name === activeTaskName);
+                            assert(foundActiveTask.status === 'active');
+                            assert(foundActiveTask.updatedAt !== undefined);
+                            assert(foundActiveTask.createdAt !== undefined);
+                        } catch(e) {
+                            return done(e);
+                        }
+                        
+                        //User 3 has no tasks in that list
+                        Faire.Tasks.getAll({ user: user_id_3, list: list_id_1 }, function(err2, getAllTasks2) {
+                            assert(err2 == null);
+                            assert(getAllTasks2 !== undefined && Array.isArray(getAllTasks2) && getAllTasks2.length == 0);
+                            assert(getAllTasks2.id === undefined);
+                            done();
+                        })
                     })
                 })
             })
