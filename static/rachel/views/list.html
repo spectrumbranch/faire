@@ -1,16 +1,22 @@
 <div class="wrapper row" data-equalizer>
 	<div id="edit-screen-border" class="medium-8 columns" data-equalizer-watch>
 		<div id="edit-screen-content">
-			<h1 class="row">
-				<span class="small-10 columns">{{list.name}}</span>
-				<span style="display: none;" class="small-10 columns">
+			<!-- List Title -->
+			<h1 class="row individual-list-title">
+				<div class="small-11 columns">
+					<span ng-hide="list.edit">
+						{{list.name}}
+					</span>
 					<input ng-show="list.edit" ng-model="list.name" type="text" />
-				</span>
-				<span class="small-2 columns text-right">
-					<i ng-hide="list.edit" class="fa fa-pencil"></i>
-					<i ng-show="list.edit" class="fa fa-check"></i>				
-				</span>
+				</div>
+				<div class="small-1 columns text-right list-icons">
+					<a title="Edit List Title" ng-click="handleListEdit(list)">
+						<i ng-hide="list.edit" class="fa fa-pencil"></i>
+						<i ng-show="list.edit" class="fa fa-check"></i>		
+					</a>
+				</div>
 			</h1>
+			<!-- Task Rows -->
 			<div class="individual-list-items row" ng-repeat="task in tasks" ng-class="{'display-none': task.status == 'deleted'}">
 				<form ng-submit="handleEdit(task)">
 					<div ng-hide="task.status == 'deleted'">
@@ -30,6 +36,7 @@
 					</div>
 				</form>
 			</div>
+			<!-- Task Entry Row -->
 			<div class="individual-list-items row">		
 				<form ng-submit="addTask()">
 					<div class="list-item-text small-10 columns" data-equalizer-watch>
@@ -44,7 +51,7 @@
 	</div>
 	<div class="medium-4 columns" data-equalizer-watch>
 		<div id="edit-screen-sidenav">
-			<a href="#/" class="main-buttons"><i class="fa fa-trash"></i> Delete List</a>
+			<a href ng-click="deleteTasklist()" class="main-buttons"><i class="fa fa-trash"></i> Delete List</a>
 			<a href="#/" class="main-buttons"><i class="fa fa-share-alt"></i> Share List</a>
 		</div>
 	</div>

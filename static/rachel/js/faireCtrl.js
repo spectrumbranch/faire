@@ -145,6 +145,27 @@ angular.module('faireApp', ['ngTouch','ngRoute', 'faire.service']).config(['$rou
         
         task.edit = !task.edit;
     }
+
+    $scope.updateList = function(list, cb) {
+        FaireService.updateList({ id: list.id, name: list.name, status: list.status }, function(error, updatedList) {
+            if (error) {
+                console.log('FaireViewListController::updateList error: ',error);
+            } else {
+                //TODO update task in scope
+            }
+            cb();
+        });
+    }	
+	
+    $scope.handleListEdit = function(list){
+        if(list.edit) {
+            $scope.updateList(list, function () {
+                //
+            });
+        }
+        
+        list.edit = !list.edit;
+    }
     
     ;(function() {
         FaireService.getListById($scope.params.listId, function(error, list) {

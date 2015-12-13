@@ -172,4 +172,22 @@ angular.module('faire.service', []).service('FaireService', ['$http', function F
             cb(data);
         })
     }	
+	
+    this.updateList = function(list, cb) {
+		var id = list.id;
+        var _list = list;
+		delete _list.id;
+        $http({
+            url: '/lists/' + id + '/update',
+            method: 'POST',
+            data: _list
+        }).success(function(data, status, headers, config) {
+            console.log(data);
+            cb(null, data);
+        }).error(function(data, status, headers, config) {
+            console.log('there is an error updating the list: ' + status);
+            console.log(data);
+            cb(data);
+        })
+    }		
 }]);
