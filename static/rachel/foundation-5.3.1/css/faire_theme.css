@@ -244,6 +244,16 @@ ul.individual-lists li{
 	margin-bottom: 15px;
 }
 
+#edit-screen-content .list-name-view{
+	line-height: 35px;
+	display: inline-block;	
+}
+
+#edit-screen-content .task-name-view{
+	display: block;
+	line-height: 24px;
+}
+
 .individual-list-items{
 	font-size: 14px;
 	list-style: none;

@@ -4,7 +4,7 @@
 			<!-- List Title -->
 			<h1 class="row individual-list-title">
 				<div class="small-11 columns">
-					<span ng-hide="list.edit">
+					<span class="list-name-view" ng-hide="list.edit">
 						{{list.name}}
 					</span>
 					<input ng-show="list.edit" ng-model="list.name" type="text" />
@@ -22,7 +22,7 @@
 					<div ng-hide="task.status == 'deleted'">
 						<div class="list-item-text small-10 columns">
 							<div ng-hide="task.edit" ng-click="toggleTaskActivity(task)" ng-class="{'cross-out-task': task.status == 'inactive'}">
-								{{task.name}}
+								<span class="task-name-view">{{task.name}}</span>
 							</div>
 							<input ng-show="task.edit" ng-model="task.name" type="text" />
 						</div>
