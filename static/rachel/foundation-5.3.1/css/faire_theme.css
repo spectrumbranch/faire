@@ -249,17 +249,13 @@ ul.individual-lists li{
 	display: inline-block;	
 }
 
-#edit-screen-content .task-name-view{
-	display: block;
-	line-height: 24px;
-}
-
 .individual-list-items{
 	font-size: 14px;
 	list-style: none;
 	margin: 0px;
-	line-height: 50px;
+	line-height: 24px;
 	border-bottom: 1px solid #eee;
+	padding: 12px 0px;
 }
 
 .individual-list-items:last-child, 
@@ -267,7 +263,13 @@ ul.individual-lists li{
 	border: 0;
 }
 
-.individual-list-items input,
+.individual-list-items input{
+	font-size: 14px;
+	padding: 6px 8px;
+	height: 28px;
+	margin: 0;
+}
+
 .individual-list-title input{
 	font-size: 14px;
 	padding: 6px 8px;
