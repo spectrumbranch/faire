@@ -1,6 +1,6 @@
 {
   "name": "faire",
-  "version": "0.4.0",
+  "version": "0.5.0",
   "description": "Text list management, useful for todo lists.",
   "main": "index.js",
   "scripts": {
@@ -16,7 +16,7 @@
     "task",
     "notes"
   ],
-  "author": "Christopher Bebry, original design by Casmira Barbaro",
+  "author": "Christopher Bebry and Rachel Hirshan, original design by Casmira Barbaro",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/spectrumbranch/faire/issues"

@@ -11,3 +11,6 @@ require('./functional/lists')(Faire, db, Fixtures);
 
 //Preferences
 require('./functional/preferences')(Faire, db, Fixtures);
+
+//Users
+require('./functional/users')(Faire, db, Fixtures);
