@@ -171,7 +171,7 @@ angular.module('faire.service', []).service('FaireService', ['$http', function F
             console.log(data);
             cb(data);
         })
-    }	
+    }
 	
     this.updateList = function(list, cb) {
 		var id = list.id;
@@ -189,5 +189,37 @@ angular.module('faire.service', []).service('FaireService', ['$http', function F
             console.log(data);
             cb(data);
         })
-    }		
+    }
+	
+	this.getUserByEmail = function(email, cb){
+        $http({
+            url: '/users/by-email/' + email,
+            method: 'GET'
+        }).success(function(data, status, headers, config) {
+            console.log(data);
+            cb(null, data);
+        }).error(function(data, status, headers, config) {
+            console.log('there is an error getting user by email: ' + status);
+            console.log(data);
+            cb(data);
+        })	
+	}
+	
+	this.shareList = function(input, cb) {
+        //input is like { listId: #, userIds: [#, ... , #] }
+		var listId = input.listId;
+        var userIds = input.userIds;
+        $http({
+            url: '/lists/' + listId + '/share',
+            method: 'POST',
+			data: { users: userIds }
+        }).success(function(data, status, headers, config) {
+            console.log(data);
+            cb(null, data);
+        }).error(function(data, status, headers, config) {
+            console.log('there is an error sharing the task: ' + status);
+            console.log(data);
+            cb(data);
+        })
+    }	
 }]);

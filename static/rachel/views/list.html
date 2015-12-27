@@ -51,8 +51,26 @@
 	</div>
 	<div class="medium-4 columns" data-equalizer-watch>
 		<div id="edit-screen-sidenav">
-			<a href ng-click="deleteTasklist()" class="main-buttons"><i class="fa fa-trash"></i> Delete List</a>
-			<a href="#/" class="main-buttons"><i class="fa fa-share-alt"></i> Share List</a>
+			<!--<a href ng-click="deleteTasklist()" class="main-buttons"><i class="fa fa-trash"></i> Delete List</a>--->
+			<div id="share-list-section" ng-class="{'border-divide': list.sharedUsers.length > 0}">
+				<h2>Share List</h2>
+				<form ng-submit="shareList(list)">
+					<input type="email" name="share-list-email" placeholder="Enter E-mail Address" ng-model="shareUser" />
+					<div class="text-right"><input type="submit" class="main-buttons" value="Share"/></div>
+				</form>
+			</div>
+			<div ng-if="list.sharedUsers.length > 0" id="share-list-users">
+				<div class="shared-users">
+					<strong>List Owner:</strong> 
+					<span>{{list.owner.email}}</span>
+				</div>
+				<div class="shared-users">
+					<strong>Shared User(s):</strong>
+					<ul>
+						<li ng-repeat="sharedUser in list.sharedUsers">{{sharedUser.email}}</li>
+					</ul>
+				</div>
+			</div>
 		</div>
 	</div>
 </div>

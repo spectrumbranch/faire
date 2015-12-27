@@ -314,15 +314,60 @@ ul.individual-lists li{
 	}
 }
 
-#edit-screen-sidenav ul{
-	list-style: none;
-	font-size: 18px;
+#edit-screen-sidenav h2{
+	font-size: 20px;
+	font-weight: bold;
 	color: #2AA6CA;
-	margin-left: 0px;
+	margin-bottom: 10px;
 }
 
-#edit-screen-sidenav ul li{
-	line-height: 40px;
+#edit-screen-sidenav input{
+    font-size: 14px;
+    padding: 6px 8px;
+    height: 28px;
+    margin: 0px 0px 10px 0px;
+}
+
+#share-list-section{
+	margin-bottom: 15px;
+    padding-bottom: 10px;
+}
+
+@media (max-width: 640px){
+	#share-list-section{
+		border-top: 1px solid #ddd;
+		padding-top: 15px;
+	}
+}
+
+#share-list-section.border-divide{
+	border-bottom: 1px solid #ddd;
+}
+
+#share-list-section form{
+	margin: 0;
+}
+
+#share-list-users{
+	font-size: 14px;
+}
+
+#share-list-users ul{
+	font-size: 14px;
+	line-height: 22px;
+}
+
+#share-list-users strong{
+	display: block;
+	padding-bottom: 5px;
+	color: #999;
+	font-size: 16px;
+}
+
+.shared-users{
+	padding-bottom: 20px;
+	line-height: 22px;
+	word-wrap: break-word;
 }
 
 #view-all{

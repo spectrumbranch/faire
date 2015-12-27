@@ -166,6 +166,32 @@ angular.module('faireApp', ['ngTouch','ngRoute', 'faire.service']).config(['$rou
         
         list.edit = !list.edit;
     }
+	
+	$scope.shareList = function(list){
+		if ($scope.shareUser != ""){
+			var shareUser = $scope.shareUser;
+			$scope.shareUser = '';
+			FaireService.getUserByEmail(shareUser, function(error, user){
+				if(error){
+					console.log('FaireViewListController::shareList error: ',error);
+				} else {
+					if (user.id == null){
+						//User does not exist
+						//TODO
+					} else {
+						//share list
+						FaireService.shareList({listId: list.id, userIds: [user.id]}, function(error2, sharedUsers){
+							if (error2) {
+								console.log('FaireViewListController::shareList error2: ', error2);
+							} else {
+								//list was shared successfully
+							}
+						});
+					}
+				}
+			});
+		}
+	}
     
     ;(function() {
         FaireService.getListById($scope.params.listId, function(error, list) {
