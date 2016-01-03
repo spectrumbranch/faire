@@ -176,7 +176,7 @@ describe('Faire.Lists API', function() {
             })
         })
         it('should error out when required parameters "user" and "id" are missing.', function(done) {
-            var listName = 'This is an example list to test input requirements.';
+            var listName = 'example list for delete input requirements';
             var status_deleted = 'deleted';
             Faire.Lists.add({ user: user_id_1, name: listName  }, function(err, list) {
                 //missing both user and id
@@ -211,7 +211,7 @@ describe('Faire.Lists API', function() {
             })
         })
         it('should error out when required parameters "user" and "id" are missing.', function(done) {
-            var listName = 'This is an example list for testing update input requirements.';
+            var listName = 'example list for update input requirements';
             Faire.Lists.add({ user: user_id_1, name: listName  }, function(err, list) {
                 //missing both user and id
                 Faire.Lists.update({}, function(err1, updatedList1) {
@@ -261,7 +261,7 @@ describe('Faire.Lists API', function() {
             })
         })
         it('should error out when required parameters "user" and "id" are missing.', function(done) {
-            var listName = 'This is an example list to test get input requirements.';
+            var listName = 'example list for get input requirements';
             Faire.Lists.add({ user: user_id_1, name: listName  }, function(err, list) {
                 //missing both user and id
                 Faire.Lists.get({}, function(err1, getList1) {
@@ -366,7 +366,7 @@ describe('Faire.Lists API', function() {
             })
         })
         it('should error out when required parameter "user" is missing.', function(done) {
-            var listName = 'This is an example list to test getAll input validation.';
+            var listName = 'example list for getAll input validation';
             Faire.Lists.getAll({ }, function(err1, getAllLists1) {
                 assert(err1 instanceof Error);
                 assert(getAllLists1 === undefined);
@@ -378,7 +378,7 @@ describe('Faire.Lists API', function() {
     
     describe('#share()', function() {
         it('should let the owner of a list give access rights of that list to other users', function(done) {
-            var listName = 'This is an example list to test share functionality.';
+            var listName = 'example list for share functionality';
             Faire.Lists.add({ user: user_id_1, name: listName }, function(err, list) {
                 Faire.Lists.share({ id: list.id , users: [user_id_2] }, function(err1, sharedUsers) {
                     assert(err1 == null);
@@ -389,7 +389,7 @@ describe('Faire.Lists API', function() {
             });
         })
         it('should error out when required parameters "users(as [])" and "id" are missing.', function(done) {
-            var listName = 'This is an example list to test share input requirements.';
+            var listName = 'example list for share input requirements';
             Faire.Lists.add({ user: user_id_1, name: listName  }, function(err, list) {
                 //missing id
                 Faire.Lists.share({ users: [user_id_1] }, function(err1, sharedUsers) {
@@ -410,7 +410,7 @@ describe('Faire.Lists API', function() {
     })
     describe('#unshare()', function() {
         it('should let the owner of a list revoke access rights of that list to other users', function(done) {
-            var listName = 'This is an example list to test unshare functionality.';
+            var listName = 'example list for unshare functionality';
             Faire.Lists.add({ user: user_id_1, name: listName }, function(err, list) {
                 Faire.Lists.share({ id: list.id , users: [user_id_2] }, function(err1, sharedUsers) {
                     Faire.Lists.unshare({ id: list.id , users: [user_id_2] }, function(err2, unsharedUsers) {
@@ -423,7 +423,7 @@ describe('Faire.Lists API', function() {
             });
         })
         it('should error out when required parameters "users(as [])" and "id" are missing.', function(done) {
-            var listName = 'This is an example list to test share input requirements.';
+            var listName = 'example list for share input requirements';
             Faire.Lists.add({ user: user_id_1, name: listName  }, function(err, list) {
                 //missing id
                 Faire.Lists.unshare({ users: [user_id_1] }, function(err1, sharedUsers) {
@@ -461,7 +461,7 @@ describe('Faire.Lists API', function() {
             })
         })
         it('should error out when required parameters "user" and "list" are missing.', function(done) {
-            var listName = 'This is an example list to test isListVisible input requirements.';
+            var listName = 'example list for isListVisible input requirements';
             Faire.Lists.add({ user: user_id_1, name: listName  }, function(err, list) {
                 //missing user
                 Faire.Lists.isListVisible({ id: list.id }, function(err1, listIsVisible) {
@@ -499,7 +499,7 @@ describe('Faire.Lists API', function() {
             });
         })
         it('should error out when required parameter "id" is missing.', function(done) {
-            var listName = 'This is an example list to test getSharedUsers input requirements.';
+            var listName = 'example list for getSharedUsers input requirements';
             Faire.Lists.add({ user: user_id_1, name: listName  }, function(err, list) {
                 //missing user
                 Faire.Lists.getSharedUsers({ }, function(err1, sharedUsers) {
