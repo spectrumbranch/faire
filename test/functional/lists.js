@@ -11,18 +11,19 @@ module.exports = function(faire, DB, fixtures) {
 
 //Should consider a more efficient testing method.
 describe('Faire.Lists API', function() {
-    var user_id_1, user_id_2, user_id_3, user_id_4;
+    var user_id_1, user_id_2, user_id_3, user_id_4
+    ,   email1, email2, email3, email4;
     beforeEach(function(done) {
-        var email1 = Fixtures.Lists.Users[0].email;
+        email1 = Fixtures.Lists.Users[0].email;
         var passwrd1 = Fixtures.Lists.Users[0].password;
         
-        var email2 = Fixtures.Lists.Users[1].email;
+        email2 = Fixtures.Lists.Users[1].email;
         var passwrd2 = Fixtures.Lists.Users[1].password;
         
-        var email3 = Fixtures.Lists.Users[2].email;
+        email3 = Fixtures.Lists.Users[2].email;
         var passwrd3 = Fixtures.Lists.Users[2].password;
 
-        var email4 = Fixtures.Lists.Users[3].email;
+        email4 = Fixtures.Lists.Users[3].email;
         var passwrd4 = Fixtures.Lists.Users[3].password;
 
         var virt_modules = [];
@@ -235,26 +236,39 @@ describe('Faire.Lists API', function() {
             Faire.Lists.add({ user: user_id_1, name: listName }, function(err, list) {
                 Faire.Tasks.add({ user: user_id_1, list: list.id , name: 'nested task in list' }, function(err,task) {
                     Faire.Tasks.add({ user: user_id_1, list: list.id , name: 'another nested task in list' }, function(err,task2) {
-                        Faire.Lists.get({ id: list.id, user: user_id_1 }, function(err1, getList) {
-                            assert(err1 == null);
-                            assert(getList !== undefined);
-                            assert(getList.id !== undefined && getList.id === list.id);
-                            assert(getList.name !== undefined && getList.name === listName);
-                            assert(getList.owner.email !== undefined);
-                            assert(getList.owner.id === user_id_1);
-                            assert(getList.status !== undefined);
-                            assert(getList.updatedAt !== undefined);
-                            assert(getList.createdAt !== undefined);
-                            assert(getList.sharedUsers !== undefined && getList.sharedUsers.length === 0);
-                            assert(getList.tasks !== undefined && Array.isArray(getList.tasks));
-                            
-                            Faire.Lists.get({ id: 9999999, user: user_id_1 }, function(err2, getList2) {
-                                assert(err2 == null);
-                                assert(getList2 !== undefined);
-                                assert(getList2.id === undefined);
-                                done();
+                        Faire.Lists.share({ id: list.id , users: [user_id_2] }, function(err1, sharedUsers) {
+                            Faire.Lists.get({ id: list.id, user: user_id_1 }, function(err1, getList) {
+                                try {
+                                    assert(err1 == null);
+                                    assert(getList !== undefined);
+                                    assert(getList.id !== undefined && getList.id === list.id);
+                                    assert(getList.name !== undefined && getList.name === listName);
+                                    assert(getList.owner.email !== undefined);
+                                    assert(getList.owner.id === user_id_1);
+                                    assert(getList.status !== undefined);
+                                    assert(getList.updatedAt !== undefined);
+                                    assert(getList.createdAt !== undefined);
+                                    assert(getList.sharedUsers !== undefined && getList.sharedUsers.length === 1);
+
+                                    assert(getList.sharedUsers[0].salt === undefined);
+                                    assert(getList.sharedUsers[0].hash === undefined);
+                                    assert(getList.sharedUsers[0].id === user_id_2);
+                                    assert(getList.sharedUsers[0].email === email2);
+
+                                    assert(getList.tasks !== undefined && Array.isArray(getList.tasks));
+                                } catch (e) {
+                                    return done(e);
+                                }
+                                
+                                
+                                Faire.Lists.get({ id: 9999999, user: user_id_1 }, function(err2, getList2) {
+                                    assert(err2 == null);
+                                    assert(getList2 !== undefined);
+                                    assert(getList2.id === undefined);
+                                    done();
+                                })
                             })
-                        })
+                        });
                     })
                 })
                 
