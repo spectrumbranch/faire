@@ -412,4 +412,43 @@ describe('Faire.Tasks API', function() {
             })
         })
     })
+
+    describe('#isTaskVisible()', function() {
+        it('should return true if the task is visible to the user, else false.', function(done) {
+            var taskName = 'This is an example task testing getListOfTask().';
+            Faire.Tasks.add({ user: user_id_1, name: taskName, list: list_id_1 }, function(err, task) {
+            
+                Faire.Tasks.isTaskVisible({ user: user_id_1, id: task.id }, function(err1, isTaskVisible) {
+                    assert(err1 == null);
+                    assert(isTaskVisible === true);
+
+                    Faire.Tasks.isTaskVisible({ user: user_id_2, id: task.id }, function(err2, isTaskVisible2) {
+                        assert(err2 == null);
+                        assert(isTaskVisible2 === false);
+                        Faire.Lists.share({ users: [user_id_2], id: list_id_1 }, function(err3, sharedUsers) {
+                            Faire.Tasks.isTaskVisible({ user: user_id_2, id: task.id }, function(err3, isTaskVisible3) {
+                                assert(err3 == null);
+                                assert(isTaskVisible3 === true);
+                                done();
+                            });
+                        });
+                    });
+                });
+            })
+        })
+        it('should error out when required parameter "id" is missing.', function(done) {
+            Faire.Tasks.isTaskVisible({ user: 1 }, function(err1, isTaskVisible) {
+                assert(err1 instanceof Error);
+                assert(isTaskVisible === undefined);
+                done();
+            })
+        })
+        it('should error out when required parameter "user" is missing.', function(done) {
+            Faire.Tasks.isTaskVisible({ id: 1 }, function(err1, isTaskVisible) {
+                assert(err1 instanceof Error);
+                assert(isTaskVisible === undefined);
+                done();
+            })
+        })
+    })
 })
