@@ -250,7 +250,7 @@ describe('Faire.Tasks API', function() {
     })
     
     describe('#get()', function() {
-        it('should return the task object keyed by the given id. if the task does not exist, return empty', function(done) {
+        it('should return the task object keyed by the given id. if the task does not exist, return error', function(done) {
             var taskName = 'This is an example task12.';
             Faire.Tasks.add({ user: user_id_1, name: taskName, list: list_id_1 }, function(err, task) {
                 Faire.Tasks.get({ id: task.id, user: user_id_1 }, function(err1, getTask) {
@@ -263,9 +263,8 @@ describe('Faire.Tasks API', function() {
                     assert(getTask.createdAt !== undefined);
                     
                     Faire.Tasks.get({ id: 9999999, user: user_id_1 }, function(err2, getTask2) {
-                        assert(err2 == null);
-                        assert(getTask2 !== undefined);
-                        assert(getTask2.id === undefined);
+                        assert(err2 instanceof Error);
+                        assert(getTask2 === undefined);
                         done();
                     })
                 })
