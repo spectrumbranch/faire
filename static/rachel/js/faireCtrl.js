@@ -16,6 +16,22 @@ angular.module('faireApp', ['ngTouch','ngRoute', 'faire.service']).config(['$rou
             redirectTo: '/'
         });
 }])
+
+.controller('FaireGlobalController', function ($scope, $http, FaireService, $location) {
+	var vm = this;
+	vm.version = '...';
+    vm.getVersion = function() {
+        FaireService.getVersion(function(error, version) {
+            if (error) {
+                console.log('FaireGlobalController::getVersion error: ',error);
+            } else {
+                vm.version = version;
+            }
+        });
+    }
+	vm.getVersion();
+})
+
 .controller('FaireHomeController', function ($scope, $http, FaireService, $location) {
     $scope.lists = [];
 	

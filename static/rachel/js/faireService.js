@@ -221,5 +221,19 @@ angular.module('faire.service', []).service('FaireService', ['$http', function F
             console.log(data);
             cb(data);
         })
-    }	
+    }
+
+	this.getVersion = function(cb){
+        $http({
+            url: '/version',
+            method: 'GET'
+        }).success(function(data, status, headers, config) {
+            console.log(data);
+            cb(null, data.version);
+        }).error(function(data, status, headers, config) {
+            console.log('there is an error getting version number: ' + status);
+            console.log(data);
+            cb(data);
+        })	
+	}	
 }]);

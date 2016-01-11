@@ -18,7 +18,7 @@
 
 </head>
 <body ng-app="faireApp">
-	<div id="wrapper">		
+	<div id="wrapper" ng-controller="FaireGlobalController as vm">		
 		<div id="header" class="contain-to-grid">
 			<nav class="top-bar" data-topbar role="navigation">
 				<div id="nav-container">
@@ -70,6 +70,7 @@
 			</form>
 		</div>-->			
 		<div id="main-container" ng-view></div>
+		<div id="version"><span>v.</span>\{{vm.version}}</div>
 	</div>
 	
 	<script src="rachel/foundation-5.3.1/js/vendor/jquery.js"></script>
