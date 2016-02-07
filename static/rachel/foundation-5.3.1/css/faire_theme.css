@@ -241,6 +241,7 @@ ul.individual-lists li{
 #main-container #edit-screen-border{
 	border-right: 1px solid #ddd;
 	height: 100%;
+	min-height: 210px;
 }
 
 @media (max-width: 640px){
@@ -351,6 +352,21 @@ ul.individual-lists li{
     padding: 6px 8px;
     height: 28px;
     margin: 0px 0px 10px 0px;
+}
+
+#delete-list-section{
+	margin-bottom: 25px;
+}
+
+#delete-list-section .main-buttons{
+	display: block;
+	text-align: center;
+}
+
+#delete-list-section a.main-buttons:hover, 
+#delete-list-section a.main-buttons:active,
+#delete-list-section a.main-buttons:focus{
+	color: #fff;
 }
 
 #share-list-section{

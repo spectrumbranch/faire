@@ -79,6 +79,9 @@ angular.module('faireApp', ['ngTouch','ngRoute', 'faire.service']).config(['$rou
     $scope.tasks = [];
     $scope.name = ''; //input field for new tasks
     $scope.list = { name: '' };
+	
+	//TODO put into init function
+	$(document).foundation('reveal', 'reflow');
     
     $scope.addTask = function() {
         if ($scope.name.length > 0) {
@@ -182,6 +185,20 @@ angular.module('faireApp', ['ngTouch','ngRoute', 'faire.service']).config(['$rou
         
         list.edit = !list.edit;
     }
+
+    $scope.deleteList = function(list) {
+        FaireService.deleteList({ id: list.id }, function(error, deletedList) {
+            if (error) {
+                console.log('FaireViewListController::deleteList error: ',error);
+            }
+			
+			$scope.closeDeleteModal();
+        });
+    }
+	
+	$scope.closeDeleteModal = function() {
+		$('#deleteListModal').foundation('reveal', 'close');
+	}	
 	
 	$scope.shareList = function(list){
 		if ($scope.shareUser != ""){

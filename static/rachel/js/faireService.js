@@ -190,6 +190,25 @@ angular.module('faire.service', []).service('FaireService', ['$http', function F
             cb(data);
         })
     }
+
+    this.deleteList = function(list, cb) {
+        //task is like { list: #, name: 'task name' }
+		var id = list.id;
+        var _list = list;
+		delete _list.id;
+        $http({
+            url: '/lists/' + id + '/delete',
+            method: 'POST',
+			data: _list
+        }).success(function(data, status, headers, config) {
+            console.log(data);
+            cb(null, data);
+        }).error(function(data, status, headers, config) {
+            console.log('there is an error deleting the list: ' + status);
+            console.log(data);
+            cb(data);
+        })
+    }	
 	
 	this.getUserByEmail = function(email, cb){
         $http({

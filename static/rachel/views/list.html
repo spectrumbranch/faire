@@ -51,7 +51,6 @@
 	</div>
 	<div class="medium-4 columns" data-equalizer-watch>
 		<div id="edit-screen-sidenav">
-			<!--<a href ng-click="deleteTasklist()" class="main-buttons"><i class="fa fa-trash"></i> Delete List</a>--->
 			<div id="share-list-section" ng-class="{'border-divide': list.sharedUsers.length > 0}">
 				<h2>Share List</h2>
 				<form ng-submit="shareList(list)">
@@ -71,6 +70,17 @@
 					</ul>
 				</div>
 			</div>
+			<div id="delete-list-section">
+				<a href data-reveal-id="deleteListModal" class="main-buttons"><i class="fa fa-trash"></i> Delete List</a>
+				
+				<div id="deleteListModal" class="reveal-modal small" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
+					<h2 id="modalTitle">Delete "{{list.name}}"</h2>
+					<p>Are you sure you want to delete this list?</p>
+					<a href="#/" class="main-buttons" ng-click="deleteList(list)">Yes I'm Sure</a>
+					<a href class="main-buttons" ng-click="closeDeleteModal()">Cancel</a>
+					<a class="close-reveal-modal" aria-label="Close">&#215;</a>				
+				</div>
+			</div>			
 		</div>
 	</div>
 </div>
