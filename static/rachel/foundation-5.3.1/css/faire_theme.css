@@ -326,8 +326,10 @@ ul.individual-lists li{
 	font-size: 14px;
 }
 
-.main-buttons:hover{
+.main-buttons:hover,
+.main-buttons:focus{
 	background-color: #474747;
+	color: #fff;
 }
 
 #edit-screen-sidenav{
@@ -433,4 +435,40 @@ ul.individual-lists li{
 	color: #444;
 }
 
+/*---Modal Styles---*/
 
+.faire-modal{
+	padding: 0px 20px 20px 20px;
+	border-radius: 10px;
+}
+
+@media (max-width: 640px){
+	.faire-modal{
+		width: 100%;
+		min-height: 0;
+	}
+}
+
+.faire-modal #modalTitle{
+	font-size: 20px;
+	padding: 8px 0px;
+	color: #2AA6CA;
+	font-weight: bold;
+	border-bottom: 4px solid #ddd;
+	margin-bottom: 15px;
+}
+
+.faire-modal #modalTitle .delete-title{
+	width: 90%;
+	display: inline-block;
+}
+
+.faire-modal .close-reveal-modal{
+	font-size: 30px;
+	top: 8px;
+	right: 20px;
+}
+
+.faire-modal p{
+	margin-bottom: 30px;
+}
