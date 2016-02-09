@@ -495,11 +495,17 @@ describe('Faire.Lists API', function() {
                     
                     //User 3 has no lists shared with them
                     Faire.Lists.isListVisible({ user: user_id_3, id: list.id }, function(errVisible2, listIsVisible2) {
-                        assert(errVisible == null);
+                        assert(errVisible2 == null);
                         assert(!listIsVisible2);
-                        done();
+                        
+                        Faire.Lists.share({ users: [user_id_2], id: list.id }, function(errShare, sharedList) {
+                            Faire.Lists.isListVisible({ user: user_id_2, id: list.id }, function(errVisible3, listIsVisible3) {
+                                assert(errVisible3 == null);
+                                assert(listIsVisible3);
+                                done();
+                            });
+                        });
                     })
-                    //TODO: SharedUser
                 })
             })
         })
