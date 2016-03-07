@@ -7,173 +7,81 @@
   <title>Faire</title>
 
   
-  <link rel="stylesheet" href="css/foundation.css">
-  <link rel="stylesheet" href="css/faire.css">
+  <link rel="stylesheet" href="rachel/foundation-5.3.1/css/foundation.css">
+  <link rel="stylesheet" href="rachel/foundation-5.3.1/css/faire_theme.css">
+  <link rel="stylesheet" href="rachel/foundation-5.3.1/css/foundation-icons.css" />
+  <link rel="stylesheet" href="components/font-awesome/css/font-awesome.min.css" />
 
-  <script src="js/vendor/custom.modernizr.js"></script>
+  <script src="rachel/foundation-5.3.1/js/vendor/modernizr.js"></script>
+  <script src="components/angular/angular.min.js"></script>
+  <script src="components/angular-route/angular-route.min.js"></script>
 
 </head>
-<body ng-app="faireApp">
-	<div ng-controller="TaskCtrl">
-		<div data-magellan-expedition="fixed">
-			<div class="row entry-section">
-				<div class="large-11 small-11 faire-entry columns">
-					<form ng-submit="addTask()">
-						<input type="text" id="addItemInput" ng-model="taskName" placeholder="Add an item to your list..." size="50" />
-					</form>
-				</div>
-				<div class="large-1 small-1 faire-menu-entry columns">
-					<a id="faire-menu-btn">
-						<span class="faire-menu-icon-wrapper">
-							<span class="faire-menu-icon" style=""></span>
-						</span>
-					</a>				
-				</div>
-			</div>
-			<div class="faire-drop-menu">
-				<div class="row">
-					<div class="large-12 small-12 columns">
-						<hr class="uber-divider" />
-					</div>
-				</div>
-				<div class="row faire-task">
-					<div class="large-12 small-12 columns">
-						<a ng-click="editTheme()">Select Theme</a>
-					</div>
-				</div>
-				<div class="row">
-					<div class="large-12 small-12 columns">
-						<hr />
-					</div>
-				</div>
-				<div class="row faire-task">
-					<div class="large-12 small-12 columns">
-						<a ng-click="clearCompletedItems()">Clear Completed Items</a>
-					</div>
-				</div>
-				<div class="row">
-					<div class="large-12 small-12 columns">
-						<hr />
-					</div>
-				</div>
-				<div class="row faire-task">
-					<div class="large-12 small-12 columns">
-						<a ng-click="deleteTasklist()">Delete List</a>
-					</div>
-				</div>
-				<div class="row">
-					<div class="large-12 small-12 columns">
-						<hr />
-					</div>
-				</div>
-				<div class="row faire-task">
-					<div class="large-12 small-12 columns">
-						<a href="/logout">Logout</a>
-					</div>
-				</div>
-			</div>
-			<div class="row">
-				<div class="large-12 small-12 columns">
-					<hr class="uber-divider" />
-				</div>
-			</div>
-		</div>
+<body ng-app="faireApp" class="antialiased hide-extras">
+	<div id="wrapper" ng-controller="FaireGlobalController as vm">		
+		<div id="header" class="contain-to-grid">
+			<nav class="top-bar" data-topbar role="navigation">
+				<div id="nav-container">
+				<!--Logo-->
+					<ul class="title-area">
+						<li class="name">
+							<a href="#/"><img id="nav-logo" src="rachel/foundation-5.3.1/img/logo.png" alt="" /></a>
+						</li>
+						<li class="toggle-topbar menu-icon"><a href><span></span></a></li>
+					</ul>
 
-		<div ng-cloak id="task-container">
-			<div ng-repeat="task in tasks | orderBy:'-createdAt'">
-				<div class="faire-task  \{{task.status}}">
-					<div class="row actionable" ng-swipe-left="editTask(task.id)" ng-swipe-right="deleteTask(task.id)">
-						<div class="large-12 small-12 columns">
-							<a ng-click="toggleTask(task.id)">\{{task.name}}</a><strong class="show-for-large-up"><a ng-click="editTask(task.id)">Edit</a> | <a ng-click="deleteTask(task.id)">Delete</a></strong>
-						</div>
+					<section class="top-bar-section">
+						<!-- Right Nav Section -->
+						<ul class="right nav-links">
+							<li>
+								<a href="#/"><i class="fa fa-home"></i> Home</a>
+							</li>
+							<li>
+								<a href="#/list/new"><i class="fa fa-plus-circle"></i> Create New List</a>
+							</li>								
+							<li>
+								<a href="#/profile"><i class="fa fa-user"></i> Profile</a>
+							</li>
+							<li>
+								<a href="/logout"><i class="fa fa-sign-out"></i> Logout</a>
+							</li>
+						</ul> 
+					</section>
+				</div>				
+			</nav>	
+		</div>
+		<!--<div id="header-search">
+			<form>
+				<div class="row">
+					<div class="medium-4 small-12 columns no-padding">
+						<input type="text" id="search-bar" placeholder="Search Lists ...">
 					</div>
-					<div class="row">
-						<div class="large-12 small-12 columns">
-							<hr />
-						</div>
+					
+					<div class="medium-4 medium-offest-4 small-12 columns no-padding">
+						<select name="sort-lists">
+							<option value="sort-lists" selected>Sort Lists</option>
+							<option value="a-z">A to Z</option>
+							<option value="z-a">Z to A</option>
+							<option value="date-newest">Date: Newest</option>
+							<option value="date-oldest">Date: Oldest</option>
+						</select>
 					</div>
-				</div>
-			</div>
-			<div ng-show="hasNoTasks()">
-				<div class="row faire-task">
-					<div class="large-12 small-12 columns">
-						No tasks!
-					</div>
-				</div>
-			</div>
-		</div>
-		
-	
-		<script>
-		document.write('<script src=' +
-		('__proto__' in {} ? 'js/vendor/zepto' : 'js/vendor/jquery') +
-		'.js><\/script>')
-		</script>
-
-		<script src="js/foundation.min.js"></script>
-		<script src="js/vendor/angular.min.js"></script>
-		<script src="js/vendor/angular-touch.min.js"></script>
-		<script src="js/faire.js"></script>
-
-		<script>
-			$(document).foundation();
-		</script>
-		<div id="faireModal" class="reveal-modal">
-			<div class="row entry-section">
-				<div class="large-12 small-12 columns">
-					<form ng-submit="performEditTask(editTaskId)">
-						<input type="text" id="editItemInput" ng-model="editTaskName" placeholder="Edit an item on your list..." size="50" />
-					</form>
-				</div>
-			</div>
-			<a class="close-reveal-modal">&#215;</a>
-		</div>
-		<div id="faireDeleteModal" class="reveal-modal">
-			<div class="row entry-section">
-				<div class="large-12 small-12 columns">
-					<form ng-submit="performDeleteTask(deleteTaskId)">
-						<fieldset>
-							<legend>Are you sure you want to delete this task?</legend>
-							<blockquote>
-								\{{deleteTaskName}}
-							</blockquote>
-							<div class="row">
-								<div class="large-6 small-6 columns">
-									<input type="submit" value="Delete" class="button success radius expand" />
-								</div>
-								<div class="large-6 small-6 columns">
-									<input type="button" value="Cancel" class="button alert radius expand" onclick="show_faire_delete_modal(false)" />
-								</div>
-							</div>
-						</fieldset>
-					</form>
-				</div>
-			</div>
-			<a class="close-reveal-modal">&#215;</a>
-		</div>
-		<div id="faireEditThemeModal" class="reveal-modal">
-			<div class="row entry-section">
-				<div class="large-12 small-12 columns">
-					<fieldset>
-						<legend>Select from the options below to edit your theme</legend>
-							<form>
-								<select id="faireThemeOptions">
-								  <option value="">Theme not available</option>
-								</select>							
-							</form>
-						<div class="row">
-							<div class="large-6 small-6 columns">
-								<input type="submit" value="Accept" class="button success radius expand" onclick="changeTheme()" />
-							</div>
-							<div class="large-6 small-6 columns">
-								<input type="button" value="Cancel" class="button alert radius expand" onclick="show_faire_edit_theme_modal(false)" />
-							</div>
-						</div>
-					</fieldset>
-				</div>
-			</div>
-			<a class="close-reveal-modal">&#215;</a>
-		</div>
+				</div>	
+			</form>
+		</div>-->			
+		<div id="main-container" ng-view></div>
+		<div id="version"><span>v</span>\{{vm.version}}</div>
 	</div>
+	
+	<script src="rachel/foundation-5.3.1/js/vendor/jquery.js"></script>
+	<script src="rachel/foundation-5.3.1/js/foundation.min.js"></script>
+	<script src="rachel/foundation-5.3.1/js/foundation/foundation.reveal.js"></script>
+	<script src="rachel/foundation-5.3.1/js/vendor/angular-touch.min.js"></script>
+	<script src="rachel/js/faireService.js"></script>
+	<script src="rachel/js/faireCtrl.js"></script>	
+	
+	<script>
+		$(document).foundation();
+	</script>	
 </body>
 </html>
