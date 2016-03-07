@@ -8,6 +8,10 @@ angular.module('faireApp', ['ngTouch','ngRoute', 'faire.service']).config(['$rou
             templateUrl: 'rachel/views/create-list.html',
             controller: 'FaireCreateListController'
         })
+        .when('/profile', {
+            templateUrl: 'rachel/views/profile.html',
+            controller: 'FaireProfileController'
+        })		
         .when('/list/:listId', {
             templateUrl: 'rachel/views/list.html',
             controller: 'FaireViewListController'
@@ -74,6 +78,58 @@ angular.module('faireApp', ['ngTouch','ngRoute', 'faire.service']).config(['$rou
         })
     }
 })
+
+.controller('FaireProfileController', function ($scope, $http, FaireService, $location) {
+	
+	$scope.availableThemes = [];
+	$scope.selectedTheme = '';
+
+	//TODO put into init function
+	$(document).foundation('reveal', 'reflow');
+	
+    $scope.changeTheme = function() {
+		if($scope.selectedTheme !== ''){
+			FaireService.changeTheme($scope.selectedTheme, function(error, changedTheme) {
+				if (error) {
+					console.log('FaireProfileController::editTheme error: ',error);
+				}
+				
+				$scope.closeThemeModal();
+				window.location.reload();
+			});
+		}
+    }
+	
+	$scope.closeThemeModal = function() {
+		$('#editThemeModal').foundation('reveal', 'close');
+	}
+	
+	$scope.getThemes = function() {
+        FaireService.getThemes(function(error, availableThemes) {
+            if (error) {
+                console.log('FaireProfileController::getThemes error: ',error);
+            } else {
+                $scope.availableThemes = availableThemes;
+				console.log($scope.availableThemes);
+            }
+        });
+    }
+	
+	$scope.getThemeSelected = function() {
+        FaireService.getThemeSelected(function(error, selectedTheme) {
+            if (error) {
+                console.log('FaireProfileController::getThemeSelected error: ',error);
+            } else {
+                $scope.selectedTheme = selectedTheme;
+				console.log($scope.selectedTheme);
+            }
+        });
+    }
+	
+	$scope.getThemeSelected();
+	$scope.getThemes();
+})
+
 .controller('FaireViewListController', function ($scope, $http, $routeParams, FaireService, $location) {
     $scope.params = $routeParams;
     $scope.tasks = [];
@@ -222,10 +278,31 @@ angular.module('faireApp', ['ngTouch','ngRoute', 'faire.service']).config(['$rou
 						});
 					}
 				}
+				
+				window.location.reload();
 			});
 		}
 	}
-    
+ 
+	$scope.unshareList = function(list, userToUnshare){
+
+		FaireService.unshareList({listId: list.id, userIds: [userToUnshare]}, function(error2, unsharedUsers){
+			if (error2) {
+				console.log('FaireViewListController::unshareList error2: ', error2);
+			} else {
+				//list was unshared successfully
+			}
+			
+			$scope.closeUnshareModal();
+			window.location.reload();
+		});
+
+	}
+
+	$scope.closeUnshareModal = function() {
+		$('#unshareListModal').foundation('reveal', 'close');
+	}	
+	
     ;(function() {
         FaireService.getListById($scope.params.listId, function(error, list) {
             $scope.list = list;

@@ -241,6 +241,23 @@ angular.module('faire.service', []).service('FaireService', ['$http', function F
             cb(data);
         })
     }
+	
+	this.unshareList = function(input, cb) {
+		var listId = input.listId;
+        var userIds = input.userIds;
+        $http({
+            url: '/lists/' + listId + '/unshare',
+            method: 'POST',
+			data: { users: userIds }
+        }).success(function(data, status, headers, config) {
+            console.log(data);
+            cb(null, data);
+        }).error(function(data, status, headers, config) {
+            console.log('there is an error sharing the task: ' + status);
+            console.log(data);
+            cb(data);
+        })
+    }	
 
 	this.getVersion = function(cb){
         $http({
@@ -254,5 +271,48 @@ angular.module('faire.service', []).service('FaireService', ['$http', function F
             console.log(data);
             cb(data);
         })	
+	}
+
+	this.getThemes = function(cb){
+        $http({
+            url: '/themes',
+            method: 'GET'
+        }).success(function(data, status, headers, config) {
+            console.log(data);
+            cb(null, data.themes);
+        }).error(function(data, status, headers, config) {
+            console.log('there is an error getting themes: ' + status);
+            console.log(data);
+            cb(data);
+        })	
+	}
+
+	this.getThemeSelected = function(cb){
+        $http({
+            url: '/preferences/theme',
+            method: 'GET'
+        }).success(function(data, status, headers, config) {
+            console.log(data);
+            cb(null, data.theme);
+        }).error(function(data, status, headers, config) {
+            console.log('there is an error getting theme selected: ' + status);
+            console.log(data);
+            cb(data);
+        })	
 	}	
+	
+	this.changeTheme = function(theme, cb) {
+        $http({
+            url: '/preferences/theme',
+            method: 'POST',
+			data: {theme:theme}
+        }).success(function(data, status, headers, config) {
+            console.log(data);
+            cb(null, data);
+        }).error(function(data, status, headers, config) {
+            console.log('there is an error changing the theme: ' + status);
+            console.log(data);
+            cb(data);
+        })
+    }	
 }]);

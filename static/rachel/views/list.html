@@ -65,9 +65,24 @@
 				</div>
 				<div class="shared-users">
 					<strong>Shared User(s):</strong>
-					<ul>
-						<li ng-repeat="sharedUser in list.sharedUsers">{{sharedUser.email}}</li>
-					</ul>
+					<div ng-repeat="sharedUser in list.sharedUsers" class="row">
+						<div class="user-email-remove" id="unshare-user-section">
+							<a href data-reveal-id="unshareListModal" id="unshare-trash"><i class="fa fa-trash"></i></a>
+							
+							<div id="unshareListModal" class="reveal-modal small faire-modal" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
+								<h2 id="modalTitle">
+									<span class="modal-title">Unshare List</span>
+									<a class="close-reveal-modal" ng-click="closeUnshareModal()" aria-label="Close">&#215;</a>
+								</h2>
+								<p>Are you sure you want to unshare this list with "{{sharedUser.email}}"?</p>
+								<div class="text-center">
+									<a href class="main-buttons" ng-click="unshareList(list, sharedUser.id)">Yes I'm Sure</a>
+									<a href class="main-buttons" ng-click="closeUnshareModal()">Cancel</a>	
+								</div>
+							</div>								
+						</div>
+						<div class="user-email">{{sharedUser.email}}</div>
+					</div>
 				</div>
 			</div>
 			<div id="delete-list-section">
@@ -75,7 +90,7 @@
 				
 				<div id="deleteListModal" class="reveal-modal small faire-modal" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
 					<h2 id="modalTitle">
-						<span class="delete-title">Delete List</span>
+						<span class="modal-title">Delete List</span>
 						<a class="close-reveal-modal" aria-label="Close">&#215;</a>
 					</h2>
 					<p>Are you sure you want to delete "{{list.name}}"?</p>

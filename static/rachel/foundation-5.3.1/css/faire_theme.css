@@ -324,6 +324,7 @@ ul.individual-lists li{
 	padding: 10px 20px;
 	cursor: pointer;
 	font-size: 14px;
+	display: inline-block;
 }
 
 .main-buttons:hover,
@@ -413,6 +414,27 @@ ul.individual-lists li{
 	word-wrap: break-word;
 }
 
+.shared-users .user-email{
+	width: calc(100% - 20px);
+	display: inline-block;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	float: left;
+}
+
+.shared-users .user-email-remove{
+	width: 20px;
+	cursor: pointer;
+	display: inline-block;
+	text-align: left;
+	float: left;
+}
+
+#unshare-trash{
+	color: #222;
+}
+
 #view-all{
 
 }
@@ -458,7 +480,7 @@ ul.individual-lists li{
 	margin-bottom: 15px;
 }
 
-.faire-modal #modalTitle .delete-title{
+.faire-modal #modalTitle .modal-title{
 	width: 90%;
 	display: inline-block;
 }
@@ -470,5 +492,5 @@ ul.individual-lists li{
 }
 
 .faire-modal p{
-	margin-bottom: 30px;
+	margin-bottom: 15px;
 }
