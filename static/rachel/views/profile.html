@@ -1,0 +1,27 @@
+<div class="wrapper row" data-equalizer>
+	<div class="medium-8 columns">
+		<div id="edit-screen-content">
+			<h1>My Profile</h1>
+			<!--<form ng-submit="addList()">
+				<input type="text" name="name" ng-model="addNewListFormData.name" placeholder="Enter List Title" maxlength="50" />
+				<input type="submit" value="Create List" id="add-list" class="main-buttons right" />
+			</form>-->
+			<div id="edit-theme-section">
+				<a href data-reveal-id="editThemeModal" class="main-buttons">Edit Theme</a>
+				
+				<div id="editThemeModal" class="reveal-modal small faire-modal" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
+					<h2 id="modalTitle">
+						<span class="modal-title">Edit Theme</span>
+						<a class="close-reveal-modal" aria-label="Close">&#215;</a>
+					</h2>
+					<p>Select from the options below to edit your theme.</p>
+					<select ng-model="selectedTheme" ng-options="theme for theme in availableThemes track by theme"></select>
+					<div class="text-center">
+						<a href="#/" class="main-buttons" ng-click="changeTheme()">Save</a>
+						<a href class="main-buttons" ng-click="closeThemeModal()">Cancel</a>	
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
