@@ -30,7 +30,7 @@
     "inert": "^4.1.0",
     "joi": "10.x.x",
     "mysql": "2.x.x",
-    "nodemailer": "~0.5.5",
+    "nodemailer": "2.x.x",
     "scurvy": "1.x.x",
     "sequelize": "^3.27.0",
     "vision": "^4.1.1"
