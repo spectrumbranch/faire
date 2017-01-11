@@ -1,6 +1,6 @@
 {
   "name": "faire",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "Text list management, useful for todo lists.",
   "main": "index.js",
   "scripts": {
@@ -25,13 +25,15 @@
     "async": "2.x.x",
     "bluebird": "3.x.x",
     "handlebars": "4.x.x",
-    "hapi": "^6.11.0",
-    "hapi-auth-cookie": "^1.3.2",
+    "hapi": "16.x.x",
+    "hapi-auth-cookie": "6.x.x",
+    "inert": "^4.1.0",
     "joi": "^4.7.0",
     "mysql": "2.x.x",
     "nodemailer": "~0.5.5",
     "scurvy": "1.x.x",
-    "sequelize": "^3.27.0"
+    "sequelize": "^3.27.0",
+    "vision": "^4.1.1"
   },
   "devDependencies": {
     "mocha": "3.x.x",
