@@ -24,7 +24,7 @@
 							<div ng-hide="task.edit" ng-click="toggleTaskActivity(task)" ng-class="{'cross-out-task': task.status == 'inactive'}">
 								<span class="task-name-view">{{task.name}}</span>
 							</div>
-							<input ng-show="task.edit" ng-model="task.name" type="text" maxlength="50" />
+							<input ng-show="task.edit" ng-model="task.name" type="text" maxlength="1000" />
 						</div>
 						<div class="small-2 columns text-right list-icons">
 							<a title="Edit List Item" data-equalizer-watch ng-click="handleEdit(task)">
@@ -40,7 +40,7 @@
 			<div class="individual-list-items row">		
 				<form ng-submit="addTask()">
 					<div class="list-item-text small-10 columns" data-equalizer-watch>
-						<input ng-model="name" name="list-item" placeholder="Enter List Item Here" type="text" maxlength="50" />
+						<input ng-model="name" name="list-item" placeholder="Enter List Item Here" type="text" maxlength="1000" />
 					</div>
 					<div class="small-2 columns text-right list-icons">
 						<a title="Save List" ng-click="addTask()" data-equalizer-watch><i class="fa fa-check"></i></a>

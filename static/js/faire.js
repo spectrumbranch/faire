@@ -1,3 +1,5 @@
+//deprecated
+
 angular.module('faireApp', ['ngTouch'])
 	.controller('TaskCtrl', function ($rootScope, $scope, $http) {
 		$scope.indexer = {};
