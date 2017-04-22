@@ -4,7 +4,8 @@ faire
 Text list management, useful for todo lists
 
 [![Build Status](https://api.travis-ci.org/spectrumbranch/faire.png)](http://travis-ci.org/spectrumbranch/faire)
-[![Dependency Status](https://david-dm.org/spectrumbranch/faire.svg)](https://david-dm.org/spectrumbranch/faire)
+[![Dependency Status](https://gemnasium.com/badges/github.com/spectrumbranch/faire.svg)](https://gemnasium.com/github.com/spectrumbranch/faire)
+
 
 Installation
 ============
