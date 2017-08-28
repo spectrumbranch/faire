@@ -11,14 +11,12 @@ exports.config = {
   port: 8000,
   tls: false,
   cookie_name: 'faire-cookie',
-  cookie_password: 'xfgkj23owe90nef0'
-};
-
-exports.mailconfig = {
-  method: 'sendmail',
-  sendmail: {
-    bin: '/usr/sbin/sendmail',
-	from: '"Faire Server" <no-reply@something.com>'
+  cookie_password: 'CHANGEMExfgkj23owe90nef0xfgkj23owe90nef0xfgkj23owe90nef0xfgkj23owe90nef0xfgkj23owe90nef0_',
+  email: {
+    google_oauth_token_dir: (process.env.HOME || process.env.HOMEPATH || process.env.USERPROFILE) + '/.credentials/',
+    google_oauth_token_filename: 'gmail-nodejs-quickstart.json',
+    from_email: 'no-reply@something.com',
+    test_to_email: 'someones_email@something.com'
   }
 };
 

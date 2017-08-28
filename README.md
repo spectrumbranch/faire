@@ -27,7 +27,7 @@ cp ./config/database.example.js ./config/database.js
 cp ./config/config.example.js ./config/config.js
 ```
 
-Make sure sendmail is installed if you wish to have email working.
+Create `./config/client_id.json` using Google Gmail OAuth2 API credentials. At this time only Gmail is supported for email.
 Set up the database connection config in ```./config/database.js```. As of right now, mysql is the only officially supported database setup. Make sure the credentials are correct as to avoid crashing. The database needs to be created in advanced.
 ```
 exports.config = {
@@ -46,14 +46,12 @@ exports.config = {
   port: 8000,
   tls: false,
   cookie_name: 'faire-cookie',
-  cookie_password: 'xfgkj23owe90nef0'
-};
-
-exports.mailconfig = {
-  method: 'sendmail',
-  sendmail: {
-    bin: '/usr/sbin/sendmail',
-	from: '"Faire Server" <no-reply@something.com>'
+  cookie_password: 'CHANGEMExfgkj23owe90nef0xfgkj23owe90nef0xfgkj23owe90nef0xfgkj23owe90nef0xfgkj23owe90nef0_',
+  email: {
+    google_oauth_token_dir: (process.env.HOME || process.env.HOMEPATH || process.env.USERPROFILE) + '/.credentials/',
+    google_oauth_token_filename: 'gmail-nodejs-quickstart.json',
+    from_email: 'no-reply@something.com',
+    test_to_email: 'someones_email@something.com'
   }
 };
 
@@ -65,5 +63,7 @@ exports.mailconfig = {
 //  cert: fs.readFileSync('/somewhere/fixtures/keys/faire-cert.pem')
 //}
 ```
+
+You can use `node ./scripts/google-oauth2-setup.js` to setup the base OAuth2 token. Just ensure that your token has a refresh token (which is sent only the first time for a given authorization). If you do not get a refresh token, you may need to revoke the permissions from the Gmail account and set it up again.
 
 Run with ```node .``` and enjoy! It will be accessible via the given hostname and port in the config.js file.

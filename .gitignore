@@ -18,3 +18,4 @@ tmp
 config/config.js
 config/database.js
 config/database.test.js
+config/client_id.json
