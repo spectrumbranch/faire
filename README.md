@@ -27,7 +27,7 @@ cp ./config/database.example.js ./config/database.js
 cp ./config/config.example.js ./config/config.js
 ```
 
-Create `./config/client_id.json` using Google Gmail OAuth2 API credentials. At this time only Gmail is supported for email.
+Create `./config/client_id.json` using Google Gmail OAuth2 API credentials. At this time only Gmail is supported for email.  
 Set up the database connection config in ```./config/database.js```. As of right now, mysql is the only officially supported database setup. Make sure the credentials are correct as to avoid crashing. The database needs to be created in advanced.
 ```
 exports.config = {
