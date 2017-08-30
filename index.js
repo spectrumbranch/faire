@@ -8,15 +8,17 @@ const Vision = Faire.Vision;
 
 const options = { cors: true };
 
-const masterConfig = Faire.Config;
+Faire.Config = require('./config/config');
 
-const serverConfig = masterConfig.config,
-    tlsConfig = masterConfig.tlsconfig;
+const serverConfig = Faire.Config.config,
+    tlsConfig = Faire.Config.tlsconfig;
 
 if (serverConfig.tls) {
   console.log('Loading tls');
   options.tls = tlsConfig;
 }
+
+Faire.Email.init(Faire.Config.config.email);
 
 const server = new Hapi.Server({
   connections: {

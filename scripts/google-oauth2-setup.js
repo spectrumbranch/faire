@@ -2,6 +2,8 @@ const fs = require('fs');
 const readline = require('readline');
 
 const Faire = require('../lib');
+Faire.Config = require('../config/config');
+Faire.Email.init(Faire.Config.config.email);
 
 const TOKEN_DIR = Faire.Email.getTokenDir();
 const TOKEN_PATH = Faire.Email.getTokenPath();
@@ -57,13 +59,13 @@ return fs.readFile(TOKEN_PATH, function(err, token) {
   	console.log('Not currently authorized', err);
     // retrieve an access token
     return getAccessToken(Faire.Email.getOAuth2Client(), function () {
-      console.log('authorized! Feel free to test with gmail.test.js script', Faire.Email.getOAuth2Client().credentials);
+      console.log('Authorized! Feel free to test with gmail.test.js script', Faire.Email.getOAuth2Client().credentials);
       return process.exit();
     });
   } else {
     let existingToken = JSON.parse(token);
     Faire.Email.getOAuth2Client().credentials = existingToken;
-    console.log('already authenticated! Feel free to test with gmail.test.js script', 
+    console.log('Already authenticated! Feel free to test with gmail.test.js script', 
     	Faire.Email.getOAuth2Client().credentials);
     return process.exit();
   }
