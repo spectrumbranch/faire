@@ -6,19 +6,26 @@ const Inert = Faire.Inert;
 const CookieAuth = Faire.CookieAuth;
 const Vision = Faire.Vision;
 
+
+
 const options = { cors: true };
 
 Faire.Config = require('./config/config');
 
-const serverConfig = Faire.Config.config,
+const serverConfig = Faire.Config,
     tlsConfig = Faire.Config.tlsconfig;
 
 if (serverConfig.tls) {
   console.log('Loading tls');
-  options.tls = tlsConfig;
+  const fs = require('fs');
+
+  options.tls = {
+   key: fs.readFileSync(tlsconfig.key),
+   cert: fs.readFileSync(tlsconfig.cert)
+  };
 }
 
-Faire.Email.init(Faire.Config.config.email);
+Faire.Email.init(Faire.Config.email);
 
 const server = new Hapi.Server({
   connections: {

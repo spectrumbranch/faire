@@ -2,11 +2,11 @@ const Faire = require('../lib');
 
 Faire.Config = require('../config/config');
 
-Faire.Email.init(Faire.Config.config.email);
+Faire.Email.init(Faire.Config.email);
 
 
 return Faire.Email.sendMessage({
-    to: Faire.Config.config.email.test_to_email,
+    to: Faire.Config.email.test_to_email,
     subject: 'test subject',
     body: 'test message'
   },

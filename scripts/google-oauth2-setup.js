@@ -3,7 +3,7 @@ const readline = require('readline');
 
 const Faire = require('../lib');
 Faire.Config = require('../config/config');
-Faire.Email.init(Faire.Config.config.email);
+Faire.Email.init(Faire.Config.email);
 
 const TOKEN_DIR = Faire.Email.getTokenDir();
 const TOKEN_PATH = Faire.Email.getTokenPath();

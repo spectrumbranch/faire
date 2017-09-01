@@ -6,24 +6,20 @@
   the following configuration:
 */
 
-exports.config = {
+module.exports = {
   hostname: '0.0.0.0',
   port: 8000,
   tls: false,
   cookie_name: 'faire-cookie',
-  cookie_password: 'CHANGEMExfgkj23owe90nef0xfgkj23owe90nef0xfgkj23owe90nef0xfgkj23owe90nef0xfgkj23owe90nef0_',
+  cookie_password: 'CHANGEMExfgkj23owe90nef0xfgkj23owe90nef0xfgkj23owe90nef0xfgkj23owe90nef0xfgkj23owe90nef0_$UVijt3IHv4V#NJV#JLMKSVNKRV@KOR@O@R#Fesfsgsgfgsse22_',
   email: {
     google_oauth_token_dir: (process.env.HOME || process.env.HOMEPATH || process.env.USERPROFILE) + '/.credentials/',
     google_oauth_token_filename: 'gmail-nodejs-quickstart.json',
     from_email: 'no-reply@something.com',
     test_to_email: 'someones_email@something.com'
   }
+  tlsconfig: {
+   key: '/somewhere/fixtures/keys/faire-key.pem',
+   cert: '/somewhere/fixtures/keys/faire-cert.pem'
+  }
 };
-
-//If exports.config.tls == true, then the following tlsconfig is required to be uncommented and filled out properly.
-//Keep this commented out if exports.config.tls == false
-//var fs = require('fs');
-//exports.tlsconfig = {
-//  key: fs.readFileSync('/somewhere/fixtures/keys/faire-key.pem'),
-//  cert: fs.readFileSync('/somewhere/fixtures/keys/faire-cert.pem')
-//}
