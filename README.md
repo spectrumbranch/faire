@@ -36,3 +36,25 @@ Set up the HTTP server, mail, and tls config in ```./config/config.js```.
 You can use `node ./scripts/google-oauth2-setup.js` to setup the base OAuth2 token. Just ensure that your token has a refresh token (which is sent only the first time for a given authorization). If you do not get a refresh token, you may need to revoke the permissions from the Gmail account and set it up again.
 
 Run with ```node .``` and enjoy! It will be accessible via the given hostname and port in the config.js file.
+
+
+
+Setting Up Email
+================
+https://console.cloud.google.com/apis/credentials  
+  
+Go to Credentials  
+  
+Create credentials -> OAuth client ID  
+  
+Pick “Web Application”, name the application, set the redirect URL to  
+https://<yourwebsite.com>/google-oauth  
+Click Create  
+  
+Click Download JSON button at the right, and save this file as `./config/client_id.json`  
+  
+Run `./scripts/google-oauth2-setup.js`  
+  
+Copy URL to chrome and use inspector to find the code after authorizing the application. Paste the code back in the console.  
+  
+If necessary, revoke with: https://accounts.google.com/b/0/IssuedAuthSubTokens?hl=en  
