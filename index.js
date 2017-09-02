@@ -75,8 +75,14 @@ server.register([Inert, CookieAuth, Vision], (err) => {
       if (err) {
         throw err;
       }
+      let baseURI;
+      if (Faire.Config.baseuri) {
+        baseURI = Faire.Config.baseuri;
+      } else {
+        baseURI = server.info.uri;
+      }
 
-      Faire.Auth.setURI(server.info.uri);
+      Faire.Auth.setURI(baseURI);
       console.log('Server up at ' + server.info.uri + ' !');
     });
   });

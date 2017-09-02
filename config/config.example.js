@@ -7,6 +7,7 @@
 */
 
 module.exports = {
+  baseuri: 'https://faire.something.com',
   hostname: '0.0.0.0',
   port: 8000,
   tls: false,
