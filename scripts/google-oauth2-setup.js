@@ -30,8 +30,8 @@ function getAccessToken(oauth2Client, callback) {
       }
       // set tokens to the client
       oauth2Client.setCredentials(tokens);
-      storeToken(tokens);
-      return callback();
+      const stored = storeToken(tokens);
+      return callback(stored);
     });
   });
 }
@@ -44,29 +44,38 @@ function storeToken(token) {
       throw err;
     }
   }
+
+  console.log('storing token:', token);
   if (token.refresh_token) {
-    fs.writeFile(TOKEN_PATH, JSON.stringify(token));
+    console.log('stringified token:', JSON.stringify(token));
+    fs.writeFileSync(TOKEN_PATH, JSON.stringify(token));
     console.log('Token stored to ' + TOKEN_PATH);
+    return true;
   } else {
     console.log('Not storing token, no refresh_token found', token);
+    return false;
   }
 }
 
 
 // Check if we have previously stored a token.
 return fs.readFile(TOKEN_PATH, function(err, token) {
-  if (err) {
-  	console.log('Not currently authorized', err);
+  if (err.code === 'ENOENT') {
+  	console.log('Not currently authorized');
     // retrieve an access token
-    return getAccessToken(Faire.Email.getOAuth2Client(), function () {
-      console.log('Authorized! Feel free to test with gmail.test.js script', Faire.Email.getOAuth2Client().credentials);
+    return getAccessToken(Faire.Email.getOAuth2Client(), function (stored) {
+      if (stored) {
+        console.log('Authorized! Feel free to test with gmail.test.js script', Faire.Email.getOAuth2Client().credentials);
+      } else {
+        console.log('Did not store credentials');
+      }
       return process.exit();
     });
   } else {
     let existingToken = JSON.parse(token);
     Faire.Email.getOAuth2Client().credentials = existingToken;
-    console.log('Already authenticated! Feel free to test with gmail.test.js script', 
-    	Faire.Email.getOAuth2Client().credentials);
+    console.log('Already authenticated! Feel free to test with gmail.test.js script',
+    Faire.Email.getOAuth2Client().credentials);
     return process.exit();
   }
 });
