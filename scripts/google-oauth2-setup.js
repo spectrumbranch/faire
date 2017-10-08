@@ -31,7 +31,7 @@ function getAccessToken(oauth2Client, callback) {
       // set tokens to the client
       oauth2Client.setCredentials(tokens);
       const stored = storeToken(tokens);
-      return callback(stored);
+      return callback(null, stored);
     });
   });
 }
@@ -60,10 +60,10 @@ function storeToken(token) {
 
 // Check if we have previously stored a token.
 return fs.readFile(TOKEN_PATH, function(err, token) {
-  if (err.code === 'ENOENT') {
+  if (err != null && err.code === 'ENOENT') {
   	console.log('Not currently authorized');
     // retrieve an access token
-    return getAccessToken(Faire.Email.getOAuth2Client(), function (stored) {
+    return getAccessToken(Faire.Email.getOAuth2Client(), function (err, stored) {
       if (stored) {
         console.log('Authorized! Feel free to test with gmail.test.js script', Faire.Email.getOAuth2Client().credentials);
       } else {
@@ -74,8 +74,7 @@ return fs.readFile(TOKEN_PATH, function(err, token) {
   } else {
     let existingToken = JSON.parse(token);
     Faire.Email.getOAuth2Client().credentials = existingToken;
-    console.log('Already authenticated! Feel free to test with gmail.test.js script',
-    Faire.Email.getOAuth2Client().credentials);
+    console.log('Already authenticated! Feel free to test with gmail.test.js script', Faire.Email.getOAuth2Client().credentials);
     return process.exit();
   }
 });
