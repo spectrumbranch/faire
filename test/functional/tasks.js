@@ -58,6 +58,9 @@ describe('Faire.Tasks API', function() {
             });
         });
     })
+    afterEach(function() {
+        db.close();
+    })
     describe('#add()', function() {
         it('should return the task object after adding it to the database.', function(done) {
             var taskName = 'This is an example task.';

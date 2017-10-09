@@ -29,14 +29,14 @@
     "hapi": "^16.1.1",
     "hapi-auth-cookie": "^7.0.0",
     "inert": "^4.1.0",
-    "joi": "10.x.x",
+    "joi": "11.x.x",
     "mysql": "2.x.x",
     "scurvy": "1.x.x",
-    "sequelize": "^3.27.0",
+    "sequelize": "4.x.x",
     "vision": "^4.1.1"
   },
   "devDependencies": {
-    "mocha": "3.x.x",
-    "should": "11.x.x"
+    "mocha": "4.x.x",
+    "should": "13.x.x"
   }
 }

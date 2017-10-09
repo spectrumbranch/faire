@@ -28,6 +28,9 @@ describe('Faire.Preferences API', function() {
             });
         });
     })
+    after(function() {
+        db.close();
+    })
     describe('#preferences', function() {
         it('should change the set theme in the preferences object and return the changed object', function(done) {
             Faire.Preferences.get({ user: user_id_1 }, function(err, preference) {

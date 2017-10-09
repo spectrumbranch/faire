@@ -27,6 +27,9 @@ describe('Faire.Users API', function() {
             });
         });
     })
+    after(function() {
+        db.close();
+    })
     describe('#getByEmail', function() {
         it('should get the user object if it exists, else return null for the id', function(done) {
             Faire.Users.getByEmail({ email: email1 }, function(err, user) {

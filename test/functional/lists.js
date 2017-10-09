@@ -47,6 +47,9 @@ describe('Faire.Lists API', function() {
             });
         });
     })
+    afterEach(function() {
+        db.close();
+    })
     describe('#add()', function() {
         it('should return a list object with the given name with zero tasks after adding it to the database.', function(done) {
             var listName = 'This is a list.';
