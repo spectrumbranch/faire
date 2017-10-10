@@ -20,8 +20,8 @@ if (serverConfig.tls) {
   const fs = require('fs');
 
   options.tls = {
-   key: fs.readFileSync(tlsconfig.key),
-   cert: fs.readFileSync(tlsconfig.cert)
+   key: fs.readFileSync(tlsConfig.key),
+   cert: fs.readFileSync(tlsConfig.cert)
   };
 }
 
