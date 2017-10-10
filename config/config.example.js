@@ -18,7 +18,7 @@ module.exports = {
     google_oauth_token_filename: 'gmail-nodejs-quickstart.json',
     from_email: 'no-reply@something.com',
     test_to_email: 'someones_email@something.com'
-  }
+  },
   tlsconfig: {
    key: '/somewhere/fixtures/keys/faire-key.pem',
    cert: '/somewhere/fixtures/keys/faire-cert.pem'
